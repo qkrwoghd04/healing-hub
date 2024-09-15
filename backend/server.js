@@ -3,6 +3,8 @@ const cors = require('cors');
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
 const multer = require('multer');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const upload = multer({ storage: multer.memoryStorage() });
 
 const app = express();
@@ -24,6 +26,53 @@ const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME;
 app.use(cors());
 app.use(express.json());
 
+// 로그인 라우트
+app.post('/api/login', async (req, res) => {
+  const { email, password } = req.body;
+  console.log('Login attempt for email:', email); // 로깅 추가
+
+  const params = {
+    TableName: 'users',
+    IndexName: 'email-index',
+    KeyConditionExpression: 'email = :email',
+    ExpressionAttributeValues: {
+      ':email': email
+    }
+  };
+
+  try {
+    const { Items } = await dynamodb.query(params).promise();
+    console.log('User found:', Items.length > 0); // 로깅 추가
+
+    if (Items.length === 0) {
+      console.log('No user found with email:', email); // 로깅 추가
+      return res.status(401).json({ message: '인증 실패' });
+    }
+
+    const user = Items[0];
+    console.log('Retrieved user:', JSON.stringify(user, null, 2));
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      console.log('Password match:', isMatch); // 로깅 추가
+      return res.status(401).json({ message: '인증 실패' });
+    }
+
+    const token = jwt.sign(
+      { userId: user.userId, email: user.email, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+
+    console.log('Login successful for user:', email); // 로깅 추가
+    res.json({ token, userId: user.userId, email: user.email, role: user.role });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ message: '서버 오류' });
+  }
+});
+
+
 // 제품 목록 조회
 app.get('/api/products', async (req, res) => {
   const params = {
@@ -38,6 +87,7 @@ app.get('/api/products', async (req, res) => {
     res.status(500).json({ error: 'Could not retrieve products' });
   }
 });
+
 
 // 제품 추가
 app.post('/api/products', upload.single('image'), async (req, res) => {
