@@ -49,12 +49,17 @@ export const ProductProvider = ({ children }) => {
       throw error;
     }
   };
+  const refreshProducts = async () => {
+    await loadProducts();
+  };
+  
 
   return (
     <ProductContext.Provider value={{ 
       products, 
       addNewProduct, 
-      removeProduct 
+      removeProduct,
+      refreshProducts
     }}>
       {children}
     </ProductContext.Provider>

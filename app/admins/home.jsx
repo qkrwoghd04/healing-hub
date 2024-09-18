@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, TextInput, SafeAreaView, Alert, Modal, TouchableWithoutFeedback, Keyboard  } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, TextInput, SafeAreaView, Alert, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useProducts } from '../contexts/ProductContext';
 import * as ImagePicker from 'expo-image-picker';
@@ -96,33 +96,36 @@ const AdminHome = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <View style={styles.header}>
+        <Text style={styles.title}>관리자 홈</Text>
+        <TouchableOpacity onPress={navigateToHome} style={styles.homeButton}>
+          <Image source={require('../../assets/icons/home.png')} style={styles.homeIcon} />
+        </TouchableOpacity>
+      </View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.title}>관리자 홈</Text>
-            <TouchableOpacity onPress={navigateToHome}>
-              <Image source={require('../../assets/icons/home.png')} style={styles.homeIcon} />
-            </TouchableOpacity>
-          </View>
           {products.map((product) => (
             <View key={product.id} style={styles.productContainer}>
               <Image 
                 source={{ uri: product.image }}
                 style={styles.productImage} 
               />
-              <Text style={styles.productText}>{product.name}</Text>
-              <Text style={styles.productText}>{product.price}원</Text>
-              <TouchableOpacity onPress={() => confirmRemoveProduct(product.id)}>
-                <Image source={require('../../assets/icons/delete.png')} style={styles.icon} />
+              <View style={styles.productInfo}>
+                <Text style={styles.productName}>{product.name}</Text>
+                <Text style={styles.productPrice}>{product.price}원</Text>
+              </View>
+              <TouchableOpacity onPress={() => confirmRemoveProduct(product.id)} style={styles.deleteButton}>
+                <Image source={require('../../assets/icons/delete.png')} style={styles.deleteIcon} />
               </TouchableOpacity>
             </View>
           ))}
-          <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
-            <Image source={require('../../assets/icons/plus.png')} style={styles.icon} />
-            <Text style={styles.addButtonText}>상품 추가</Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
+      
+      <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
+        <Image source={require('../../assets/icons/plus.png')} style={styles.addIcon} />
+        <Text style={styles.addButtonText}>상품 추가</Text>
+      </TouchableOpacity>
 
       <Modal
         animationType="slide"
@@ -131,13 +134,13 @@ const AdminHome = () => {
         onRequestClose={() => setModalVisible(false)}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.modalContainer}>
+          <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <TouchableOpacity style={styles.imagePicker} onPress={pickImage}>
                 {newProductImage ? (
                   <Image source={{ uri: newProductImage.uri }} style={styles.newProductImage} />
                 ) : (
-                  <Text>이미지 선택</Text>
+                  <Text style={styles.imagePickerText}>이미지 선택</Text>
                 )}
               </TouchableOpacity>
               <TextInput
@@ -175,145 +178,173 @@ const AdminHome = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    padding: 20,
-    paddingTop: 50,
+    backgroundColor: '#F7F9FC',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E4E8',
+    backgroundColor: '#FFFFFF',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#2D3748',
+  },
+  homeButton: {
+    padding: 8,
+    backgroundColor: '#EDF2F7',
+    borderRadius: 8,
   },
   homeIcon: {
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
+    tintColor: '#4A5568',
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    paddingBottom: 100, // 추가 버튼을 위한 여백
+  },
+  container: {
+    padding: 20,
   },
   productContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    marginBottom: 15,
+    padding: 15,
+    shadowColor: "#718096",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 3,
   },
   productImage: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    marginRight: 15,
   },
-  input: {
+  productInfo: {
     flex: 1,
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginRight: 10,
   },
-  icon: {
-    width: 24,
-    height: 24,
+  productName: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#2D3748',
+    marginBottom: 4,
+  },
+  productPrice: {
+    fontSize: 16,
+    color: '#4A5568',
+  },
+  deleteButton: {
+    padding: 8,
+    backgroundColor: '#FED7D7',
+    borderRadius: 8,
+  },
+  deleteIcon: {
+    width: 20,
+    height: 20,
+    tintColor: '#E53E3E',
   },
   addButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
+    backgroundColor: '#4299E1',
+    borderRadius: 15,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    shadowColor: "#4299E1",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 6,
+    marginBottom: 25
   },
-  addProductContainer: {
-    marginTop: 20,
-    borderTopWidth: 1,
-    borderTopColor: '#ccc',
-    paddingTop: 20,
+  addIcon: {
+    width: 20,
+    height: 20,
+    tintColor: '#FFFFFF',
+    marginRight: 8,
   },
-  imagePicker: {
-    width: 100,
-    height: 100,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  newProductImage: {
-    width: 98,
-    height: 98,
-    borderRadius: 5,
-  },
-  saveButton: {
-    backgroundColor: '#4CAF50',
-    padding: 15,
-    borderRadius: 10,
-    marginTop: 20,
-  },
-  saveButtonText: {
+  addButtonText: {
     color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  productText: {
-    flex: 1,
     fontSize: 16,
-    marginRight: 10,
+    fontWeight: '700',
   },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(45, 55, 72, 0.6)',
   },
   modalContent: {
     backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    width: '80%',
-    maxHeight: '80%',  // 모달의 최대 높이를 설정
+    borderRadius: 16,
+    padding: 24,
+    width: '90%',
+    maxHeight: '80%',
   },
   imagePicker: {
-    width: 100,
-    height: 100,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    width: 120,
+    height: 120,
+    borderWidth: 2,
+    borderColor: '#E2E8F0',
+    borderRadius: 60,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    marginBottom: 20,
+    marginBottom: 24,
+    overflow: 'hidden',
+  },
+  imagePickerText: {
+    color: '#4299E1',
+    fontSize: 16,
   },
   newProductImage: {
     width: '100%',
     height: '100%',
-    borderRadius: 5,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
+    borderColor: '#E2E8F0',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+    fontSize: 16,
+    backgroundColor: '#F7FAFC',
   },
   textArea: {
     height: 100,
     textAlignVertical: 'top',
   },
   modalButton: {
-    backgroundColor: '#007AFF',
-    padding: 10,
-    borderRadius: 5,
+    backgroundColor: '#4299E1',
+    padding: 14,
+    borderRadius: 8,
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 12,
   },
   cancelButton: {
-    backgroundColor: '#FF3B30',
+    backgroundColor: '#FC8181',
+    marginTop: 12,
   },
   modalButtonText: {
     color: 'white',
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
 

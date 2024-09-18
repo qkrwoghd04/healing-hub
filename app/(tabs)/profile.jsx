@@ -25,8 +25,8 @@ const Profile = () => {
 
 const InfoItem = ({ label, value }) => (
   <View style={styles.infoItem}>
-    <Text style={[styles.label, {fontFamily: 'GmarketSansTTFBold'}]}>{label}:</Text>
-    <Text style={[styles.value, {fontFamily: 'GmarketSansTTFMedium'}]}>{value}</Text>
+    <Text style={[styles.label, {fontFamily: 'Pretendard-Bold'}]}>{label}:</Text>
+    <Text style={[styles.value, {fontFamily: 'Pretendard-SemiBold'}]}>{value}</Text>
   </View>
 );
 
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   storeImage: {
     width: '90%',
-    height: 350,
+    height: 340,
     resizeMode: 'cover',
     borderRadius: 20,
   },
@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   infoItem: {
-    marginBottom: 15,
+    marginBottom: 10,
   },
   label: {
     fontWeight: 'bold',
     fontSize: 28,
-    marginBottom: 5,
+    
   },
   value: {
     fontSize: 20,
