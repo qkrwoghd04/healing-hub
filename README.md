@@ -62,14 +62,15 @@
 ---
 
 ## 🚀 개발 (기능 구현)
-
+### FE Updated (2024-09-19)
+    <img src="https://github.com/user-attachments/assets/2761e311-f1a9-4e9c-9a82-db1d5c67ee5f" alt="Update Design" width=700><br>
 ### 프론트엔드 (FE)
 
 1. **원터치 가게 연결**
    - 앱 하단에 **"가게 전화 걸기"** 버튼 구현
    - 클릭 시 즉시 가게로 전화 연결<br>
    
-<img src="https://github.com/user-attachments/assets/301dad40-8f66-4a9a-b286-d181bde76a67" alt="원터치 가게 연결" width=700><br>
+   <img src="https://github.com/user-attachments/assets/3fa15829-1ebe-431e-814b-ac2acc295dcd" alt="원터치 가게 연결" width=700><br>
 
    ```javascript
    // index.jsx
@@ -90,37 +91,53 @@
    - 홈 화면 중앙에 상품 정보 캐러셀 구현
    - **FlipCard**를 사용하여 상품 정보의 앞면과 뒷면 표시<br>
    
-<img src="https://github.com/user-attachments/assets/57d5a5fe-2c95-4953-b01c-50f3a009c2be" alt="상품 정보 표시" width=700><br>
+   <img src="https://github.com/user-attachments/assets/228d1a38-1b00-4ee0-bada-4e642f1242ac" alt="상품 정보 표시" width=700><br>
 
    ```javascript
    // index.jsx
-   import Swiper from 'react-native-swiper';
+   import { SwiperFlatList } from 'react-native-swiper-flatlist';
    import FlipCard from 'react-native-flip-card';
-   
+
+   const ProductSlide = memo(({ item, formatPrice }) => (
+     <View style={styles.slide}>
+       <FlipCard
+         style={styles.flipCard}
+         friction={1000}
+         perspective={3000}
+         flipHorizontal={true}
+         flipVertical={false}
+         flip={false}
+         clickable={true}
+       >
+         {/* Face side */}
+         <View style={styles.face}>
+           ...
+         </View>
+         {/* Back side */}
+         <View style={styles.back}>
+           ...
+         </View>
+       </FlipCard>
+     </View>
+   ));
+
    return (
-     <Swiper style={styles.swiperContainer} autoplay loop>
-       {products.map((product) => (
-         <FlipCard key={product.id}>
-           {/* 앞면: 상품 이미지, 이름, 가격 */}
-           <View style={styles.face}>
-             <Image source={{ uri: product.image }} style={styles.productImage} />
-             <Text style={styles.productName}>{product.name}</Text>
-             <Text style={styles.productPrice}>{formatPrice(product.price)}</Text>
-           </View>
-           {/* 뒷면: 상품 상세 정보 */}
-           <View style={styles.back}>
-             <Text style={styles.productDetailTitle}>상품 상세 정보:</Text>
-             <Text style={styles.productDetailDescription}>{product.description}</Text>
-           </View>
-         </FlipCard>
-       ))}
-     </Swiper>
+     ...
+     <View style={styles.swiperContainer}>
+        <SwiperFlatList
+          ...
+          renderItem={({ item }) => <ProductSlide item={item} formatPrice={formatPrice} />}
+        />
+      </View>
+      ...
    );
    ```
 
 3. **관리자 기능**
    - 관리자 로그인 화면 구현
    - 상품 추가, 삭제 기능 구현
+  
+   <img src="https://github.com/user-attachments/assets/7df75fc6-7a55-4b1c-9966-aaa2d8d98c93" alt="관리자 페이지" width=700><br>
 
    ```javascript
    // home.jsx (관리자 화면)
@@ -133,23 +150,26 @@
    };
    
    return (
-     <View>
-       {/* 상품 목록 표시 */}
-       {products.map((product) => (
-         <View key={product.id}>
-           <Image source={{ uri: product.image }} style={styles.productImage} />
-           <Text>{product.name}</Text>
-           <Text>{product.price}원</Text>
-           <TouchableOpacity onPress={() => confirmRemoveProduct(product.id)}>
-             <Image source={require('../../assets/icons/delete.png')} style={styles.icon} />
-           </TouchableOpacity>
-         </View>
-       ))}
-       {/* 상품 추가 버튼 */}
-       <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
-         <Text>상품 추가</Text>
-       </TouchableOpacity>
-     </View>
+     ...
+     <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.container}>
+          {products.map((product) => (
+            <View key={product.id} style={styles.productContainer}>
+              ...
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+      // 상품 추가 버튼 (모달 창 불러오기)
+      <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>... </TouchableOpacity>
+      // 상품 추가 모달창
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >...</Modal>
+      ...
    );
    ```
 
@@ -226,3 +246,7 @@
 - [React Native 공식 문서](https://reactnative.dev/docs/getting-started)
 - [Expo 문서](https://docs.expo.dev/)
 - [AWS Elastic Beanstalk 개발자 안내서](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html)
+- [Tab Navigation](https://reactnavigation.org/docs/bottom-tab-navigator)
+- [Tab Icon](https://icons.expo.fyi/Index)
+- [Color Reference](https://kr.pinterest.com/pin/702983823112471636/)
+- [Flatlist](https://www.npmjs.com/package/react-native-swiper-flatlist)
