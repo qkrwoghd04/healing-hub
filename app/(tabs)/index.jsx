@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, Text, Image, TouchableOpacity, Linking, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import { useRouter } from 'expo-router';
@@ -7,6 +7,7 @@ import FlipCard from 'react-native-flip-card';
 
 const { width } = Dimensions.get('window');
 
+// HomeScreen Component (No need to memoize as it's the parent)
 const HomeScreen = () => {
   const router = useRouter();
   const { products } = useProducts();
@@ -26,16 +27,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.headerContent}>
-          <Image
-            source={require('../../assets/images/logo.png')}
-            style={[styles.appNameImage, { width: 60, height: 60 }]}
-          />
-          <Text style={[styles.title, { padding: 10, fontFamily: 'Typography-Times-Regular', fontSize: 38, color:"#443F3D" }]}>Healing Hub</Text>
-          <TouchableOpacity style={styles.adminIconContainer} onPress={navigateToAdminLogin}>
-            <Image source={require('../../assets/icons/admin.png')} style={styles.adminIcon} />
-          </TouchableOpacity>
-        </View>
+        <HeaderContent navigateToAdminLogin={navigateToAdminLogin} />
       </View>
 
       <View style={styles.swiperContainer}>
@@ -50,47 +42,9 @@ const HomeScreen = () => {
           paginationActiveColor="#443F3D"
           paginationStyle={styles.pagination}
           data={products}
-          renderItem={({ item }) => (
-            <View style={styles.slide}>
-              <FlipCard
-                style={styles.flipCard}
-                friction={1000}
-                perspective={3000}
-                flipHorizontal={true}
-                flipVertical={false}
-                flip={false}
-                clickable={true}
-              >
-                {/* Face side */}
-                <View style={styles.face}>
-                  <View style={styles.ImageContainer}>
-                    <Image
-                      source={{ uri: item.image }}
-                      style={styles.productImage}
-                    />
-                  </View>
-                  <View style={styles.line} />
-                  <View style={styles.productInfo}>
-                    <View style={styles.productNameContainer}>
-                      <Text
-                        style={styles.productName}
-                        numberOfLines={1}
-                        ellipsizeMode="tail"
-                      >
-                        {item.name.length > 15 ? item.name.substring(0, 17) + "..." : item.name}
-                      </Text>
-                    </View>
-                    <Text style={styles.productPrice}>{formatPrice(item.price)}</Text>
-                  </View>
-                </View>
-                {/* Back side */}
-                <View style={styles.back}>
-                  <Text style={styles.productDetailTitle}>{item.name} :</Text>
-                  <Text style={styles.productDetailDescription}>({item.description})</Text>
-                </View>
-              </FlipCard>
-            </View>
-          )}
+          keyExtractor={(item) => item.id.toString()}
+          windowSize={5} 
+          renderItem={({ item }) => <ProductSlide item={item} formatPrice={formatPrice} />}
         />
       </View>
 
@@ -100,6 +54,60 @@ const HomeScreen = () => {
     </SafeAreaView>
   );
 };
+
+const HeaderContent = memo(({ navigateToAdminLogin }) => (
+  <View style={styles.headerContent}>
+    <Image
+      source={require('../../assets/images/logo.png')}
+      style={[styles.appNameImage, { width: 60, height: 60 }]}
+    />
+    <Text style={[styles.title, { padding: 10, fontFamily: 'Typography-Times-Regular', fontSize: 38, color: "#443F3D" }]}>
+      Healing Hub
+    </Text>
+    <TouchableOpacity style={styles.adminIconContainer} onPress={navigateToAdminLogin}>
+      <Image source={require('../../assets/icons/admin.png')} style={styles.adminIcon} />
+    </TouchableOpacity>
+  </View>
+));
+
+const ProductSlide = memo(({ item, formatPrice }) => (
+  <View style={styles.slide}>
+    <FlipCard
+      style={styles.flipCard}
+      friction={1000}
+      perspective={3000}
+      flipHorizontal={true}
+      flipVertical={false}
+      flip={false}
+      clickable={true}
+    >
+      {/* Face side */}
+      <View style={styles.face}>
+        <View style={styles.ImageContainer}>
+          <Image source={{ uri: item.image }} style={styles.productImage} />
+        </View>
+        <View style={styles.line} />
+        <View style={styles.productInfo}>
+          <View style={styles.productNameContainer}>
+            <Text
+              style={styles.productName}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {item.name.length > 15 ? item.name.substring(0, 17) + "..." : item.name}
+            </Text>
+          </View>
+          <Text style={styles.productPrice}>{formatPrice(item.price)}</Text>
+        </View>
+      </View>
+      {/* Back side */}
+      <View style={styles.back}>
+        <Text style={styles.productDetailTitle}>{item.name} :</Text>
+        <Text style={styles.productDetailDescription}>({item.description})</Text>
+      </View>
+    </FlipCard>
+  </View>
+));
 
 const styles = StyleSheet.create({
   container: {

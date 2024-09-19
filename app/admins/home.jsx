@@ -14,7 +14,7 @@ const AdminHome = () => {
   const router = useRouter();
 
   const addProduct = async () => {
-    if (products.length < 10) {
+    if (products.length < 13) {
       if (!newProductName || !newProductPrice || !newProductImage || !newProductDetail) {
         Alert.alert('입력 오류', '모든 필드를 입력해주세요.');
         return;
@@ -40,7 +40,7 @@ const AdminHome = () => {
         Alert.alert('오류', '상품 추가에 실패했습니다.');
       }
     } else {
-      Alert.alert('최대 개수 초과', '최대 10개의 상품만 등록할 수 있습니다.');
+      Alert.alert('최대 개수 초과', '최대 12개의 상품만 등록할 수 있습니다.');
     }
   };
 
