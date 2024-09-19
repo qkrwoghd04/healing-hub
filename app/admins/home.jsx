@@ -94,6 +94,10 @@ const AdminHome = () => {
     router.push('/(tabs)');
   };
 
+  const formatPrice = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.header}>
@@ -106,18 +110,19 @@ const AdminHome = () => {
         <View style={styles.container}>
           {products.map((product) => (
             <View key={product.id} style={styles.productContainer}>
-              <Image 
-                source={{ uri: product.image }}
-                style={styles.productImage} 
-              />
-              <View style={styles.productInfo}>
-                <Text style={styles.productName}>{product.name}</Text>
-                <Text style={styles.productPrice}>{product.price}원</Text>
-              </View>
-              <TouchableOpacity onPress={() => confirmRemoveProduct(product.id)} style={styles.deleteButton}>
-                <Image source={require('../../assets/icons/delete.png')} style={styles.deleteIcon} />
-              </TouchableOpacity>
+            <Image 
+              source={{ uri: product.image }}
+              style={styles.productImage} 
+            />
+            <View style={styles.verticalLine} />
+            <View style={styles.productInfo}>
+              <Text style={styles.productName}>{product.name}</Text>
+              <Text style={styles.productPrice}>{formatPrice(product.price)}</Text>
             </View>
+            <TouchableOpacity onPress={() => confirmRemoveProduct(product.id)} style={styles.deleteButton}>
+              <Image source={require('../../assets/icons/delete.png')} style={styles.deleteIcon} />
+            </TouchableOpacity>
+          </View>
           ))}
         </View>
       </ScrollView>
@@ -180,7 +185,7 @@ const AdminHome = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#F7F9FC',
+    backgroundColor: '#fff',
   },
   header: {
     flexDirection: 'row',
@@ -189,27 +194,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#E0E4E8',
-    backgroundColor: '#FFFFFF',
+    borderBottomColor: '#e9ede6',
+    backgroundColor: '#fff',
   },
   title: {
-    fontSize: 24,
+    fontSize: 38,
     fontWeight: 'bold',
-    color: '#2D3748',
+    color: '#443F3D',
+    fontFamily: 'Typography-Times-Regular',
   },
   homeButton: {
     padding: 8,
-    backgroundColor: '#EDF2F7',
-    borderRadius: 8,
+    borderRadius: 10,
   },
   homeIcon: {
-    width: 20,
-    height: 20,
-    tintColor: '#4A5568',
+    width: 24,
+    height: 24,
+    tintColor: '#443F3D',
   },
   scrollViewContent: {
     flexGrow: 1,
-    paddingBottom: 100, // 추가 버튼을 위한 여백
+    paddingBottom: 100,
   },
   container: {
     padding: 20,
@@ -217,44 +222,51 @@ const styles = StyleSheet.create({
   productContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
+    backgroundColor: '#fff',
+    borderRadius: 10,
     marginBottom: 15,
     padding: 15,
-    shadowColor: "#718096",
-    shadowOffset: { width: 0, height: 4 },
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 6,
+    shadowRadius: 3.84,
     elevation: 3,
   },
+  verticalLine: {
+    height: '80%',
+    width: 1,
+    backgroundColor: 'rgba(132, 121, 88, 0.2)', // #847958 with 20% opacity
+    marginHorizontal: 10,
+  },
   productImage: {
-    width: 70,
-    height: 70,
-    borderRadius: 35,
-    marginRight: 15,
+    width: 80,
+    height: 80,
+    borderRadius: 10,
   },
   productInfo: {
     flex: 1,
+    marginLeft: 5,
   },
   productName: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#2D3748',
+    color: '#443F3D',
     marginBottom: 4,
+    fontFamily: 'Pretendard-Medium',
   },
   productPrice: {
     fontSize: 16,
-    color: '#4A5568',
+    color: '#847958',
+    fontFamily: 'Pretendard-Medium',
   },
   deleteButton: {
     padding: 8,
-    backgroundColor: '#FED7D7',
     borderRadius: 8,
   },
   deleteIcon: {
-    width: 20,
-    height: 20,
-    tintColor: '#E53E3E',
+    width: 25,
+    height: 25,
+    tintColor: '#954F4C',
   },
   addButton: {
     position: 'absolute',
@@ -262,7 +274,7 @@ const styles = StyleSheet.create({
     right: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#4299E1',
+    backgroundColor: '#954F4C',
     borderRadius: 15,
     paddingVertical: 12,
     paddingHorizontal: 20,
@@ -283,16 +295,17 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: '700',
+    fontFamily: 'Pretendard-Medium',
   },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(45, 55, 72, 0.6)',
+    backgroundColor: 'rgba(68, 63, 61, 0.6)',
   },
   modalContent: {
-    backgroundColor: 'white',
-    borderRadius: 16,
+    backgroundColor: '#fff',
+    borderRadius: 10,
     padding: 24,
     width: '90%',
     maxHeight: '80%',
@@ -301,7 +314,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderWidth: 2,
-    borderColor: '#E2E8F0',
+    borderColor: '#847958',
     borderRadius: 60,
     justifyContent: 'center',
     alignItems: 'center',
@@ -310,8 +323,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   imagePickerText: {
-    color: '#4299E1',
+    color: '#847958',
     fontSize: 16,
+    fontFamily: 'Pretendard-Medium',
   },
   newProductImage: {
     width: '100%',
@@ -319,32 +333,34 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: '#e9ede6',
     borderRadius: 8,
     padding: 12,
     marginBottom: 16,
     fontSize: 16,
-    backgroundColor: '#F7FAFC',
+    backgroundColor: '#fff',
+    fontFamily: 'Pretendard-Medium',
   },
   textArea: {
     height: 100,
     textAlignVertical: 'top',
   },
   modalButton: {
-    backgroundColor: '#4299E1',
+    backgroundColor: '#847958',
     padding: 14,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 12,
   },
   cancelButton: {
-    backgroundColor: '#FC8181',
+    backgroundColor: '#954F4C',
     marginTop: 12,
   },
   modalButtonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: '600',
+    fontFamily: 'Pretendard-Medium',
   },
 });
 

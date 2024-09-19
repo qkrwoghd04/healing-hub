@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, Linking, StyleSheet, SafeAreaView } from 'react-native';
-import Swiper from 'react-native-swiper';
+import { View, Text, Image, TouchableOpacity, Linking, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import { useRouter } from 'expo-router';
 import { useProducts } from '../contexts/ProductContext';
 import FlipCard from 'react-native-flip-card';
+
+const { width } = Dimensions.get('window');
 
 const HomeScreen = () => {
   const router = useRouter();
@@ -36,79 +38,64 @@ const HomeScreen = () => {
         </View>
       </View>
 
-      <Swiper
-        style={styles.swiperContainer}
-        showsButtons={false}
-        removeClippedSubviews={false}
-        autoplay loop
-        autoplayTimeout={5}
-      >
-        {products.map((product) => (
-          <FlipCard
-            style={[styles.flipCard,
-            {
-              flex: 0.9,
-              width: '90%',
-              height: 200,
-              marginTop: 5,
-              alignItems: 'center',
-              alignSelf: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'white',
-              borderRadius: 10,
-              shadowColor: "#000",
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.5,
-              shadowRadius: 3.84,
-              elevation: 3,
-            }
-            ]}
-            friction={1000}
-            perspective={3000}
-            flipHorizontal={true}
-            flipVertical={false}
-            flip={false}
-            clickable={true}
-            key={product.id}
-          >
-            {/* Face side */}
-            <View style={styles.face}>
-              <View style={[styles.ImageContainer, { justifyContent: "center", alignContent: "center" }]}>
-                <Image
-                  source={{ uri: product.image }}
-                  style={[styles.productImage, { width: 350, height: 350, marginTop: 10 }]}
-                />
-              </View>
-              <View style={[styles.line, { flex: 17, borderBottomWidth: 1, width: "100%", borderBlockColor: "#e9ede6", marginTop: 10 }]} />
-              <View style={[styles.productInfo, { width: '100%' }]}>
-                <View style={[styles.productNameContainer, { flexDirection: 'row', alignItems: 'center' }]}>
-                  <Text
-                    style={[styles.productName, { fontFamily: 'Pretendard-Medium' }]}
-                    numberOfLines={1}
-                    ellipsizeMode="tail"
-                  >
-                    {product.name.length > 15 ? product.name.substring(0, 17) + "..." : product.name}
-                  </Text>
+      <View style={styles.swiperContainer}>
+        <SwiperFlatList
+          autoplay
+          autoplayLoop
+          autoplayDelay={3}
+          index={0}
+          showPagination
+          paginationStyleItem={styles.paginationDot}
+          paginationDefaultColor="#ACAAAB"
+          paginationActiveColor="#443F3D"
+          paginationStyle={styles.pagination}
+          data={products}
+          renderItem={({ item }) => (
+            <View style={styles.slide}>
+              <FlipCard
+                style={styles.flipCard}
+                friction={1000}
+                perspective={3000}
+                flipHorizontal={true}
+                flipVertical={false}
+                flip={false}
+                clickable={true}
+              >
+                {/* Face side */}
+                <View style={styles.face}>
+                  <View style={styles.ImageContainer}>
+                    <Image
+                      source={{ uri: item.image }}
+                      style={styles.productImage}
+                    />
+                  </View>
+                  <View style={styles.line} />
+                  <View style={styles.productInfo}>
+                    <View style={styles.productNameContainer}>
+                      <Text
+                        style={styles.productName}
+                        numberOfLines={1}
+                        ellipsizeMode="tail"
+                      >
+                        {item.name.length > 15 ? item.name.substring(0, 17) + "..." : item.name}
+                      </Text>
+                    </View>
+                    <Text style={styles.productPrice}>{formatPrice(item.price)}</Text>
+                  </View>
                 </View>
-                <Text style={[styles.productPrice, { fontFamily: 'Pretendard-Medium', marginTop: 10, marginBottom: 10 }]}>{formatPrice(product.price)}</Text>
-              </View>
+                {/* Back side */}
+                <View style={styles.back}>
+                  <Text style={styles.productDetailTitle}>{item.name} :</Text>
+                  <Text style={styles.productDetailDescription}>({item.description})</Text>
+                </View>
+              </FlipCard>
             </View>
-            {/* Back side */}
-            <View style={styles.back}>
-              <Text style={[styles.productDetailTitle, { fontSize: 30, marginBottom: 10 }]}>{product.name} :</Text>
-              <Text style={[styles.productDetailDescription, { fontSize: 27, lineHeight: 50 }]}>({product.description})</Text>
-            </View>
-          </FlipCard>
-        ))}
-      </Swiper>
+          )}
+        />
+      </View>
 
-
-
-      <TouchableOpacity style={[styles.callButton, { backgroundColor: "#847958", borderRadius: 10 }]} onPress={makePhoneCall}>
-        <Text style={[styles.callButtonText, { fontFamily: 'Pretendard-Medium' }]}>가게 전화 걸기</Text>
+      <TouchableOpacity style={styles.callButton} onPress={makePhoneCall}>
+        <Text style={styles.callButtonText}>가게 전화 걸기</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -142,44 +129,69 @@ const styles = StyleSheet.create({
     marginRight: 5
   },
   swiperContainer: {
-    height: 300,
+    height: 550,  // Adjust this value as needed
   },
   slide: {
-    flex: 1,
+    width: width,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  flipCard: {
+    flex: 0.9,
+    width: width * 0.9,
+    height: 500,  // Adjust this value as needed
+    marginTop: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3.84,
+    elevation: 3,
+  },
   productImage: {
-    width: '100%',
+    width: 373,
     height: 350,
     resizeMode: 'stretch',
-    borderRadius: 20
+    borderRadius: 10
   },
   productInfo: {
     padding: 10,
     alignItems: 'center',
+    width: '100%',
   },
   productName: {
     fontSize: 25,
     fontWeight: 'bold',
     marginTop: 5,
+    fontFamily: 'Pretendard-Medium'
   },
   productPrice: {
     fontSize: 28,
     color: '#000',
-    marginTop: 5,
+    marginTop: 10,
+    marginBottom: 10,
+    fontFamily: 'Pretendard-Medium'
   },
   callButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#847958',
     padding: 25,
-    borderRadius: 15,
-    margin: 20,
+    borderRadius: 10,
+    marginRight: 20,
+    marginLeft: 20,
+    marginBottom: 20
   },
   callButtonText: {
     color: 'white',
     fontSize: 35,
     fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily: 'Pretendard-Medium'
   },
   back: {
     width: '100%',
@@ -190,9 +202,34 @@ const styles = StyleSheet.create({
   },
   productDetailTitle: {
     fontFamily: 'Pretendard-Medium',
+    fontSize: 30,
+    marginBottom: 10
   },
   productDetailDescription: {
     fontFamily: 'Pretendard-Light',
+    fontSize: 27,
+    lineHeight: 50
+  },
+  paginationDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 5,
+  },
+  ImageContainer: { 
+    justifyContent: "center", 
+    alignContent: "center" 
+  },
+  line: { 
+    flex: 17, 
+    borderBottomWidth: 1, 
+    width: "100%", 
+    borderBlockColor: "#e9ede6", 
+    marginTop: 10 
+  },
+  productNameContainer: { 
+    flexDirection: 'row', 
+    alignItems: 'center' 
   },
 });
 

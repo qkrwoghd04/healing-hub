@@ -13,9 +13,13 @@ const Profile = () => {
         </View>
         <View style={styles.infoContainer}>
           <InfoItem label="가게 이름" value="힐링 허브" />
+          <View style={styles.separator} />
           <InfoItem label="주소" value="서울 중구 청계천로274 평화시장 2층나열169호 힐링허브" />
+          <View style={styles.separator} />
           <InfoItem label="전화번호" value="010-4040-1669" />
+          <View style={styles.separator} />
           <InfoItem label="영업시간" value="평일 9:00 - 18:00, 주말 휴무" />
+          <View style={styles.separator} />
           <InfoItem label="소개" value="최고 품질의 건강식품만을 판매하는 전문점입니다. 고객 여러분의 건강을 지켜드리겠습니다." />
         </View>
       </ScrollView>
@@ -25,8 +29,8 @@ const Profile = () => {
 
 const InfoItem = ({ label, value }) => (
   <View style={styles.infoItem}>
-    <Text style={[styles.label, {fontFamily: 'Pretendard-Bold'}]}>{label}:</Text>
-    <Text style={[styles.value, {fontFamily: 'Pretendard-SemiBold'}]}>{value}</Text>
+    <Text style={[styles.label, {fontFamily: 'Pretendard-Medium'}]}>{label}:</Text>
+    <Text style={[styles.value, {fontFamily: 'Pretendard-Light'}]}>{value}</Text>
   </View>
 );
 
@@ -54,6 +58,12 @@ const styles = StyleSheet.create({
   },
   value: {
     fontSize: 20,
+  },
+  separator: {
+    height: 1, // 구분선의 두께
+    backgroundColor: '#ccc', // 흐린 회색 구분선
+    opacity: 0.5, // 구분선의 투명도 설정
+    width: '100%',
   },
 });
 

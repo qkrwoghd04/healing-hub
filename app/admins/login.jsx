@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    fontFamily: 'Pretendard-Medium',
     fontWeight: 'bold',
     marginBottom: 20,
   },
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   loginButton: {
-    backgroundColor: '#3236b8',
+    backgroundColor: '#954F4C',
     padding: 10,
     borderRadius: 5,
     width: '100%',
@@ -128,6 +129,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'Pretendard-Medium',
   },
 });
 
