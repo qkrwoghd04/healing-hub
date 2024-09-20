@@ -1,13 +1,11 @@
 import React, { memo } from 'react';
-import { View, Text, Image, TouchableOpacity, Linking, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Linking, StyleSheet, SafeAreaView} from 'react-native';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import { useRouter } from 'expo-router';
 import { useProducts } from '../contexts/ProductContext';
 import FlipCard from 'react-native-flip-card';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const { width } = Dimensions.get('window');
-
-// HomeScreen Component (No need to memoize as it's the parent)
 const HomeScreen = () => {
   const router = useRouter();
   const { products } = useProducts();
@@ -29,7 +27,6 @@ const HomeScreen = () => {
       <View style={styles.header}>
         <HeaderContent navigateToAdminLogin={navigateToAdminLogin} />
       </View>
-
       <View style={styles.swiperContainer}>
         <SwiperFlatList
           autoplay
@@ -43,14 +40,15 @@ const HomeScreen = () => {
           paginationStyle={styles.pagination}
           data={products}
           keyExtractor={(item) => item.id.toString()}
-          windowSize={5} 
+          windowSize={5}
           renderItem={({ item }) => <ProductSlide item={item} formatPrice={formatPrice} />}
         />
       </View>
-
-      <TouchableOpacity style={styles.callButton} onPress={makePhoneCall}>
-        <Text style={styles.callButtonText}>가게 전화 걸기</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.callButton} onPress={makePhoneCall}>
+          <Text style={styles.callButtonText}>가게 전화 걸기</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -59,9 +57,9 @@ const HeaderContent = memo(({ navigateToAdminLogin }) => (
   <View style={styles.headerContent}>
     <Image
       source={require('../../assets/images/logo.png')}
-      style={[styles.appNameImage, { width: 60, height: 60 }]}
+      style={styles.appNameImage}
     />
-    <Text style={[styles.title, { padding: 10, fontFamily: 'Typography-Times-Regular', fontSize: 38, color: "#443F3D" }]}>
+    <Text style={styles.title}>
       Healing Hub
     </Text>
     <TouchableOpacity style={styles.adminIconContainer} onPress={navigateToAdminLogin}>
@@ -115,7 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   header: {
-    padding: 10,
+    padding: wp('2%'),
   },
   headerContent: {
     flexDirection: 'row',
@@ -123,32 +121,43 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
   },
-  appName: {
-    textAlign: 'center',
-    padding: 10,
+  appNameImage: {
+    width: wp('15%'),
+    height: wp('15%'),
+    maxWidth: 60,
+    maxHeight: 60,
+  },
+  title: {
+    padding: wp('2%'),
+    fontFamily: 'Typography-Times-Regular',
+    fontSize: wp('9%'),
+    color: "#443F3D",
   },
   adminIconContainer: {
     position: 'absolute',
     right: 0,
   },
   adminIcon: {
-    width: 28,
-    height: 28,
-    marginRight: 5
+    width: wp('7%'),
+    height: wp('7%'),
+    maxWidth: 28,
+    maxHeight: 28,
+    marginRight: wp('2%'),
   },
   swiperContainer: {
-    height: 550,  // Adjust this value as needed
+    height: hp('60%'),
+    marginTop: 7
   },
   slide: {
-    width: width,
+    width: wp('100%'),
+    height: hp('55%'),
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 5,
+    marginBottom: 10,
   },
   flipCard: {
-    flex: 0.9,
-    width: width * 0.9,
-    height: 500,  // Adjust this value as needed
-    marginTop: 5,
+    width: wp('90%'),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -162,42 +171,65 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 3,
   },
+  ImageContainer: {
+    justifyContent: "center",
+    alignContent: "center",
+    width: '100%',
+    height: '75%',
+  },
   productImage: {
-    width: 373,
-    height: 350,
-    resizeMode: 'stretch',
-    borderRadius: 10
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+    borderRadius: 10,
+  },
+  line: {
+    borderBottomWidth: 1,
+    width: "100%",
+    borderBlockColor: "#e9ede6",
+    marginTop: hp('1%'),
+  },
+  productNameContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',   
+    width: '100%',             
   },
   productInfo: {
-    padding: 10,
+    flex: 0.8,
+    padding: wp('2%'),
     alignItems: 'center',
     width: '100%',
   },
   productName: {
-    fontSize: 25,
+    fontSize: wp('6%'),
     fontWeight: 'bold',
-    marginTop: 5,
-    fontFamily: 'Pretendard-Medium'
+    marginTop: hp('1%'),
+    fontFamily: 'Pretendard-Medium',
+    textAlign: 'center', 
+    width: '90%', 
   },
   productPrice: {
-    fontSize: 28,
+    fontSize: wp('7%'),
     color: '#000',
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: hp('1%'),
+    marginBottom: hp('1%'),
     fontFamily: 'Pretendard-Medium'
+  },
+  buttonContainer: {
+    height: hp('12%'),
+
+    alignContent: 'center',
+    justifyContent: 'center'
   },
   callButton: {
     backgroundColor: '#847958',
-    padding: 25,
+    padding: wp('5%'),
     borderRadius: 10,
-    marginRight: 20,
-    marginLeft: 20,
-    marginBottom: 20
+    marginHorizontal: wp('5%'),
   },
   callButtonText: {
     color: 'white',
-    fontSize: 35,
-    fontWeight: 'bold',
+    fontSize: wp('9%'),
     textAlign: 'center',
     fontFamily: 'Pretendard-Medium'
   },
@@ -206,39 +238,37 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 15,
+    padding: wp('4%'),
   },
   productDetailTitle: {
     fontFamily: 'Pretendard-Medium',
-    fontSize: 30,
-    marginBottom: 10
+    fontSize: wp('7%'),
+    marginBottom: hp('1%'),
   },
   productDetailDescription: {
     fontFamily: 'Pretendard-Light',
-    fontSize: 27,
-    lineHeight: 50
+    fontSize: wp('6%'),
+    lineHeight: hp('6%'),
   },
   paginationDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginHorizontal: 5,
+    width: wp('3%'),
+    height: wp('2%'),
+    borderRadius: wp('1%'),
+    marginHorizontal: wp('1%'),
   },
-  ImageContainer: { 
-    justifyContent: "center", 
-    alignContent: "center" 
+  ImageContainer: {
+    justifyContent: "center",
+    alignContent: "center",
+    width: '100%',
+    height: '75%',
   },
-  line: { 
-    flex: 17, 
-    borderBottomWidth: 1, 
-    width: "100%", 
-    borderBlockColor: "#e9ede6", 
-    marginTop: 10 
+  line: {
+    borderBottomWidth: 1,
+    width: "100%",
+    borderBlockColor: "#e9ede6",
+    marginTop: hp('1%'),
   },
-  productNameContainer: { 
-    flexDirection: 'row', 
-    alignItems: 'center' 
-  },
+
 });
 
 export default HomeScreen;

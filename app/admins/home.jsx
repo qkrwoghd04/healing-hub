@@ -128,7 +128,6 @@ const AdminHome = () => {
       </ScrollView>
       
       <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
-        <Image source={require('../../assets/icons/plus.png')} style={styles.addIcon} />
         <Text style={styles.addButtonText}>상품 추가</Text>
       </TouchableOpacity>
 

@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityInd
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loginUser } from '../utils/api';
+import { Ionicons } from '@expo/vector-icons';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -64,8 +65,15 @@ const AdminLogin = () => {
     }
   };
 
+  const handleGoBack = () => {
+    router.back(); 
+  };
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
+        <Ionicons name="arrow-back" size={24} color="#000" />
+      </TouchableOpacity>
       <Text style={styles.title}>관리자 로그인</Text>
       <TextInput
         style={styles.input}
@@ -101,6 +109,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 60, // 상태 바 높이를 고려하여 조정
+    left: 20,
+    zIndex: 1,
   },
   title: {
     fontSize: 30,
