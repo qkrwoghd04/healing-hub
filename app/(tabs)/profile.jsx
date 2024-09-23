@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const Profile = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollContainer}>
+      <ScrollView>
         <View style={[styles.imageContainer, {width: '100%', alignItems: 'center'}]}>
           <Image
             source={require('../../assets/images/shop.jpg')}
@@ -17,8 +17,7 @@ const Profile = () => {
           <View style={styles.separator} />
           <InfoItem 
             label="주소" 
-            value="서울특별시 중구 청계천로 246 평화시장 2층 나 169호 (우 : 04563)"
-            isAddress={true}
+            value="서울특별시 중구 청계천로 246 평화시장 2층 나 169호"
           />
           <View style={styles.separator} />
           <InfoItem 
@@ -26,7 +25,7 @@ const Profile = () => {
             value="010-4040-1669"
           />
           <View style={styles.separator} />
-          <InfoItem label="영업시간" value="평일 9:00 - 18:00, 주말 휴무" />
+          <InfoItem label="영업시간" value="평일 9:30 - 18:00, 일요일만 휴무" />
           <View style={styles.separator} />
           <InfoItem label="소개" value="최고 품질의 건강식품만을 판매하는 전문점입니다. 고객 여러분의 건강을 지켜드리겠습니다." />
         </View>
@@ -73,14 +72,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  scrollContainer: {
-    marginBottom: 100
-  },
   storeImage: {
     width: wp('90%'), // 화면 크기에 맞춰 유연하게 조정
-    height: hp('35%'), // 화면 높이에 따라 유연하게 조정
+    height: hp('30%'), // 화면 높이에 따라 유연하게 조정
     resizeMode: 'cover',
     borderRadius: 20,
+    marginTop: 40
   },
   infoContainer: {
     padding: wp('4%'), // 화면 크기에 맞게 padding 조정
@@ -90,10 +87,10 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: 'bold',
-    fontSize: wp('7%'), // 화면 크기에 맞게 폰트 크기 조정
+    fontSize: wp('6%'), // 화면 크기에 맞게 폰트 크기 조정
   },
   value: {
-    fontSize: wp('5%'), // 화면 크기에 맞게 폰트 크기 조정
+    fontSize: wp('4.5%'), // 화면 크기에 맞게 폰트 크기 조정
   },
   separator: {
     height: 1, 

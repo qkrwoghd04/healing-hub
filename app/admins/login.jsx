@@ -25,12 +25,11 @@ const AdminLogin = () => {
     setIsLoading(true);
     try {
       const userData = await loginUser(email, password);
-      console.log('Login response:', userData); // 디버깅을 위한 로그
+      console.log('Login response:', userData);
 
       await AsyncStorage.setItem('userToken', userData.token);
       await AsyncStorage.setItem('userRole', userData.role);
       
-      // userName이 존재할 경우에만 저장
       if (userData.name) {
         await AsyncStorage.setItem('userName', userData.name);
       }
@@ -51,7 +50,9 @@ const AdminLogin = () => {
         if (error.response.status === 404) {
           errorMessage = 'API 엔드포인트를 찾을 수 없습니다. 서버 설정을 확인해주세요.';
         } else if (error.response.status === 401) {
-          errorMessage = '이메일 또는 비밀번호가 올바르지 않습니다.';
+          errorMessage = error.response.data.message || '이메일 또는 비밀번호가 올바르지 않습니다.';
+        } else if (error.response.status >= 500) {
+          errorMessage = '서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
         }
       } else if (error.request) {
         errorMessage = '서버에서 응답을 받지 못했습니다. 네트워크 연결을 확인해주세요.';

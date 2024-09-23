@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { View, Text, Image, TouchableOpacity, Linking, StyleSheet, SafeAreaView} from 'react-native';
+import { View, Text, Image, TouchableOpacity, Linking, StyleSheet, SafeAreaView } from 'react-native';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import { useRouter } from 'expo-router';
 import { useProducts } from '../contexts/ProductContext';
@@ -24,31 +24,31 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <HeaderContent navigateToAdminLogin={navigateToAdminLogin} />
+      <View style={styles.mainContainer}>
+        <View style={styles.header}>
+          <HeaderContent navigateToAdminLogin={navigateToAdminLogin} />
+        </View>
+        <View style={styles.swiperContainer}>
+          <SwiperFlatList
+            index={0}
+            showPagination
+            paginationStyleItem={styles.paginationDot}
+            paginationDefaultColor="#ACAAAB"
+            paginationActiveColor="#443F3D"
+            paginationStyle={styles.pagination}
+            data={products}
+            keyExtractor={(item) => item.id.toString()}
+            windowSize={5}
+            renderItem={({ item }) => <ProductSlide item={item} formatPrice={formatPrice} />}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.callButton} onPress={makePhoneCall}>
+            <Text style={styles.callButtonText}>매장 주문</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={styles.swiperContainer}>
-        <SwiperFlatList
-          autoplay
-          autoplayLoop
-          autoplayDelay={3}
-          index={0}
-          showPagination
-          paginationStyleItem={styles.paginationDot}
-          paginationDefaultColor="#ACAAAB"
-          paginationActiveColor="#443F3D"
-          paginationStyle={styles.pagination}
-          data={products}
-          keyExtractor={(item) => item.id.toString()}
-          windowSize={5}
-          renderItem={({ item }) => <ProductSlide item={item} formatPrice={formatPrice} />}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.callButton} onPress={makePhoneCall}>
-          <Text style={styles.callButtonText}>가게 전화 걸기</Text>
-        </TouchableOpacity>
-      </View>
+
     </SafeAreaView>
   );
 };
@@ -72,8 +72,8 @@ const ProductSlide = memo(({ item, formatPrice }) => (
   <View style={styles.slide}>
     <FlipCard
       style={styles.flipCard}
-      friction={1000}
-      perspective={3000}
+      friction={10000}
+      perspective={10000}
       flipHorizontal={true}
       flipVertical={false}
       flip={false}
@@ -112,6 +112,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  mainContainer: {
+    marginTop: 30
+  },
   header: {
     padding: wp('2%'),
   },
@@ -124,13 +127,13 @@ const styles = StyleSheet.create({
   appNameImage: {
     width: wp('15%'),
     height: wp('15%'),
-    maxWidth: 60,
-    maxHeight: 60,
+    maxWidth: 55,
+    maxHeight: 55,
   },
   title: {
     padding: wp('2%'),
     fontFamily: 'Typography-Times-Regular',
-    fontSize: wp('9%'),
+    fontSize: wp('8%'),
     color: "#443F3D",
   },
   adminIconContainer: {
@@ -142,10 +145,11 @@ const styles = StyleSheet.create({
     height: wp('7%'),
     maxWidth: 28,
     maxHeight: 28,
-    marginRight: wp('2%'),
+    marginRight: wp('4%'),
+    marginBottom: wp('2%')
   },
   swiperContainer: {
-    height: hp('60%'),
+    height: hp('62%'),
     marginTop: 7
   },
   slide: {
@@ -191,8 +195,8 @@ const styles = StyleSheet.create({
   },
   productNameContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',   
-    width: '100%',             
+    justifyContent: 'center',
+    width: '100%',
   },
   productInfo: {
     flex: 0.8,
@@ -205,8 +209,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: hp('1%'),
     fontFamily: 'Pretendard-Medium',
-    textAlign: 'center', 
-    width: '90%', 
+    textAlign: 'center',
+    width: '90%',
   },
   productPrice: {
     fontSize: wp('7%'),

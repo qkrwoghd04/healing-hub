@@ -71,14 +71,14 @@ const TabBar = ({ state, descriptors, navigation }) => {
 const styles = StyleSheet.create({
   tabbar: {
     position: 'absolute',
-    bottom: 25,
+    bottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#EBF1F1',
     marginHorizontal: 20,
     paddingVertical: 15,
-    borderRadius: 25,
+    borderRadius: 20,
     borderCurve: 'center',
     shadowColor: 'black',
     shadowOffset: {width: 0, height : 10},

@@ -22,14 +22,18 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const DYNAMODB_TABLE_NAME = process.env.DYNAMODB_TABLE_NAME;
 const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME;
+const corsOptions = {
+  origin: process.env.CORS_ALLOW_ORIGIN,
+  optionsSuccessStatus: 200
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // 로그인 라우트
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
-  console.log('Login attempt for email:', email); // 로깅 추가
+  console.log('Login attempt for email:', email); 
 
   const params = {
     TableName: 'users',
@@ -42,7 +46,7 @@ app.post('/api/login', async (req, res) => {
 
   try {
     const { Items } = await dynamodb.query(params).promise();
-    console.log('User found:', Items.length > 0); // 로깅 추가
+    console.log('User found:', Items.length > 0); 
 
     if (Items.length === 0) {
       console.log('No user found with email:', email); // 로깅 추가
