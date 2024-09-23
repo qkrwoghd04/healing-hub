@@ -34,7 +34,7 @@
 ---
 
 ## 🗒️ 설계(구조)
-![healing-hub](https://github.com/user-attachments/assets/7178229b-460c-497e-8296-55acf7227969)
+![healinghub drawio](https://github.com/user-attachments/assets/8ef65b15-220f-4d37-9a77-94881d6eebba)
 
 
 ### 프론트엔드 (FE)
@@ -57,7 +57,7 @@
 
 ### 배포 (AWS Elastic Beanstalk)
 - Elastic Beanstalk을 통한 백앤드 배포로 인프라 관리 부담 최소화
-- 서버 상태를 실시간으로 모니터링이 가능
+- CloudFront를 통해 https프로토콜 사용으로 보안강화 및 빠른 콘텐츠 전송 (Android api 9이상에서는 기본적으로 모든 네트워크 연결에 HTTPS를 요구)
 
 ---
 
