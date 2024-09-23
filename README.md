@@ -231,6 +231,9 @@
      return `https://${S3_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${params.Key}`;
    };
    ```
+4. **보안**
+   - 새로운 상품을 등록하고 삭제하는 admin 또한 사용자들이 사용하는 앱과 동일한 앱을 다운받아 관리 (home화면 header우측 상단에 관리자 아이콘을 통해서 로그인)
+   - 다른 유저들도 login화면에 접근가능하기때문에, 관리자의 email과 암호화된 비밀번호를 통해 접근
 
 ---
 
