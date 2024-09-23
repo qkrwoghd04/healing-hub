@@ -198,7 +198,8 @@
 
 2. **데이터베이스 연동**
    - AWS DynamoDB를 사용하여 상품 정보 저장 및 관리
-
+   <img width="700" alt="dynamodb" src="https://github.com/user-attachments/assets/310a082a-9a0d-410c-bee7-21764ce59ac1"><br>
+   <img width="700" alt="products_dynamodb" src="https://github.com/user-attachments/assets/fcaaed86-f7b0-400e-8d01-5a262aa329d1"><br>
    ```javascript
    // server.js
    const AWS = require('aws-sdk');
@@ -213,6 +214,7 @@
 
 3. **이미지 저장**
    - AWS S3를 사용하여 상품 이미지 저장
+    <img width="700" alt="healing-hub-s3" src="https://github.com/user-attachments/assets/4456df27-576c-406d-9ce9-c9552d97c627">
 
    ```javascript
    // server.js
@@ -228,15 +230,6 @@
      await s3.putObject(params).promise();
      return `https://${S3_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${params.Key}`;
    };
-   ```
-
-4. **보안**
-   - CORS 설정을 통한 API 접근 제어
-
-   ```javascript
-   // server.js
-   const cors = require('cors');
-   app.use(cors());
    ```
 
 ---
