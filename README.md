@@ -34,8 +34,9 @@
 ---
 
 ## 🗒️ 설계(구조)
-![healinghub drawio](https://github.com/user-attachments/assets/8ef65b15-220f-4d37-9a77-94881d6eebba)
-
+### 2024-10-02
+#### login 요청처리문이 server.js에 작성되어있지만 실제로는 lambda함수로 route되고 있어서, 불필요한 패키지 및 스크립트로 인해 복잡성 증가 및 패키지 용량 낭비 (해결)
+![healing-hub-diagram](https://github.com/user-attachments/assets/26e21d68-9e48-4b21-99a1-048f128a0da6)
 
 ### 프론트엔드 (FE)
 - #### 개발 환경 (Expo)
