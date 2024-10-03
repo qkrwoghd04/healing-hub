@@ -2,7 +2,7 @@
 
 ## 📅 프로젝트 기간
 
-2024-08-26 ~ 2024-09-05
+2024-08-26 ~ 2024-09-23
 
 ## 🛠 기술 스택
 
@@ -34,8 +34,9 @@
 ---
 
 ## 🗒️ 설계(구조)
-![healinghub drawio](https://github.com/user-attachments/assets/8ef65b15-220f-4d37-9a77-94881d6eebba)
-
+### 2024-10-02
+#### login 요청처리문이 server.js에 작성되어있지만 실제로는 lambda함수로 route되고 있어서, 불필요한 패키지 및 스크립트로 인해 복잡성 증가 및 패키지 용량 낭비 (해결)
+![healing-hub-diagram](https://github.com/user-attachments/assets/26e21d68-9e48-4b21-99a1-048f128a0da6)
 
 ### 프론트엔드 (FE)
 - #### 개발 환경 (Expo)
@@ -231,6 +232,9 @@
      return `https://${S3_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${params.Key}`;
    };
    ```
+4. **보안**
+   - 새로운 상품을 등록하고 삭제하는 admin 또한 사용자들이 사용하는 앱과 동일한 앱을 다운받아 관리 (home화면 header우측 상단에 관리자 아이콘을 통해서 로그인)
+   - 다른 유저들도 login화면에 접근가능하기때문에, 관리자의 email과 암호화된 비밀번호를 통해 접근
 
 ---
 
