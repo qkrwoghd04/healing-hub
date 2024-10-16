@@ -5,6 +5,7 @@ import { View, Text, Image, ScrollView} from 'react-native';
 
 const StyledView = styled(View)
 const StyledText = styled(Text)
+const StyledImage = styled(Image)
 const StyledScrollView = styled(ScrollView)
 
 const formatPrice = (price) => {
@@ -12,37 +13,33 @@ const formatPrice = (price) => {
 };
 
 const ProductSlide = memo(({ item }) => (
-  <StyledView className='flex flex-col justify-center items-center w-[15vh] h-[30vh] m-2 bg-white rounded-lg'>
+  <StyledView className='flex flex-col justify-center items-center w-[15vh] h-[30vh] rounded-lg'>
     {/* Image */}
-    <View className='w-full h-1/2 flex justify-center items-center'>
-      <Image source={{ uri: item.image }} style={{ width: '95%', height: '100%', resizeMode: 'cover'}} />
-    </View>
+    <StyledView className='w-full h-1/2 flex justify-center items-center'>
+      <StyledImage source={{ uri: item.image }} style={{ width: '95%', height: '100%', resizeMode: 'cover'}} className="border border-gray-300 rounded-lg" />
+    </StyledView>
     
     <StyledView className='w-full h-1/2 p-2'>
       <StyledText className='text-lg font-bold mb-2 font-pretendard-Medium' numberOfLines={1} ellipsizeMode="tail">
-        {item.name}
+        {item.shortName}
       </StyledText>
       <StyledText className='text-gray-600 mb-2 font-pretendard-light' numberOfLines={2} ellipsizeMode="tail">
         {item.description}
       </StyledText>
-      <StyledText className='text-xl font-semibold text-gray-800 font-Pretendard-Medium'>
+      <StyledText className='text-xl text-black font-Pretendard-Medium'>
         {formatPrice(item.price)}
       </StyledText>
     </StyledView>
   </StyledView>
 ));
 
-const HorizontalProductScroll = () => {
+const HotProductScroll = () => {
   const { products } = useProducts();
 
   return (
-    <StyledView className='w-full h-[38vh] bg-gray-100 rounded-md'>
-      <StyledText className='text-3xl font-Pretendard-Medium p-2'>인기 상품 및 할인 상품</StyledText>
-      <StyledScrollView 
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 16 }}
-      >
+    <StyledView className='w-full h-[38vh] rounded-md px-4'>
+      <StyledText className='text-3xl font-pretendard-light py-2'>인기 상품 및 할인 상품</StyledText>
+      <StyledScrollView horizontal showsHorizontalScrollIndicator={false}>
         {products.map((item) => (
           <ProductSlide key={item.id} item={item} />
         ))}
@@ -51,7 +48,7 @@ const HorizontalProductScroll = () => {
   )
 }
 
-export default HorizontalProductScroll
+export default HotProductScroll
 
 
 // swiperContainer: {
