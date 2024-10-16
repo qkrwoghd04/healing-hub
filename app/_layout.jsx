@@ -1,6 +1,6 @@
 import React from 'react';
 import { SplashScreen, Stack } from 'expo-router';
-import { ProductProvider } from './contexts/ProductContext';
+import { ProductProvider } from '../api/ProductContext';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 
@@ -21,12 +21,13 @@ export default function RootLayout() {
   }, [fontsLoaded, error])
 
   if(!fontsLoaded && !error) return null;
+
   return (
     <ProductProvider>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="admins/login" options={{ headerShown: false }} />
-        <Stack.Screen name="admins/home" options={{ headerShown: false }} />
+        <Stack.Screen name="(app)" options={{ headerShown: false }} />
+        <Stack.Screen name="admin/login" options={{ headerShown: false }} />
+        <Stack.Screen name="admin/home" options={{ headerShown: false }} />
       </Stack>
     </ProductProvider>
   );

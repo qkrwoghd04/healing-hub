@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, TextInput, SafeAreaView, Alert, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useProducts } from '../contexts/ProductContext';
+import { useProducts } from '../../api/ProductContext';
 import * as ImagePicker from 'expo-image-picker';
 
 const AdminHome = () => {

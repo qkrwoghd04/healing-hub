@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { loginUser } from '../utils/api';
+import { loginUser } from '../../api/api';
 import { Ionicons } from '@expo/vector-icons';
 
 const AdminLogin = () => {
