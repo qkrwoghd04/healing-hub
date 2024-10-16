@@ -4,7 +4,6 @@ import { useProducts } from '../api/ProductContext';
 import { View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 import { FormatPrice } from '../components/FormatPrice'
 
-
 const StyledView = styled(View);
 const StyledText = styled(Text);
 const StyledScrollView = styled(ScrollView);
@@ -28,6 +27,7 @@ const CategoryProductScroll = () => {
 
   return (
     <StyledView className="w-full h-auto rounded-md px-4">
+      
       {/* 카테고리 스크롤바 */}
       <StyledText className="text-3xl font-pretendard-light py-2">카테고리별</StyledText>
       <StyledScrollView 
