@@ -1,18 +1,37 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import TabBar from "../../components/TabBar";
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 export default function TabsLayout() {
   return (
-    <Tabs tabBar={props => <TabBar {...props} />}>
+    <Tabs screenOptions={{
+      tabBarStyle: {
+        backgroundColor: '#fff',
+        borderTopWidth: 0.3,
+        borderColor: '#000',
+        padding: 0,
+      },
+      tabBarShowLabel: true,
+      tabBarActiveTintColor: '#954F4C',
+      tabBarInactiveTintColor: '#737373'
+    }}>
+      <Tabs.Screen 
+        name="category" 
+        options={{
+          title: '카테고리별',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="category" size={size} color={color} />
+          ),
+        }}
+      />
       <Tabs.Screen 
         name="index" 
         options={{
           title: '홈',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
+            <AntDesign name="home" size={size} color={color} />        
           ),
         }}
       />
@@ -22,7 +41,7 @@ export default function TabsLayout() {
           title: '매장 정보',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="profile" size={size} color={color} />
+            <AntDesign name="questioncircleo" size={size} color={color} />
           ),
         }}
       />
