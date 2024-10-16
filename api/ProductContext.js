@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { fetchProducts, addProduct, deleteProduct } from '../utils/api';
+import { fetchProducts, addProduct, deleteProduct } from './api';
 
 const ProductContext = createContext();
 
@@ -10,6 +10,7 @@ export const ProductProvider = ({ children }) => {
     loadProducts();
   }, []);
 
+  // Load Products
   const loadProducts = async () => {
     try {
       const fetchedProducts = await fetchProducts();
@@ -19,6 +20,8 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+
+  // Add New Products(Admin)
   const addNewProduct = async (productData) => {
     try {
       const newProduct = await addProduct(productData);
@@ -29,6 +32,7 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  // Remove Existing Products(Admin)
   const removeProduct = async (id) => {
     try {
       await deleteProduct(id);
@@ -42,7 +46,7 @@ export const ProductProvider = ({ children }) => {
     await loadProducts();
   };
   
-
+  
   return (
     <ProductContext.Provider value={{ 
       products, 
