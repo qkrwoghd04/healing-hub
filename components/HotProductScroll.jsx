@@ -18,7 +18,7 @@ const ProductSlide = memo(({ item }) => (
     
     <StyledView className='w-full h-1/2 p-2'>
       <StyledText className='text-lg font-bold mb-2 font-pretendard-Medium' numberOfLines={1} ellipsizeMode="tail">
-        {item.shortName}
+        {item.name}
       </StyledText>
       <StyledText className='text-gray-600 mb-2 font-pretendard-light' numberOfLines={2} ellipsizeMode="tail">
         {item.description}
