@@ -30,6 +30,7 @@ const CategoryProductScroll = () => {
     ? sortProductsByPopularity(products.filter(item => item.category === selectedCategory))
     : [];
 
+    
   return (
     <StyledView className="w-full h-auto rounded-md px-4">
       
