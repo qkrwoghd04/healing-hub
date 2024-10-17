@@ -46,7 +46,7 @@ app.get('/products', async (req, res) => {
 
 // 제품 추가
 app.post('/products', upload.single('image'), async (req, res) => {
-  const { name, price, description } = req.body;
+  const { name, price, category, popularity, description } = req.body;
   const id = uuidv4();
   const imageKey = `${id}.jpg`;
 
@@ -66,6 +66,8 @@ app.post('/products', upload.single('image'), async (req, res) => {
         id,
         name,
         price,
+        popularity,
+        category,
         description,
         image: `https://${S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${imageKey}`
       }

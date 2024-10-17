@@ -1,33 +1,27 @@
 import React, { memo } from 'react'
-import { styled } from 'nativewind';
 import { useProducts } from '../api/ProductContext';
 import { View, Text, Image, ScrollView} from 'react-native';
 import { FormatPrice } from '../components/FormatPrice'
 
-const StyledView = styled(View)
-const StyledText = styled(Text)
-const StyledImage = styled(Image)
-const StyledScrollView = styled(ScrollView)
-
 const ProductSlide = memo(({ item }) => (
-  <StyledView className='flex flex-col justify-center items-center w-[15vh] h-[30vh] rounded-lg'>
+  <View className='flex flex-col justify-center items-center w-[15vh] h-[30vh] rounded-lg'>
     {/* Image */}
-    <StyledView className='w-full h-1/2 flex justify-center items-center'>
-      <StyledImage source={{ uri: item.image }} style={{ width: '95%', height: '100%', resizeMode: 'cover'}} className="border border-gray-300 rounded-lg" />
-    </StyledView>
+    <View className='w-full h-1/2 flex justify-center items-center'>
+      <Image source={{ uri: item.image }} style={{ width: '95%', height: '100%', resizeMode: 'cover'}} className="border border-gray-300 rounded-lg" />
+    </View>
     
-    <StyledView className='w-full h-1/2 p-2'>
-      <StyledText className='text-lg font-bold mb-2 font-pretendard-Medium' numberOfLines={1} ellipsizeMode="tail">
+    <View className='w-full h-1/2 p-2'>
+      <Text className='text-lg font-bold mb-2 font-pretendard-Medium' numberOfLines={1} ellipsizeMode="tail">
         {item.name}
-      </StyledText>
-      <StyledText className='text-gray-600 mb-2 font-pretendard-light' numberOfLines={2} ellipsizeMode="tail">
+      </Text>
+      <Text className='text-gray-600 mb-2 font-pretendard-light' numberOfLines={2} ellipsizeMode="tail">
         {item.description}
-      </StyledText>
-      <StyledText className='text-xl text-black font-Pretendard-Medium'>
+      </Text>
+      <Text className='text-xl text-black font-Pretendard-Medium'>
         {FormatPrice(item.price)}
-      </StyledText>
-    </StyledView>
-  </StyledView>
+      </Text>
+    </View>
+  </View>
 ));
 
 const HotProductScroll = () => {
@@ -58,14 +52,14 @@ const HotProductScroll = () => {
   const filteredProducts = getFilteredProducts();
 
   return (
-    <StyledView className='w-full h-[38vh] rounded-md px-4'>
-      <StyledText className='text-3xl font-pretendard-light py-2'>인기 상품 및 할인 상품</StyledText>
-      <StyledScrollView horizontal showsHorizontalScrollIndicator={false}>
+    <View className='w-full h-[40%] rounded-md px-4'>
+      <Text className='text-3xl font-pretendard-light py-2'>인기 상품 및 할인 상품</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {filteredProducts.map((item) => (
           <ProductSlide key={item.id} item={item} />
         ))}
-      </StyledScrollView>
-    </StyledView>
+      </ScrollView>
+    </View>
   )
 }
 
