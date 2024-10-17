@@ -91,7 +91,7 @@ const AdminHome = () => {
   };
 
   const navigateToHome = () => {
-    router.push('/(tabs)');
+    router.push('/(app)');
   };
 
   const formatPrice = (price) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { styled } from 'nativewind';
 import { useProducts } from '../api/ProductContext';
 import { View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
@@ -13,6 +13,11 @@ const StyledImage = styled(Image);
 const CategoryProductScroll = () => {
   const { products } = useProducts();
   const [selectedCategory, setSelectedCategory] = useState(null);
+  useEffect(() => {
+    if (products.length > 0) {
+      setSelectedCategory(products[0].category);
+    }
+  }, [products]);
 
   // 상품을 popularity 순으로 정렬하는 함수
   const sortProductsByPopularity = (items) => {

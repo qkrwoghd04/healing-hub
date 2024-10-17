@@ -35,9 +35,9 @@ const AdminLogin = () => {
       }
 
       if (userData.role === 'admin') {
-        router.push('/admins/home');
+        router.push('/admin/home');
       } else {
-        router.push('/(tabs)');
+        router.push('/(app)');
       }
     } catch (error) {
       console.error('Login error:', error);
