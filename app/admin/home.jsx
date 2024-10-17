@@ -30,6 +30,8 @@ const AdminHome = () => {
     formData.append('name', newProductName);
     formData.append('price', newProductPrice);
     formData.append('description', newProductDetail);
+    formData.append('category', newProductCategory);
+    formData.append('popularity', newProductPopularity);
     formData.append('image', {
       uri: newProductImage.uri,
       type: 'image/jpeg',
@@ -85,7 +87,7 @@ const AdminHome = () => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 0.5,
+      quality: 1,
     });
 
     if (!result.canceled) {
@@ -101,15 +103,15 @@ const AdminHome = () => {
       {/* Product List */}
       <ScrollView className="w-full h-full mx-2">
         {products.map((product) => (
-          <View key={product.id} className="w-full h-[40%] flex flex-row justify-start items-center my-1">
+          <View key={product.id} className="w-full h-16 flex flex-row justify-start items-center my-1">
             {/* Product Image */}
             <View className="w-[15%] h-full mr-2">
               <Image source={{ uri: product.image }} className="w-full h-full rounded-lg" />
             </View>
 
             {/* Product Info */}
-            <View className="w-[70%] h-full flex justify-between items-start border-l-[0.5px] border-gray-700 px-2">
-              <Text className="font-Pretendard-Medium">{product.name}</Text>
+            <View className="w-[70%] h-full flex justify-center items-start border-l-[0.5px] border-gray-700 px-2">
+              <Text className="font-Pretendard-Medium mb-2">{product.name}</Text>
               <Text>{FormatPrice(product.price)}</Text>
             </View>
 

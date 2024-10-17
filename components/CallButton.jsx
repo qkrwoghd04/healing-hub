@@ -11,8 +11,8 @@ const CallButton = () => {
     Linking.openURL('tel:010-4040-1669');
   };
   return (
-    <StyledView className="absolute bottom-0 h-[12vh] w-full flex items-center justify-center">
-      <StyledTouchableOpacity className="bg-[#847958] rounded-md h-2/3 w-[90%] flex justify-center items-center" onPress={makePhoneCall}>
+    <StyledView className="relative h-16 w-full flex items-center justify-center">
+      <StyledTouchableOpacity className="bg-[#847958] rounded-md h-full w-[90%] flex justify-center items-center" onPress={makePhoneCall}>
         <StyledText className="text-white text-3xl font-pretendard">매장 주문</StyledText>
       </StyledTouchableOpacity>
     </StyledView>
