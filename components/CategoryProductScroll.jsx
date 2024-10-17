@@ -27,9 +27,9 @@ const CategoryProductScroll = () => {
   return (
     <View className="w-full h-[45%] rounded-md px-4 gap-2">
       
-      <Text className="text-3xl font-pretendard-light py-2">카테고리별</Text>
+      <Text className="text-3xl font-pretendard-light">카테고리별</Text>
       {/* 카테고리 스크롤바 */}
-      <View className="w-full h-8">
+      <View className="w-full h-10">
         <ScrollView 
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -44,7 +44,7 @@ const CategoryProductScroll = () => {
               onPress={() => setSelectedCategory(category)}
               className={`flex flex-row items-center bg-white rounded-md p-2 border ${selectedCategory === category ? 'bg-gray-700' : 'border-gray-400'}`}
             >
-              <Text className={`${selectedCategory === category ? 'text-white' : 'text-gray-700'}`}>{category}</Text>
+              <Text className={`${selectedCategory === category ? 'text-white' : 'text-gray-700'} text-[20px]`}>{category}</Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
