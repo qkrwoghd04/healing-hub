@@ -1,31 +1,39 @@
-import React, { memo } from 'react'
+import React, { useState } from 'react'
 import { useProducts } from '../api/ProductContext';
 import { View, Text, Image, ScrollView} from 'react-native';
-import { FormatPrice } from '../components/FormatPrice'
 
-const ProductSlide = memo(({ item }) => (
-  <View className='flex flex-col justify-center items-center w-[15vh] h-[30vh] rounded-lg'>
-    {/* Image */}
-    <View className='w-full h-1/2 flex justify-center items-center'>
-      <Image source={{ uri: item.image }} style={{ width: '95%', height: '100%', resizeMode: 'cover'}} className="border border-gray-300 rounded-lg" />
+//Components
+import { FormatPrice } from '../components/FormatPrice'
+import ProductModal from './ProductModal';
+import { TouchableOpacity } from 'react-native';
+
+const ProductSlide = ({ item, onPress }) => (
+  <TouchableOpacity onPress={onPress}>
+    <View className='flex flex-col justify-center items-center w-[15vh] h-[30vh] rounded-lg'>
+      {/* Image */}
+      <View className='w-full h-1/2 flex justify-center items-center'>
+        <Image source={{ uri: item.image }} style={{ width: '95%', height: '100%', resizeMode: 'cover'}} className="border border-gray-300 rounded-lg" />
+      </View>
+      
+      <View className='w-full h-1/2 p-2'>
+        <Text className='text-lg font-bold mb-2 font-pretendard-Medium' numberOfLines={1} ellipsizeMode="tail">
+          {item.name}
+        </Text>
+        <Text className='text-gray-600 mb-2 font-pretendard-light' numberOfLines={2} ellipsizeMode="tail">
+          {item.description}
+        </Text>
+        <Text className='text-xl text-black font-Pretendard-Medium'>
+          {FormatPrice(item.price)}
+        </Text>
+      </View>
     </View>
-    
-    <View className='w-full h-1/2 p-2'>
-      <Text className='text-lg font-bold mb-2 font-pretendard-Medium' numberOfLines={1} ellipsizeMode="tail">
-        {item.name}
-      </Text>
-      <Text className='text-gray-600 mb-2 font-pretendard-light' numberOfLines={2} ellipsizeMode="tail">
-        {item.description}
-      </Text>
-      <Text className='text-xl text-black font-Pretendard-Medium'>
-        {FormatPrice(item.price)}
-      </Text>
-    </View>
-  </View>
-));
+  </TouchableOpacity>
+);
 
 const HotProductScroll = () => {
   const { products } = useProducts();
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
    // popularity가 "High", "Medium", "Low" 순서로 필터링하여 최대 10개 선택
   const getFilteredProducts = () => {
@@ -51,14 +59,27 @@ const HotProductScroll = () => {
 
   const filteredProducts = getFilteredProducts();
 
+  const openModal = (product) => {
+    setSelectedProduct(product);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setSelectedProduct(null);
+    setModalVisible(false);
+  };
+
   return (
-    <View className='w-full h-[40%] rounded-md px-4'>
-      <Text className='text-3xl font-pretendard-light py-2'>인기 상품 및 할인 상품</Text>
+    <View className="w-full h-[40%] rounded-md px-4">
+      <Text className="text-3xl font-pretendard-light py-1">인기 상품 및 할인 상품</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {filteredProducts.map((item) => (
-          <ProductSlide key={item.id} item={item} />
+          <ProductSlide key={item.id} item={item} onPress={() => openModal(item)} />
         ))}
       </ScrollView>
+
+      {/* Modal for Product Details */}
+      <ProductModal visible={modalVisible} onClose={closeModal} product={selectedProduct} />
     </View>
   )
 }

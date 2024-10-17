@@ -1,4 +1,3 @@
-// ProductModal.js
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, TextInput, Modal, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';

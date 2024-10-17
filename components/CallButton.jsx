@@ -12,7 +12,7 @@ const CallButton = () => {
   };
   return (
     <StyledView className="relative h-16 w-full flex items-center justify-center">
-      <StyledTouchableOpacity className="bg-[#847958] rounded-md h-full w-[90%] flex justify-center items-center" onPress={makePhoneCall}>
+      <StyledTouchableOpacity className="bg-[#847958] rounded-md h-full w-[90%] flex justify-center items-center border-2 border-[#45403D]" onPress={makePhoneCall}>
         <StyledText className="text-white text-3xl font-pretendard">매장 주문</StyledText>
       </StyledTouchableOpacity>
     </StyledView>
