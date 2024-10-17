@@ -1,7 +1,8 @@
 // ProductModal.js
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, Image, TouchableOpacity, TextInput, Modal, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+import * as ImagePicker from 'expo-image-picker';
 
 const popularity = [
   { label: '높음', value: 'High' },
@@ -24,7 +25,6 @@ const ProductModal = ({
   modalVisible,
   setModalVisible,
   newProductImage,
-  pickImage,
   newProductName,
   setNewProductName,
   newProductPrice,
@@ -38,6 +38,18 @@ const ProductModal = ({
   addProduct,
 }) => {
 
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setNewProductImage(result.assets[0]);
+    }
+  };
   return (
     <Modal
       animationType="slide"

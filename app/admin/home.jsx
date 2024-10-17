@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, SafeAreaView, Alert } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView, SafeAreaView, Alert, TextInput } from 'react-native';
 import { useProducts } from '../../api/ProductContext';
-import * as ImagePicker from 'expo-image-picker';
-import { Entypo, Octicons } from '@expo/vector-icons';
-
+import { Entypo } from '@expo/vector-icons';
 
 // Components
 import AdminHeader from '../../components/AdminHeader';
@@ -19,6 +17,16 @@ const AdminHome = () => {
   const [newProductCategory, setNewProductCategory] = useState('');
   const [newProductDetail, setNewProductDetail] = useState('');
   const [newProductImage, setNewProductImage] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Search logic to filter products based on searchQuery
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
 
   const addProduct = async () => {
     if (!newProductName || !newProductPrice || !newProductImage || !newProductDetail) {
@@ -82,50 +90,52 @@ const AdminHome = () => {
     }
   };
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setNewProductImage(result.assets[0]);
-    }
-  };
-
   return (
     <SafeAreaView className="w-full h-full">
       {/* Header */}
       <AdminHeader />
 
+      {/* Search Input */}
+      <View>
+        <TextInput
+          placeholder='Search'
+          clearButtonMode='always'
+          autoCapitalize='none'
+          autoCorrect={false}
+          value={searchQuery}
+          onChangeText={(query) => handleSearch(query)}
+          className="px-4 py-2 border-2 border-gray-400 rounded-lg m-2"
+        />
+      </View>
+
       {/* Product List */}
-      <ScrollView className="w-full h-full mx-2">
-        {products.map((product) => (
-          <View key={product.id} className="w-full h-16 flex flex-row justify-start items-center my-1">
-            {/* Product Image */}
-            <View className="w-[15%] h-full mr-2">
-              <Image source={{ uri: product.image }} className="w-full h-full rounded-lg" />
-            </View>
+      <View className="w-full h-[80%] border-b-[1px] border-gray-400">
+        <ScrollView className="w-full h-full mx-2">
+          {filteredProducts.map((product) => (
+            <View key={product.id} className="w-full h-16 flex flex-row justify-start items-center my-1">
+              {/* Product Image */}
+              <View className="w-[15%] h-full mr-2">
+                <Image source={{ uri: product.image }} className="w-full h-full rounded-lg" />
+              </View>
 
-            {/* Product Info */}
-            <View className="w-[70%] h-full flex justify-center items-start border-l-[0.5px] border-gray-700 px-2">
-              <Text className="font-Pretendard-Medium mb-2">{product.name}</Text>
-              <Text>{FormatPrice(product.price)}</Text>
-            </View>
+              {/* Product Info */}
+              <View className="w-[70%] h-full flex justify-center items-start border-l-[0.5px] border-gray-700 px-2">
+                <Text className="font-Pretendard-Medium mb-2">{product.name}</Text>
+                <Text>{FormatPrice(product.price)}</Text>
+              </View>
 
-            {/* Delete Button */}
-            <TouchableOpacity onPress={() => confirmRemoveProduct(product.id)}>
-              <Entypo name="cross" size={30} color="gray" />
-            </TouchableOpacity>
-          </View>
-        ))}
-      </ScrollView>
+              {/* Delete Button */}
+              <TouchableOpacity onPress={() => confirmRemoveProduct(product.id)}>
+                <Entypo name="cross" size={30} color="gray"/>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
 
       {/* Add Button */}
-      <TouchableOpacity className="w-12 h-12 absolute bottom-10 right-3" onPress={() => setModalVisible(true)}>
-        <Octicons name="diff-added" size={40} color="gray" />
+      <TouchableOpacity className="absolute bottom-10 right-5 bg-[#45403D] p-2 rounded-lg" onPress={() => setModalVisible(true)}>
+        <Text className="text-xl text-white font-pretendard-light">상품 추가</Text>
       </TouchableOpacity>
 
       {/* Product Modal */}
@@ -133,7 +143,6 @@ const AdminHome = () => {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         newProductImage={newProductImage} // Image
-        pickImage={pickImage} 
         newProductName={newProductName} // Product Name
         setNewProductName={setNewProductName}
         newProductPrice={newProductPrice} // Product Price
@@ -143,7 +152,7 @@ const AdminHome = () => {
         newProductCategory={newProductCategory} // Product 카테고리
         setNewProductCategory={setNewProductCategory}
         newProductDetail={newProductDetail} // Product Description
-        setNewProductDetail={setNewProductDetail} 
+        setNewProductDetail={setNewProductDetail}
         addProduct={addProduct} // Add Product Function
       />
     </SafeAreaView>

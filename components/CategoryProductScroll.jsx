@@ -32,6 +32,7 @@ const CategoryProductScroll = () => {
       <View className="w-full h-8">
         <ScrollView 
           horizontal
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             gap: 8,
           }}
@@ -51,9 +52,9 @@ const CategoryProductScroll = () => {
 
       {/* 선택된 카테고리의 상품 목록 */}
       {selectedCategory && (
-        <View className='w-full h-[80%]'>
+        <View className='w-full h-[70%]'>
           <ScrollView className='w-full h-full gap-y-2'>
-            {filteredProducts.map((item, index) => (
+            {filteredProducts.slice(0, 3).map((item, index) => (
               <View key={index} className="flex-row justify-start items-center rounded-md gap-x-4">
                 {/* Product Number */}
                 <View className='flex flex-col justify-center items-center'>
