@@ -1,7 +1,12 @@
 import React from 'react';
-import { View, Text, Image, ScrollView, SafeAreaView } from 'react-native';
+import {View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, SafeAreaView as NativeSafeScrollView } from 'react-native';
+import { styled } from "nativewind";
 
-
+const View = styled(NativeView);
+const ScrollView = styled(NativeScrollView);
+const SafeAreaView = styled(NativeSafeScrollView);
+const Text = styled(NativeText);
+const Image = styled(NativeImage);
 
 const Profile = () => {
   return (

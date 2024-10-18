@@ -1,7 +1,16 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, TextInput, Modal, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
+import { View as NativeView, Text as NativeText, Image as NativeImage, TouchableOpacity as NativeTouchableOpacity, TextInput as NativeTextInput, Modal as NativeModal, TouchableWithoutFeedback as NativeTouchableWithoutFeedback, Keyboard, StyleSheet  } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import * as ImagePicker from 'expo-image-picker';
+import { styled } from "nativewind";
+
+const View = styled(NativeView);
+const Modal = styled(NativeModal);
+const TouchableOpacity  = styled(NativeTouchableOpacity);
+const Text = styled(NativeText);
+const Image = styled(NativeImage);
+const TouchableWithoutFeedback = styled(NativeTouchableWithoutFeedback);
+const TextInput = styled(NativeTextInput);
 
 const popularity = [
   { label: '높음', value: 'High' },

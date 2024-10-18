@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal as NativeModal, View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity, Dimensions } from 'react-native';
 import {  AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { styled } from "nativewind";
@@ -15,7 +15,7 @@ const TouchableOpacity = styled(NativeTouchableOpacity);
 const ProductModal = ({ visible, onClose, product }) => {
   const [imageAspectRatio, setImageAspectRatio] = useState(1);
   const screenWidth = Dimensions.get('window').width;
-  const containerWidth = screenWidth - 32; // padding 좌우 16px씩 제외
+  const containerWidth = screenWidth - 32;
 
   useEffect(() => {
     if (product?.image) {

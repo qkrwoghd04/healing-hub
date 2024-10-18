@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import { useProducts } from '../api/ProductContext';
-import { View, Text, Image, ScrollView} from 'react-native';
+import { View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView} from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { styled } from "nativewind";
 
 //Components
 import { FormatPrice } from '../components/FormatPrice'
 import ProductModal from './ProductModal';
 import { TouchableOpacity } from 'react-native';
+
+const View = styled(NativeView);
+const ScrollView = styled(NativeScrollView);
+const Text = styled(NativeText);
+const Image = styled(NativeImage);
 
 const ProductSlide = ({ item, onPress }) => (
   <View className="flex">
