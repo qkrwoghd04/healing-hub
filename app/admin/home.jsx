@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, SafeAreaView, Alert, TextInput } from 'react-native';
+import { View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity, SafeAreaView as NativeSafeAreaView, Alert as NativeAlert, TextInput as NativeTextInput } from 'react-native';
 import { useProducts } from '../../api/ProductContext';
 import { Entypo } from '@expo/vector-icons';
+import { styled } from "nativewind";
 
 // Components
 import AdminHeader from '../../components/AdminHeader';
 import { FormatPrice } from '../../components/FormatPrice';
 import AddProductModal from '../../components/AddProductModal';
+
+const View = styled(NativeView);
+const ScrollView = styled(NativeScrollView);
+const TouchableOpacity  = styled(NativeTouchableOpacity);
+const Text = styled(NativeText);
+const Image = styled(NativeImage);
+const SafeAreaView = styled(NativeSafeAreaView);
+const Alert = styled(NativeAlert);
+const TextInput = styled(NativeTextInput);
+
 
 const AdminHome = () => {
   const { products, addNewProduct, removeProduct } = useProducts();

@@ -1,11 +1,13 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
-
+import { SafeAreaView as NativeSafeAreaView } from 'react-native';
+import { styled } from "nativewind"
 // Components
 import Header from '../../components/Header'
 import HotProductScroll from '../../components/HotProductScroll'
 import CallButton from '../../components/CallButton';
 import CategoryProductScroll from '../../components/CategoryProductScroll';
+
+const SafeAreaView = styled(NativeSafeAreaView );
 
 const HomeScreen = () => {
   
