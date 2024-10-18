@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <View className="flex-row justify-center items-center w-full relatvie h-[5vh] m-1">
       <Text className="text-3xl font-bold color-[#443F3D] font-Typography-Times-Regular">
-        Healing Hub
+        아이힐링허브
       </Text>
 
       <TouchableOpacity onPress={navigateToAdminLogin} className="absolute right-8">
