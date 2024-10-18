@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useProducts } from '../api/ProductContext';
 import { View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 import { FormatPrice } from '../components/FormatPrice'
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const CategoryProductScroll = () => {
   const { products } = useProducts();
@@ -25,20 +26,24 @@ const CategoryProductScroll = () => {
 
     
   return (
-    <View className="w-full h-[45%] rounded-md px-4 gap-2">
-      
-      <Text className="text-3xl font-pretendard-light">카테고리별</Text>
+    <View className="w-full h-[45%] rounded-md gap-2 flex flex-col justify-center items-start">
+      {/* Title */}
+      <View className="flex flex-row justify-start items-center pl-4">
+        <Text className="text-3xl font-Pretendard-Medium pr-2">고객님들이 선택한 상품</Text>
+        <Ionicons name="bag-check-outline" size={24} color="black" />
+      </View>
       {/* 카테고리 스크롤바 */}
       <View className="w-full h-10">
         <ScrollView 
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
-            gap: 8,
+            gap: 10,
+            paddingHorizontal: 15,
           }}
           className='w-full h-full'
         >
-          {Array.from(new Set(products.map(item => item.category))).map((category, index) => (
+          {Array.from(new Set(products.map(item => item.category))).reverse().map((category, index) => (
             <TouchableOpacity 
               key={index} 
               onPress={() => setSelectedCategory(category)}
@@ -53,7 +58,7 @@ const CategoryProductScroll = () => {
       {/* 선택된 카테고리의 상품 목록 */}
       {selectedCategory && (
         <View className='w-full h-[70%]'>
-          <ScrollView className='w-full h-full gap-y-2'>
+          <ScrollView className='w-full h-full gap-y-2' contentContainerStyle={{paddingHorizontal:20}}>
             {filteredProducts.slice(0, 3).map((item, index) => (
               <View key={index} className="flex-row justify-start items-center rounded-md gap-x-4">
                 {/* Product Number */}
@@ -69,9 +74,9 @@ const CategoryProductScroll = () => {
                   />
                 </View>
                 {/* Product Info */}
-                <View className='flex flex-col justify-between'>
-                  <Text className="text-xl font-pretendard-light">{item.name}</Text>
-                  <Text className="text-l font-pretendard-light">{item.description}</Text>
+                <View className='flex flex-col justify-between w-[70%]'>
+                  <Text className="text-xl font-pretendard-light" numberOfLines={1} ellipsizeMode="tail">{item.name}</Text>
+                  <Text className="text-l font-pretendard-light" numberOfLines={1} ellipsizeMode="tail">{item.description}</Text>
                   <Text className="text-xl">{FormatPrice(item.price)}</Text>
                 </View>              
               </View>
