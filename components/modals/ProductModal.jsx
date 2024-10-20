@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Modal as NativeModal, View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity, Dimensions } from 'react-native';
-import {  AntDesign, MaterialIcons } from '@expo/vector-icons';
+import {  AntDesign } from '@expo/vector-icons';
 import { styled } from "nativewind";
-import { FormatPrice } from "../components/FormatPrice";
+import { FormatPrice } from "../functions/FormatPrice";
 
 
 const View = styled(NativeView);
@@ -77,20 +77,20 @@ const ProductModal = ({ visible, onClose, product }) => {
               </View>
               {/* Product Detail Image */}
               <Image
-                source={{ uri: "https://shop-phinf.pstatic.net/20221118_298/1668745369592QRKQO_JPEG/%EC%BF%A0%EC%BD%94%EC%9D%B4%EB%8B%A8.JPG?type=w860" }}
+                source={{ uri: product.product_detail_url }}
                 style={{
                   width: containerWidth,
                   height: containerWidth / imageAspectRatio,
                   resizeMode: 'contain'
                 }}
                 className="rounded-lg self-center"
-                onLoad={() => handleLongImageLoad("https://shop-phinf.pstatic.net/20221118_298/1668745369592QRKQO_JPEG/%EC%BF%A0%EC%BD%94%EC%9D%B4%EB%8B%A8.JPG?type=w860")}
+                onLoad={() => handleLongImageLoad(product.product_detail_url)}
               />
             </View>
           </ScrollView>
 
-          <TouchableOpacity onPress={onClose} className="absolute top-2 left-3">
-            <MaterialIcons name="arrow-back-ios" size={35} color="#707070" />
+          <TouchableOpacity onPress={onClose} className="absolute top-2 right-3">
+            <AntDesign name="close" size={35} color="#585e58" />  
           </TouchableOpacity>
         </View>
       </View>

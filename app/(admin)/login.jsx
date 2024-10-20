@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
+import { View as NativeView, Text as NativeText, TextInput as NativeTextInput, TouchableOpacity as NativeTouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { loginUser } from '../../api/api';
 import { Ionicons } from '@expo/vector-icons';
+import { styled } from 'nativewind'
+
+// API
+import { loginUser } from '../../api/api';
+
+const View = styled(NativeView)
+const Text = styled(NativeText)
+const TextInput = styled(NativeTextInput)
+const TouchableOpacity = styled(NativeTouchableOpacity)
+
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -25,7 +34,6 @@ const AdminLogin = () => {
     setIsLoading(true);
     try {
       const userData = await loginUser(email, password);
-      console.log('Login response:', userData);
 
       await AsyncStorage.setItem('userToken', userData.token);
       await AsyncStorage.setItem('userRole', userData.role);
@@ -35,10 +43,8 @@ const AdminLogin = () => {
       }
 
       if (userData.role === 'admin') {
-        router.push('/admin/home');
-      } else {
-        router.push('/(app)');
-      }
+        router.push('(admin)/home');
+      } 
     } catch (error) {
       console.error('Login error:', error);
       let errorMessage = '로그인 중 오류가 발생했습니다.';
@@ -71,81 +77,37 @@ const AdminLogin = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
+    <View className="flex-1 justify-center items-center p-10">
+      <TouchableOpacity className='absolute top-20 left-5' onPress={handleGoBack}>
         <Ionicons name="arrow-back" size={24} color="#000" />
       </TouchableOpacity>
-      <Text style={styles.title}>관리자 로그인</Text>
+      <Text className='font-Pretendard-Medium text-3xl pb-5'>관리자 로그인</Text>
       <TextInput
-        style={styles.input}
         placeholder="이메일"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
         editable={!isLoading}
+        className='w-full h-[40px] border-[1px] border-gray-300 rounded-md px-3 mb-3'
       />
       <TextInput
-        style={styles.input}
         placeholder="비밀번호"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
         editable={!isLoading}
+        className='w-full h-[40px] border-[1px] border-gray-300 rounded-md px-3 mb-3'
       />
       {isLoading ? (
         <ActivityIndicator size="large" color="#007AFF" />
       ) : (
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginButtonText}>로그인</Text>
+        <TouchableOpacity className="bg-[#20284F] w-full h-12 rounded-md flex justify-center items-center" onPress={handleLogin}>
+          <Text className='text-white font-Pretendard-Medium text-xl'>로그인</Text>
         </TouchableOpacity>
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  backButton: {
-    position: 'absolute',
-    top: 60, // 상태 바 높이를 고려하여 조정
-    left: 20,
-    zIndex: 1,
-  },
-  title: {
-    fontSize: 30,
-    fontFamily: 'Pretendard-Medium',
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-  loginButton: {
-    backgroundColor: '#954F4C',
-    padding: 10,
-    borderRadius: 5,
-    width: '100%',
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  loginButtonText: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
-    fontFamily: 'Pretendard-Medium',
-  },
-});
 
 export default AdminLogin;

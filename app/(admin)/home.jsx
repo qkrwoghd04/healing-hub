@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import { View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity, SafeAreaView as NativeSafeAreaView, Alert as NativeAlert, TextInput as NativeTextInput } from 'react-native';
+import { View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity, SafeAreaView as NativeSafeAreaView, Alert as NativeAlert } from 'react-native';
 import { useProducts } from '../../api/ProductContext';
 import { Entypo } from '@expo/vector-icons';
 import { styled } from "nativewind";
 
 // Components
-import AdminHeader from '../../components/AdminHeader';
-import { FormatPrice } from '../../components/FormatPrice';
-import AddProductModal from '../../components/AddProductModal';
+import AdminHeader from '../../components/headers/AdminHeader';
+import { FormatPrice } from '../../components/functions/FormatPrice';
+import AddProductModal from '../../components/modals/AddProductModal';
+import SearchBar from '../../components/SearchBar';
 
 const View = styled(NativeView);
 const ScrollView = styled(NativeScrollView);
-const TouchableOpacity  = styled(NativeTouchableOpacity);
+const TouchableOpacity = styled(NativeTouchableOpacity);
 const Text = styled(NativeText);
 const Image = styled(NativeImage);
 const SafeAreaView = styled(NativeSafeAreaView);
 const Alert = styled(NativeAlert);
-const TextInput = styled(NativeTextInput);
 
 
 const AdminHome = () => {
@@ -102,25 +102,18 @@ const AdminHome = () => {
   };
 
   return (
-    <SafeAreaView className="w-full h-full">
+    <SafeAreaView className="w-full h-full bg-white">
       {/* Header */}
       <AdminHeader />
 
-      {/* Search Input */}
-      <View>
-        <TextInput
-          placeholder='Search'
-          clearButtonMode='always'
-          autoCapitalize='none'
-          autoCorrect={false}
-          value={searchQuery}
-          onChangeText={(query) => handleSearch(query)}
-          className="px-4 py-2 border-2 border-gray-400 rounded-lg m-2"
-        />
-      </View>
-
+      {/* SearchBar Component */}
+      <SearchBar
+        searchQuery={searchQuery}
+        onSearch={handleSearch}
+        className="px-4 py-2 border-2 border-gray-400 rounded-lg m-2"
+      />
       {/* Product List */}
-      <View className="w-full h-[80%] border-b-[1px] border-gray-400">
+      <View className="w-full h-[74%] border-b-[1px] border-gray-400">
         <ScrollView className="w-full h-full mx-2">
           {filteredProducts.map((product) => (
             <View key={product.id} className="w-full h-16 flex flex-row justify-start items-center my-1">
@@ -137,7 +130,7 @@ const AdminHome = () => {
 
               {/* Delete Button */}
               <TouchableOpacity onPress={() => confirmRemoveProduct(product.id)}>
-                <Entypo name="cross" size={30} color="gray"/>
+                <Entypo name="cross" size={30} color="gray" />
               </TouchableOpacity>
             </View>
           ))}
@@ -145,7 +138,7 @@ const AdminHome = () => {
       </View>
 
       {/* Add Button */}
-      <TouchableOpacity className="absolute bottom-10 right-5 bg-[#45403D] p-2 rounded-lg" onPress={() => setModalVisible(true)}>
+      <TouchableOpacity className="absolute bottom-3 right-5 bg-[#20284F] p-2 rounded-lg" onPress={() => setModalVisible(true)}>
         <Text className="text-xl text-white font-pretendard-light">상품 추가</Text>
       </TouchableOpacity>
 

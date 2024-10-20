@@ -25,9 +25,8 @@ export default function RootLayout() {
   return (
     <ProductProvider>
       <Stack>
-        <Stack.Screen name="(app)" options={{ headerShown: false }} />
-        <Stack.Screen name="admin/login" options={{ headerShown: false }} />
-        <Stack.Screen name="admin/home" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(admin)" options={{ headerShown: false }} />
       </Stack>
     </ProductProvider>
   );

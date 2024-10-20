@@ -150,13 +150,13 @@ const ProductModal = ({
             {/* Modal Bottom */}
             <View className="flex flex-row justify-between items-center w-full h-[10%]">
               <TouchableOpacity
-                className="bg-[#847958] flex-1 h-[90%] justify-center items-center rounded-md mr-1"
+                className="bg-[#20284F] flex-1 h-[90%] justify-center items-center rounded-md mr-1"
                 onPress={addProduct}
               >
                 <Text className="text-white text-xl font-Pretendard-Medium">추가</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                className="bg-[#954F4C] flex-1 h-[90%] justify-center items-center rounded-md ml-1"
+                className="bg-red-600 flex-1 h-[90%] justify-center items-center rounded-md ml-1"
                 onPress={() => setModalVisible(false)}
               >
                 <Text className="text-white text-xl font-Pretendard-Medium">취소</Text>
