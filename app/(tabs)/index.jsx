@@ -6,7 +6,7 @@ import { styled } from "nativewind"
 import HomeHeader from '../../components/headers/HomeHeader'
 import HotProductScroll from '../../components/HotProductScroll'
 import CallButton from '../../components/CallButton';
-import CategoryProductScroll from '../../components/CategoryProductScroll';
+import FlatGridProduct from '../../components/FlatGridProduct';
 
 // API
 import { useProducts } from '../../api/ProductContext';
@@ -19,11 +19,11 @@ const HomeScreen = () => {
   const { products } = useProducts(); 
   
   return (
-    <SafeAreaView className="flex bg-white/100 relative h-full w-full">
+    <SafeAreaView className="flex bg-white relative h-full w-full">
       {/* Only using on dev process */}
       <HomeHeader />
       <HotProductScroll products={products}/>
-      <CategoryProductScroll products={products}/>
+      <FlatGridProduct dimension={100} name={true} title={true}/>
       <CallButton />
     </SafeAreaView>
   );
