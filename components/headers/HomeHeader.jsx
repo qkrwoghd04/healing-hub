@@ -1,31 +1,31 @@
 import React from 'react';
 import { View as NativeView , Text as NativeText, TouchableOpacity as NativeTouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import Feather from '@expo/vector-icons/Feather';
+import { MaterialIcons } from '@expo/vector-icons';
 import { styled } from "nativewind";
 
 const View = styled(NativeView);
 const TouchableOpacity  = styled(NativeTouchableOpacity);
 const Text = styled(NativeText);
 
-const AdminHeader = () => {
+const Header = () => {
   const router = useRouter();
 
   const navigateToAdminLogin = () => {
-    router.push('/(app)');
+    router.push('/(admin)/login');
   };
 
   return (
-    <View className="flex-row justify-center items-center w-full relatvie h-[5vh] m-1">
-      <Text className="text-3xl font-bold color-[#443F3D] font-pretendard-light">
-        Admin Home
+    <View className="flex-row justify-center items-center w-full relative h-[5h] m-1 mt-10">
+      <Text className="text-2xl font-bold color-[#20284F] font-Pretendard-Medium">
+        힐링허브
       </Text>
 
       <TouchableOpacity onPress={navigateToAdminLogin} className="absolute right-8">
-        <Feather name="home" size={24} color="black" />
+        <MaterialIcons name="admin-panel-settings" size={35} color="black" />
       </TouchableOpacity>
     </View>
   );
 };
 
-export default AdminHeader;
+export default Header;

@@ -12,13 +12,13 @@ export default function TabsLayout() {
         padding: 0,
       },
       tabBarShowLabel: true,
-      tabBarActiveTintColor: '#954F4C',
-      tabBarInactiveTintColor: '#737373'
+      tabBarActiveTintColor: '#dba40d',
+      tabBarInactiveTintColor: '#20284F',
     }}>
       <Tabs.Screen 
         name="category" 
         options={{
-          title: '카테고리별',
+          title: '카테고리',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="category" size={size} color={color} />
