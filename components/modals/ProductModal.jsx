@@ -1,43 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { Modal as NativeModal, View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity, Dimensions } from 'react-native';
-import {  AntDesign, Fontisto } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { Modal as NativeModal, View as NativeView, Text as NativeText, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity } from 'react-native';
+import { Image } from 'expo-image';
+import { AntDesign, Fontisto } from '@expo/vector-icons';
 import { styled } from "nativewind";
 import { FormatPrice } from "../functions/FormatPrice";
-
 
 const View = styled(NativeView);
 const ScrollView = styled(NativeScrollView);
 const Modal = styled(NativeModal);
 const Text = styled(NativeText);
-const Image = styled(NativeImage);
 const TouchableOpacity = styled(NativeTouchableOpacity);
 
 const ProductModal = ({ visible, onClose, product }) => {
-  const [imageAspectRatio, setImageAspectRatio] = useState(1);
-  const screenWidth = Dimensions.get('window').width;
-  const containerWidth = screenWidth - 32;
-
-  useEffect(() => {
-    if (product?.image) {
-      NativeImage.getSize(product.image, (width, height) => {
-        setImageAspectRatio(width / height);
-      }, (error) => {
-        console.error('Error loading product image:', error);
-      });
-    }
-  }, [product?.image]);
-
-  const handleLongImageLoad = (imageUrl) => {
-    NativeImage.getSize(imageUrl, (width, height) => {
-      // 이미지의 실제 비율 계산
-      const actualAspectRatio = width / height;
-      setImageAspectRatio(actualAspectRatio);
-    }, (error) => {
-      console.error('Error loading long image:', error);
-    });
-  };
+  const [imgHeight, setImgHeight] = useState(0);
 
   if (!product) return null;
+
+  const handleImageLoad = (event) => {
+    const { width, height } = event.source; 
+    setImgHeight(height + 300); 
+  };
 
   return (
     <Modal
@@ -53,16 +35,16 @@ const ProductModal = ({ visible, onClose, product }) => {
             <View className="w-full h-[35vh] flex justify-center items-center rounded-lg">
               <Image
                 source={{ uri: product.image }}
-                style={{ 
-                  width: '100%', 
-                  height: '90%', 
-                  resizeMode: 'contain'
+                style={{
+                  width: '100%',
+                  height: '90%',
                 }}
+                contentFit='contain'
               />
             </View>
 
             {/* Product Info */}
-            <View className='flex flex-col justify-center items-start'>
+            <View className='flex-1 flex-col justify-center items-start'>
               <View className='w-full flex flex-col justify-center items-start border-y-[1px] border-gray-300 p-2 rounded-xl'>
                 <Text className="text-2xl font-Pretendard-Medium">{product.name}</Text>
                 <Text className="text-xl font-Pretendard-Medium text-gray-700">{product.description}</Text>
@@ -70,7 +52,7 @@ const ProductModal = ({ visible, onClose, product }) => {
               </View>
 
               {/* 긴 이미지 */}
-              <View className="w-full">
+              <View className="flex-1 w-full" style={{ height: imgHeight ? imgHeight : 'auto' }}>
                 {/* 제품 정보 with Arrow */}
                 <View className='flex-col justify-center items-center py-4 gap-y-2'>
                   <Text className='font-Pretendard-Medium text-3xl text-black'>제품 정보</Text>
@@ -79,20 +61,18 @@ const ProductModal = ({ visible, onClose, product }) => {
                 {/* Product Detail Image */}
                 <Image
                   source={{ uri: product.product_detail_url }}
-                  style={{
-                    width: containerWidth,
-                    height: containerWidth / imageAspectRatio,
-                    resizeMode: 'contain'
-                  }}
-                  className="rounded-lg self-center"
-                  onLoad={() => handleLongImageLoad(product.product_detail_url)}
+                  contentFit="fill"
+                  style={{ width: '100%', height: '100%'}}
+                  transition={300}
+                  onLoad={handleImageLoad}
+                  cachePolicy="memory-disk"
                 />
               </View>
             </View>
           </ScrollView>
 
           <TouchableOpacity onPress={onClose} className="absolute top-2 right-3">
-            <AntDesign name="close" size={35} color="#585e58" />  
+            <AntDesign name="close" size={35} color="#585e58" />
           </TouchableOpacity>
         </View>
       </View>
