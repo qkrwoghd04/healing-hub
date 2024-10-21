@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal as NativeModal, View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity, Dimensions } from 'react-native';
-import {  AntDesign } from '@expo/vector-icons';
+import {  AntDesign, Fontisto } from '@expo/vector-icons';
 import { styled } from "nativewind";
 import { FormatPrice } from "../functions/FormatPrice";
 
@@ -47,45 +47,47 @@ const ProductModal = ({ visible, onClose, product }) => {
       onRequestClose={onClose}
     >
       <View className="flex-1 justify-center items-center" style={{ backgroundColor: 'rgba(68, 63, 61, 0.6)' }}>
-        <View className="w-full h-[70%] bg-white rounded-lg p-4">
-          <ScrollView contentContainerStyle={{ paddingVertical: 10 }}>
+        <View className="w-full h-[58%] bg-white rounded-lg">
+          <ScrollView contentContainerStyle={{ paddingBottom: 10 }}>
             {/* Top Image */}
-            <View className="w-full h-[35vh] flex justify-center items-center">
+            <View className="w-full h-[35vh] flex justify-center items-center rounded-lg">
               <Image
                 source={{ uri: product.image }}
                 style={{ 
                   width: '100%', 
-                  height: '100%', 
-                  resizeMode: 'contain' 
-                }}
-              />
-            </View>
-            {/* Product Info */}
-            <View className='flex flex-col justify-center items-start gap-y-2 py-2'>
-              <Text className="text-2xl font-Pretendard-Medium">{product.name}</Text>
-              <Text className="text-2xl font-Pretendard-Medium">{FormatPrice(product.price)}</Text>
-              <Text className="text-xl font-Pretendard-Medium text-gray-700">{product.description}</Text>
-            </View>
-
-            {/* 긴 이미지 */}
-            <View className="w-full border-t-4 border-gray-300">
-              {/* 제품 정보 with Arrow */}
-              <View className='flex-row justify-center items-center py-4'>
-                <AntDesign name="arrowdown" size={30} color="black" />
-                <Text className='font-Pretendard-Medium text-4xl text-red-500'>제품 정보</Text>
-                <AntDesign name="arrowdown" size={30} color="black" />
-              </View>
-              {/* Product Detail Image */}
-              <Image
-                source={{ uri: product.product_detail_url }}
-                style={{
-                  width: containerWidth,
-                  height: containerWidth / imageAspectRatio,
+                  height: '90%', 
                   resizeMode: 'contain'
                 }}
-                className="rounded-lg self-center"
-                onLoad={() => handleLongImageLoad(product.product_detail_url)}
               />
+            </View>
+
+            {/* Product Info */}
+            <View className='flex flex-col justify-center items-start'>
+              <View className='w-full flex flex-col justify-center items-start border-y-[1px] border-gray-300 p-2 rounded-xl'>
+                <Text className="text-2xl font-Pretendard-Medium">{product.name}</Text>
+                <Text className="text-xl font-Pretendard-Medium text-gray-700">{product.description}</Text>
+                <Text className="text-2xl font-extrabold">{FormatPrice(product.price)}</Text>
+              </View>
+
+              {/* 긴 이미지 */}
+              <View className="w-full">
+                {/* 제품 정보 with Arrow */}
+                <View className='flex-col justify-center items-center py-4 gap-y-2'>
+                  <Text className='font-Pretendard-Medium text-3xl text-black'>제품 정보</Text>
+                  <Fontisto name="caret-down" size={24} color="black" />
+                </View>
+                {/* Product Detail Image */}
+                <Image
+                  source={{ uri: product.product_detail_url }}
+                  style={{
+                    width: containerWidth,
+                    height: containerWidth / imageAspectRatio,
+                    resizeMode: 'contain'
+                  }}
+                  className="rounded-lg self-center"
+                  onLoad={() => handleLongImageLoad(product.product_detail_url)}
+                />
+              </View>
             </View>
           </ScrollView>
 

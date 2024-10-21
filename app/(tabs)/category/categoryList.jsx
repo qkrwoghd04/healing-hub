@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigation } from '@react-navigation/native';
 import { Text as NativeText, View as NativeView, ScrollView as NativeScrollView, Image as NativeImage, SafeAreaView as NativeSafeAreaView, ActivityIndicator, TouchableOpacity as NativeTouchableOpacity } from 'react-native'
-import { useRoute } from '@react-navigation/native';
+import { useLocalSearchParams, useRouter  } from 'expo-router'
 import { styled } from 'nativewind'
 import { AntDesign } from '@expo/vector-icons';
 
@@ -21,9 +20,8 @@ const ScrollView = styled(NativeScrollView)
 const TouchableOpacity = styled(NativeTouchableOpacity)
 
 const CategoryList = () => {
-  const route = useRoute();
-  const navigation = useNavigation();
-  const { category } = route.params;  // Category passed from the previous screen
+  const router = useRouter();
+  const { category } = useLocalSearchParams();
   const { products, refreshProducts } = useProducts();  
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -73,7 +71,7 @@ const CategoryList = () => {
         {/* Category Title */}
         <View className='bg-[#20284F] w-full h-[12%] flex flex-row justify-center items-center relative'>
           <Text className='text-white text-2xl font-Pretendard-Medium text-center pt-5'>{category}</Text>
-          <TouchableOpacity className="absolute top-10 right-5" onPress={() => navigation.goBack()}>
+          <TouchableOpacity className="absolute top-10 right-5" onPress={() => router.push("category")}>
             <AntDesign name="closecircleo" size={30} color="white" />
           </TouchableOpacity>
         </View>
@@ -86,7 +84,7 @@ const CategoryList = () => {
                 key={index}
                 onPress={() => openModal(product)}
               >
-                <View className='bg-white p-4 mb-4 rounded-2xl shadow-lg'>
+                <View className='bg-white p-4 mb-4 rounded-md shadow-lg border-[1px] border-gray-300'>
                   <View className='flex flex-row items-center'>
                     <Image
                       source={{ uri: product.image }}
@@ -96,8 +94,8 @@ const CategoryList = () => {
                       <Text className='text-xl font-Pretendard-Medium text-[#20284F]' numberOfLines={2} ellipsizeMode='tail'>{product.name}</Text>
                       <View className='flex-row items-center'>
                         <View className='w-full flex flex-row items-center mt-4'>
-                          <Text className='text-lg text-[#20284F] font-Pretendard-SemiBold'>{FormatPrice(product.price)} / </Text>
-                          <Text className='flex-1 text-gray-600' numberOfLines={1} ellipsizeMode='tail'>{product.description}</Text>
+                          <Text className='text-lg text-[#20284F] font-semibold'>{FormatPrice(product.price)}</Text>
+                          <Text className='flex-1 text-gray-600' numberOfLines={1} ellipsizeMode='tail'> / {product.description}</Text>
                         </View>
                       </View>
                     </View>

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Text as NativeText, View as NativeView, TouchableOpacity, Image as NativeImage, } from 'react-native'
 import { FlatGrid } from 'react-native-super-grid';
-import { useNavigation } from '@react-navigation/native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { styled } from 'nativewind'
+import { useRouter } from 'expo-router';
 
 const View = styled(NativeView)
 const Text = styled(NativeText)
@@ -20,7 +20,8 @@ const Categories = [
 ]
 
 const FlatGridProduct = ({ dimension, name, title }) => {
-  const navigation = useNavigation();
+  const router = useRouter();
+  
   return (
     <View className="flex-1 px-2">
       {title && (
@@ -36,7 +37,7 @@ const FlatGridProduct = ({ dimension, name, title }) => {
         spacing={10}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate('categoryList', { category: item.name })}
+            onPress={() => router.push({pathname: 'category/categoryList', params: { category: item.name}})}
           >
             <View className="justify-center items-center rounded-xl px-3 h-[130px] font-Pretendard-Light bg-white border-[1px] border-gray-400">
               <Image
