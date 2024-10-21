@@ -27,7 +27,7 @@ const ProductSlide = ({ item, onPress }) => (
           <Text className='text-xl mb-2 font-pretendard-light' numberOfLines={1} ellipsizeMode="tail">
             {item.name}
           </Text>
-          <Text className='text-gray-600 mb-2 font-pretendard-light' numberOfLines={2} ellipsizeMode="tail">
+          <Text className='text-gray-600 mb-2 font-pretendard-light' numberOfLines={1} ellipsizeMode="tail">
             {item.description}
           </Text>
           <Text className='text-xl text-black font-Pretendard-Medium'>
@@ -78,7 +78,7 @@ const HotProductScroll = ({products = []}) => {
 
   return (
     <View className="w-full h-[38%] rounded-md">
-      <View className="flex flex-row justify-start items-center pl-4" >
+      <View className="flex flex-row justify-start items-center px-4 pb-2" >
         <Animated.Text
           style={{ opacity }} // Apply the animated opacity value
           className="text-2xl font-Pretendard-Medium mr-2 text-yellow-600"
