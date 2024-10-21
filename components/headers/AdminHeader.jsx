@@ -17,7 +17,7 @@ const AdminHeader = () => {
 
   return (
     <View className="flex-row justify-center items-center w-full relatvie h-[5vh] m-1 mt-10">
-      <Text className="text-3xl font-bold color-[#443F3D] font-Pretendard-Light">
+      <Text className="text-2xl color-[#443F3D] font-Pretendard-Medium">
         Admin Home
       </Text>
 

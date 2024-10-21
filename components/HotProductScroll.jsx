@@ -24,13 +24,13 @@ const ProductSlide = ({ item, onPress }) => (
         </View>
 
         <View className='w-full h-1/2 p-2'>
-          <Text className='text-xl mb-2 font-pretendard-light' numberOfLines={1} ellipsizeMode="tail">
+          <Text className='text-lg mb-2 font-pretendard-light' numberOfLines={1} ellipsizeMode="tail">
             {item.name}
           </Text>
           <Text className='text-gray-600 mb-2 font-pretendard-light' numberOfLines={1} ellipsizeMode="tail">
             {item.description}
           </Text>
-          <Text className='text-xl text-black font-Pretendard-Medium'>
+          <Text className='text-lg text-black font-Pretendard-Medium'>
             {FormatPrice(item.price)}
           </Text>
         </View>

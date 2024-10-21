@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity, SafeAreaView as NativeSafeAreaView, Alert as NativeAlert } from 'react-native';
+import { View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity, SafeAreaView as NativeSafeAreaView, Alert } from 'react-native';
 import { useProducts } from '../../api/ProductContext';
 import { Entypo } from '@expo/vector-icons';
 import { styled } from "nativewind";
@@ -16,7 +16,7 @@ const TouchableOpacity = styled(NativeTouchableOpacity);
 const Text = styled(NativeText);
 const Image = styled(NativeImage);
 const SafeAreaView = styled(NativeSafeAreaView);
-const Alert = styled(NativeAlert);
+
 
 
 const AdminHome = () => {
