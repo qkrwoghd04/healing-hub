@@ -18,7 +18,7 @@ const ProductModal = ({ visible, onClose, product }) => {
 
   const handleImageLoad = (event) => {
     const { width, height } = event.source; 
-    setImgHeight(height + 300); 
+    setImgHeight(height); 
   };
 
   return (
@@ -29,7 +29,7 @@ const ProductModal = ({ visible, onClose, product }) => {
       onRequestClose={onClose}
     >
       <View className="flex-1 justify-center items-center" style={{ backgroundColor: 'rgba(68, 63, 61, 0.6)' }}>
-        <View className="w-full h-[58%] bg-white rounded-lg">
+        <View className="w-full h-[70%] bg-white rounded-lg">
           <ScrollView contentContainerStyle={{ paddingBottom: 10 }}>
             {/* Top Image */}
             <View className="w-full h-[35vh] flex justify-center items-center rounded-lg">

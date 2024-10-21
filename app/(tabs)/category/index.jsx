@@ -3,7 +3,7 @@ import { Text as NativeText, View as NativeView, SafeAreaView as NativeSafeAreaV
 import { styled } from 'nativewind'
 
 //components
-import SearchBar from '../../../components/SearchBar'
+// import SearchBar from '../../../components/SearchBar'
 import FlatGridProduct from '../../../components/FlatGridProduct';
 
 const View = styled(NativeView)
@@ -20,7 +20,7 @@ const CategroyScreen = () => {
     <SafeAreaview className='h-full w-full'>
       {/* Category Header with SearchBar */}
       <View className='bg-[#20284F] w-full h-[15%] rounded-b-2xl relative px-4 pt-8'>
-        <View className='flex-1 justify-center items-start'>
+        <View className='flex-1 justify-center items-center'>
           <Text className='text-white text-2xl font-Pretendard-Medium'>카테고리별 상품</Text>
         </View>
         {/* <View className='flex-1'>
@@ -33,7 +33,7 @@ const CategroyScreen = () => {
       </View>
 
       {/* 카테고리 FlatGrid */}
-      <FlatGridProduct dimension={130} name={true} title={false}/>
+      <FlatGridProduct dimension={130} setName={true} title={false}/>
     </SafeAreaview>
   )
 }
