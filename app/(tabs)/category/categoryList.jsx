@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Text as NativeText, View as NativeView, ScrollView as NativeScrollView, Image as NativeImage, SafeAreaView as NativeSafeAreaView, ActivityIndicator, TouchableOpacity as NativeTouchableOpacity } from 'react-native'
+import { Text as NativeText, View as NativeView, ScrollView as NativeScrollView, SafeAreaView as NativeSafeAreaView, ActivityIndicator, TouchableOpacity as NativeTouchableOpacity } from 'react-native'
+import { Image as NativeImage } from 'expo-image'
 import { useLocalSearchParams, useRouter  } from 'expo-router'
 import { styled } from 'nativewind'
 import { AntDesign } from '@expo/vector-icons';
@@ -71,8 +72,8 @@ const CategoryList = () => {
         {/* Category Title */}
         <View className='bg-[#20284F] w-full h-[12%] flex flex-row justify-center items-center relative'>
           <Text className='text-white text-2xl font-Pretendard-Medium text-center pt-5'>{category}</Text>
-          <TouchableOpacity className="absolute top-10 right-5" onPress={() => router.push("category")}>
-            <AntDesign name="closecircleo" size={30} color="white" />
+          <TouchableOpacity className="absolute top-8 right-5" onPress={() => router.push("category")}>
+            <AntDesign name="close" size={48} color="white" />
           </TouchableOpacity>
         </View>
 
@@ -87,7 +88,9 @@ const CategoryList = () => {
                 <View className='bg-white p-4 mb-4 rounded-md shadow-lg border-[1px] border-gray-300'>
                   <View className='flex flex-row items-center'>
                     <Image
-                      source={{ uri: product.image }}
+                      source={{ 
+                        uri: product.image 
+                      }}
                       className="w-20 h-20 rounded-xl mr-4"
                     />
                     <View className='flex-1'>

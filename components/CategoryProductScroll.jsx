@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity } from 'react-native';
+import { View as NativeView, Text as NativeText, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity } from 'react-native';
+import { Image as NativeImage } from 'expo-image'
 import { FormatPrice } from './functions/FormatPrice'
 import { FontAwesome6} from '@expo/vector-icons';
 import { styled } from 'nativewind'

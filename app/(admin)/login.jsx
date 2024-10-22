@@ -79,7 +79,7 @@ const AdminLogin = () => {
   return (
     <View className="flex-1 justify-center items-center p-10">
       <TouchableOpacity className='absolute top-20 left-5' onPress={handleGoBack}>
-        <Ionicons name="arrow-back" size={24} color="#000" />
+        <Ionicons name="chevron-back" size={48} color="gray" />
       </TouchableOpacity>
       <Text className='font-Pretendard-Medium text-3xl pb-5'>관리자 로그인</Text>
       <TextInput
@@ -89,7 +89,7 @@ const AdminLogin = () => {
         keyboardType="email-address"
         autoCapitalize="none"
         editable={!isLoading}
-        className='w-full h-[40px] border-[1px] border-gray-300 rounded-md px-3 mb-3'
+        className='w-full h-[50px] border-[1px] border-gray-300 rounded-md px-3 mb-3'
       />
       <TextInput
         placeholder="비밀번호"
@@ -97,7 +97,7 @@ const AdminLogin = () => {
         onChangeText={setPassword}
         secureTextEntry
         editable={!isLoading}
-        className='w-full h-[40px] border-[1px] border-gray-300 rounded-md px-3 mb-3'
+        className='w-full h-[50px] border-[1px] border-gray-300 rounded-md px-3 mb-3'
       />
       {isLoading ? (
         <ActivityIndicator size="large" color="#007AFF" />
