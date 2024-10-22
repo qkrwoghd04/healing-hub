@@ -72,7 +72,7 @@ const ProductModal = ({ visible, onClose, product }) => {
           </ScrollView>
 
           <TouchableOpacity onPress={onClose} className="absolute top-2 right-3">
-            <AntDesign name="close" size={35} color="#585e58" />
+            <AntDesign name="close" size={48} color="#585e58" />
           </TouchableOpacity>
         </View>
       </View>

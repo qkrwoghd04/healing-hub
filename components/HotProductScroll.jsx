@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, Animated, TouchableOpacity } from 'react-native';
+import { View as NativeView, Text as NativeText, ScrollView as NativeScrollView, Animated, TouchableOpacity } from 'react-native';
+import { Image } from 'expo-image'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { styled } from "nativewind";
 
@@ -11,7 +12,6 @@ import { sortProductsByPopularity } from './functions/sortProductsByPopularity'
 const View = styled(NativeView);
 const ScrollView = styled(NativeScrollView);
 const Text = styled(NativeText);
-const Image = styled(NativeImage);
 
 
 const ProductSlide = ({ item, onPress }) => (
@@ -20,7 +20,17 @@ const ProductSlide = ({ item, onPress }) => (
       <View className='flex flex-col justify-center items-center w-[15vh] h-[30vh] rounded-lg'>
         {/* Image */}
         <View className='w-full h-1/2 flex justify-center items-center'>
-          <Image source={{ uri: item.image }} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} className="border border-gray-300 rounded-lg" />
+          <Image 
+            source={{ uri: item.image }} 
+            style={{ 
+              width: '100%', 
+              height: '100%', 
+              borderWidth: 1,
+              borderColor: "#D1D5DB",
+              borderRadius: 12,
+            }} 
+            contentFit='cover'
+          />
         </View>
 
         <View className='w-full h-1/2 p-2'>

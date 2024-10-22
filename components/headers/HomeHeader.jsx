@@ -17,12 +17,12 @@ const Header = () => {
 
   return (
     <View className="flex-row justify-center items-center w-full relative h-[5h] m-1 mt-10">
-      <Text className="text-2xl font-bold color-[#20284F] font-Pretendard-Medium">
+      <Text className="text-3xl font-bold color-[#20284F] font-Pretendard-Medium">
         힐링허브
       </Text>
 
       <TouchableOpacity onPress={navigateToAdminLogin} className="absolute right-8">
-        <MaterialIcons name="admin-panel-settings" size={35} color="black" />
+        <MaterialIcons name="admin-panel-settings" size={48} color="black" />
       </TouchableOpacity>
     </View>
   );

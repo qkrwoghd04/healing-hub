@@ -1,6 +1,7 @@
 import React from 'react';
-import {View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, SafeAreaView as NativeSafeScrollView } from 'react-native';
+import {View as NativeView, Text as NativeText, ScrollView as NativeScrollView, SafeAreaView as NativeSafeScrollView } from 'react-native';
 import { styled } from "nativewind";
+import { Image as NativeImage } from 'expo-image'
 
 const View = styled(NativeView);
 const ScrollView = styled(NativeScrollView);
