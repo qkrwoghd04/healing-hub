@@ -16,13 +16,14 @@ const Header = () => {
   };
 
   return (
-    <View className="flex-row justify-center items-center w-full relative h-[5h] m-1 mt-10">
-      <Text className="text-3xl font-bold color-[#20284F] font-Pretendard-Medium">
+    <View className="relative w-full mt-10 flex-row justify-center items-center">
+      {/* App name */}
+      <Text className="text-2xl color-[#20284F] font-Pretendard-Medium">
         힐링허브
       </Text>
-
-      <TouchableOpacity onPress={navigateToAdminLogin} className="absolute right-8">
-        <MaterialIcons name="admin-panel-settings" size={48} color="black" />
+      {/* Admin */}
+      <TouchableOpacity onPress={navigateToAdminLogin} className="absolute right-5">
+        <MaterialIcons name="admin-panel-settings" size={35} color="black" />
       </TouchableOpacity>
     </View>
   );

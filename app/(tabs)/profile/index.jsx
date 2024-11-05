@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {View as NativeView, Text as NativeText, ScrollView as NativeScrollView, SafeAreaView as NativeSafeScrollView } from 'react-native';
 import { styled } from "nativewind";
 import { Image as NativeImage } from 'expo-image'
+import { Asset } from 'expo-asset'
 
 const View = styled(NativeView);
 const ScrollView = styled(NativeScrollView);
@@ -10,15 +11,27 @@ const Text = styled(NativeText);
 const Image = styled(NativeImage);
 
 const Profile = () => {
+  const [shopImage, setShopImage] = useState(null);
+
+  useEffect(() => {
+    const loadShopImage = async () => {
+      const image = await Asset.loadAsync(require('../../../assets/images/shop.webp'));
+      setShopImage(image);
+    };
+
+    loadShopImage();
+  }, []);
   return (
     <SafeAreaView className="w-full h-full flex flex-col justify-start items-center relative bg-white">
       <View className='w-full h-full flex flex-col justify-center items-center mt-10'>
         {/* Shop Image */}
         <View className="w-full h-[35%] relative px-2">
-          <Image
-            source={require('../../../assets/images/shop.jpg')}
-            className="w-full h-full bg-cover rounded-lg"
-          />
+          {shopImage ? (
+            <Image
+              source={shopImage}
+              className="w-full h-full bg-cover rounded-lg"
+            />
+          ) : null}
         </View>
         {/* Shop Info */}
         <View className="flex justify-center items-center w-full h-[70%] relative">

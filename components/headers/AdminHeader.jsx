@@ -1,8 +1,8 @@
 import React from 'react';
+import { styled } from "nativewind";
 import { View as NativeView , Text as NativeText, TouchableOpacity as NativeTouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import Feather from '@expo/vector-icons/Feather';
-import { styled } from "nativewind";
+import { Feather } from '@expo/vector-icons';
 
 const View = styled(NativeView);
 const TouchableOpacity  = styled(NativeTouchableOpacity);
@@ -16,13 +16,13 @@ const AdminHeader = () => {
   };
 
   return (
-    <View className="flex-row justify-center items-center w-full relatvie h-[5vh] m-1 mt-10">
+    <View className="relatvie w-full mt-10 flex-row justify-center items-center">
       <Text className="text-2xl color-[#443F3D] font-Pretendard-Medium">
         Admin Home
       </Text>
 
-      <TouchableOpacity onPress={navigateToAdminLogin} className="absolute right-8">
-        <Feather name="home" size={24} color="black" />
+      <TouchableOpacity onPress={navigateToAdminLogin} className="absolute right-5">
+        <Feather name="home" size={30} color="black" />
       </TouchableOpacity>
     </View>
   );
