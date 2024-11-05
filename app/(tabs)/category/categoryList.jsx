@@ -3,7 +3,7 @@ import { Text as NativeText, View as NativeView, ScrollView as NativeScrollView,
 import { Image as NativeImage } from 'expo-image'
 import { useLocalSearchParams, useRouter  } from 'expo-router'
 import { styled } from 'nativewind'
-import { AntDesign } from '@expo/vector-icons';
+import { EvilIcons } from '@expo/vector-icons';
 
 // API and Context
 import { useProducts } from '../../../api/ProductContext'
@@ -67,13 +67,13 @@ const CategoryList = () => {
   }
 
   return (
-    <SafeAreaview className='h-full w-full bg-gray-100'>
+    <SafeAreaview className='h-full w-full bg-gray-50'>
       <View className='w-full h-full'>
         {/* Category Title */}
-        <View className='bg-[#20284F] w-full h-[12%] flex flex-row justify-center items-center relative'>
-          <Text className='text-white text-2xl font-Pretendard-Medium text-center pt-5'>{category}</Text>
+        <View className='bg-[#20284F] w-full h-[12%] flex flex-row justify-center items-center relative px-4 pt-8'>
+          <Text className='text-white text-2xl font-Pretendard-Medium text-center'>{category}</Text>
           <TouchableOpacity className="absolute top-8 right-5" onPress={() => router.push("category")}>
-            <AntDesign name="close" size={48} color="white" />
+            <EvilIcons name="close" size={48} color="white" />
           </TouchableOpacity>
         </View>
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { styled } from 'nativewind'
 import { View as NativeView, Text as NativeText, TextInput as NativeTextInput, TouchableOpacity as NativeTouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
-import { styled } from 'nativewind'
 
 // API
 import { loginUser } from '../../api/api';
@@ -78,9 +78,12 @@ const AdminLogin = () => {
 
   return (
     <View className="flex-1 justify-center items-center p-10">
-      <TouchableOpacity className='absolute top-20 left-5' onPress={handleGoBack}>
-        <Ionicons name="chevron-back" size={48} color="gray" />
+      {/* Return Icon */}
+      <TouchableOpacity className='absolute top-10 left-5' onPress={handleGoBack}>
+        <Ionicons name="chevron-back" size={35} color="black" />
       </TouchableOpacity>
+
+
       <Text className='font-Pretendard-Medium text-3xl pb-5'>관리자 로그인</Text>
       <TextInput
         placeholder="이메일"
@@ -89,7 +92,7 @@ const AdminLogin = () => {
         keyboardType="email-address"
         autoCapitalize="none"
         editable={!isLoading}
-        className='w-full h-[50px] border-[1px] border-gray-300 rounded-md px-3 mb-3'
+        className='w-full h-[50px] border-[1px] border-gray-400 rounded-md px-3 mb-3'
       />
       <TextInput
         placeholder="비밀번호"
@@ -97,7 +100,7 @@ const AdminLogin = () => {
         onChangeText={setPassword}
         secureTextEntry
         editable={!isLoading}
-        className='w-full h-[50px] border-[1px] border-gray-300 rounded-md px-3 mb-3'
+        className='w-full h-[50px] border-[1px] border-gray-400 rounded-md px-3 mb-3'
       />
       {isLoading ? (
         <ActivityIndicator size="large" color="#007AFF" />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal as NativeModal, View as NativeView, Text as NativeText, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
-import { AntDesign, Fontisto } from '@expo/vector-icons';
+import { EvilIcons, Fontisto } from '@expo/vector-icons';
 import { styled } from "nativewind";
 import { FormatPrice } from "../functions/FormatPrice";
 
@@ -28,8 +28,8 @@ const ProductModal = ({ visible, onClose, product }) => {
       transparent={true}
       onRequestClose={onClose}
     >
-      <View className="flex-1 justify-center items-center" style={{ backgroundColor: 'rgba(68, 63, 61, 0.6)' }}>
-        <View className="w-full h-[70%] bg-white rounded-lg">
+      <View className="flex-1 justify-center items-center">
+        <View className="w-full h-full bg-white">
           <ScrollView contentContainerStyle={{ paddingBottom: 10 }}>
             {/* Top Image */}
             <View className="w-full h-[35vh] flex justify-center items-center rounded-lg">
@@ -72,7 +72,7 @@ const ProductModal = ({ visible, onClose, product }) => {
           </ScrollView>
 
           <TouchableOpacity onPress={onClose} className="absolute top-2 right-3">
-            <AntDesign name="close" size={48} color="#585e58" />
+            <EvilIcons name="close" size={48} color="black" />
           </TouchableOpacity>
         </View>
       </View>

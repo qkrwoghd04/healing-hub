@@ -10,8 +10,6 @@ export default function RootLayout() {
   const [fontsLoaded, error] = useFonts({
     "Pretendard-Light": require("../assets/fonts/Pretendard-Light.ttf"),
     "Pretendard-Medium": require("../assets/fonts/Pretendard-Medium.ttf"),
-    "Typography-Times-Regular": require("../assets/fonts/Typography_Times_Regular.ttf"),
-    
   });
 
   useEffect(() => {

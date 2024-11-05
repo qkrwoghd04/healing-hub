@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView as NativeSafeAreaView, BackHandler, Alert } from 'react-native';
 import { styled } from "nativewind"
+import { SafeAreaView as NativeSafeAreaView, BackHandler, Alert } from 'react-native';
 
 // Components
 import HomeHeader from '../../components/headers/HomeHeader'
