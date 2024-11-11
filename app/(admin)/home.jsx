@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
-import { View as NativeView, Text as NativeText, Image as NativeImage, ScrollView as NativeScrollView, TouchableOpacity as NativeTouchableOpacity, SafeAreaView as NativeSafeAreaView, Alert } from 'react-native';
+import {
+  View as NativeView,
+  Text as NativeText,
+  Image as NativeImage,
+  ScrollView as NativeScrollView,
+  TouchableOpacity as NativeTouchableOpacity,
+  SafeAreaView as NativeSafeAreaView,
+  Alert,
+} from 'react-native';
 import { useProducts } from '../../api/ProductContext';
 import { Entypo } from '@expo/vector-icons';
-import { styled } from "nativewind";
+import { styled } from 'nativewind';
 
 // Components
 import AdminHeader from '../../components/headers/AdminHeader';
@@ -17,8 +25,6 @@ const Text = styled(NativeText);
 const Image = styled(NativeImage);
 const SafeAreaView = styled(NativeSafeAreaView);
 
-
-
 const AdminHome = () => {
   const { products, addNewProduct, removeProduct } = useProducts();
   const [modalVisible, setModalVisible] = useState(false);
@@ -31,8 +37,8 @@ const AdminHome = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Search logic to filter products based on searchQuery
-  const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const handleSearch = (query) => {
@@ -77,25 +83,21 @@ const AdminHome = () => {
 
   const confirmRemoveProduct = (id) => {
     if (products.length > 1) {
-      Alert.alert(
-        '상품 삭제',
-        '상품을 삭제하시겠습니까?',
-        [
-          { text: '취소', style: 'cancel' },
-          {
-            text: '삭제',
-            onPress: async () => {
-              try {
-                await removeProduct(id);
-                Alert.alert('삭제 완료', '상품이 삭제되었습니다.');
-              } catch (error) {
-                console.error('Error deleting product:', error);
-                Alert.alert('오류', '상품 삭제에 실패했습니다.');
-              }
-            },
+      Alert.alert('상품 삭제', '상품을 삭제하시겠습니까?', [
+        { text: '취소', style: 'cancel' },
+        {
+          text: '삭제',
+          onPress: async () => {
+            try {
+              await removeProduct(id);
+              Alert.alert('삭제 완료', '상품이 삭제되었습니다.');
+            } catch (error) {
+              console.error('Error deleting product:', error);
+              Alert.alert('오류', '상품 삭제에 실패했습니다.');
+            }
           },
-        ]
-      );
+        },
+      ]);
     } else {
       Alert.alert('최소 개수 초과', '최소 1개의 상품은 존재해야 합니다.');
     }
@@ -116,7 +118,9 @@ const AdminHome = () => {
       <View className="w-full h-[74%] border-b-[1px] border-gray-400">
         <ScrollView className="w-full h-full mx-2">
           {filteredProducts.map((product) => (
-            <View key={product.id} className="w-full h-16 flex flex-row justify-start items-center my-1">
+            <View
+              key={product.id}
+              className="w-full h-16 flex flex-row justify-start items-center my-1">
               {/* Product Image */}
               <View className="w-[15%] h-full mr-2">
                 <Image source={{ uri: product.image }} className="w-full h-full rounded-lg" />
@@ -138,7 +142,9 @@ const AdminHome = () => {
       </View>
 
       {/* Add Button */}
-      <TouchableOpacity className="absolute bottom-3 right-5 bg-[#20284F] p-2 rounded-lg" onPress={() => setModalVisible(true)}>
+      <TouchableOpacity
+        className="absolute bottom-3 right-5 bg-[#20284F] p-2 rounded-lg"
+        onPress={() => setModalVisible(true)}>
         <Text className="text-xl text-white font-pretendard-light">상품 추가</Text>
       </TouchableOpacity>
 

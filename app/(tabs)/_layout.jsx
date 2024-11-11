@@ -4,19 +4,20 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 export default function TabsLayout() {
   return (
-    <Tabs screenOptions={{
-      tabBarStyle: {
-        backgroundColor: '#fff',
-        borderTopWidth: 0.3,
-        borderColor: '#000',
-        padding: 0,
-      },
-      tabBarShowLabel: true,
-      tabBarActiveTintColor: '#dba40d',
-      tabBarInactiveTintColor: '#20284F',
-    }}>
-      <Tabs.Screen 
-        name="category" 
+    <Tabs
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: '#fff',
+          borderTopWidth: 0.3,
+          borderColor: '#000',
+          padding: 0,
+        },
+        tabBarShowLabel: true,
+        tabBarActiveTintColor: '#dba40d',
+        tabBarInactiveTintColor: '#20284F',
+      }}>
+      <Tabs.Screen
+        name="category"
         options={{
           title: '카테고리',
           headerShown: false,
@@ -25,18 +26,16 @@ export default function TabsLayout() {
           ),
         }}
       />
-      <Tabs.Screen 
-        name="index" 
+      <Tabs.Screen
+        name="index"
         options={{
           title: '홈',
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="home" size={size} color={color} />        
-          ),
+          tabBarIcon: ({ color, size }) => <AntDesign name="home" size={size} color={color} />,
         }}
       />
-      <Tabs.Screen 
-        name="profile" 
+      <Tabs.Screen
+        name="profile"
         options={{
           title: '매장 정보',
           headerShown: false,

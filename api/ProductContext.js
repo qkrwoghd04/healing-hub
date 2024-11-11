@@ -20,12 +20,11 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-
   // Add New Products(Admin)
   const addNewProduct = async (productData) => {
     try {
       const newProduct = await addProduct(productData);
-      setProducts(prevProducts => [...prevProducts, newProduct]);
+      setProducts((prevProducts) => [...prevProducts, newProduct]);
     } catch (error) {
       console.error('Failed to add product:', error);
       throw error;
@@ -36,7 +35,7 @@ export const ProductProvider = ({ children }) => {
   const removeProduct = async (id) => {
     try {
       await deleteProduct(id);
-      setProducts(prevProducts => prevProducts.filter(p => p.id !== id));
+      setProducts((prevProducts) => prevProducts.filter((p) => p.id !== id));
     } catch (error) {
       console.error('Failed to delete product:', error);
       throw error;
@@ -45,15 +44,15 @@ export const ProductProvider = ({ children }) => {
   const refreshProducts = async () => {
     await loadProducts();
   };
-  
-  
+
   return (
-    <ProductContext.Provider value={{ 
-      products, 
-      addNewProduct, 
-      removeProduct,
-      refreshProducts
-    }}>
+    <ProductContext.Provider
+      value={{
+        products,
+        addNewProduct,
+        removeProduct,
+        refreshProducts,
+      }}>
       {children}
     </ProductContext.Provider>
   );
