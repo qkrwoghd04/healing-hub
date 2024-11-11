@@ -1,12 +1,22 @@
 import React from 'react';
-import { View as NativeView, Text as NativeText, Image as NativeImage, TouchableOpacity as NativeTouchableOpacity, TextInput as NativeTextInput, Modal as NativeModal, TouchableWithoutFeedback as NativeTouchableWithoutFeedback, Keyboard, StyleSheet  } from 'react-native';
+import {
+  View as NativeView,
+  Text as NativeText,
+  Image as NativeImage,
+  TouchableOpacity as NativeTouchableOpacity,
+  TextInput as NativeTextInput,
+  Modal as NativeModal,
+  TouchableWithoutFeedback as NativeTouchableWithoutFeedback,
+  Keyboard,
+  StyleSheet,
+} from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import * as ImagePicker from 'expo-image-picker';
-import { styled } from "nativewind";
+import { styled } from 'nativewind';
 
 const View = styled(NativeView);
 const Modal = styled(NativeModal);
-const TouchableOpacity  = styled(NativeTouchableOpacity);
+const TouchableOpacity = styled(NativeTouchableOpacity);
 const Text = styled(NativeText);
 const Image = styled(NativeImage);
 const TouchableWithoutFeedback = styled(NativeTouchableWithoutFeedback);
@@ -45,7 +55,6 @@ const ProductModal = ({
   setNewProductDetail,
   addProduct,
 }) => {
-
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -63,21 +72,26 @@ const ProductModal = ({
       animationType="slide"
       transparent={true}
       visible={modalVisible}
-      onRequestClose={() => setModalVisible(false)}
-    >
+      onRequestClose={() => setModalVisible(false)}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View className="flex-1 justify-center items-center" style={{ backgroundColor: 'rgba(68, 63, 61, 0.6)' }}>
+        <View
+          className="flex-1 justify-center items-center"
+          style={{ backgroundColor: 'rgba(68, 63, 61, 0.6)' }}>
           <View className="bg-white rounded-lg w-[90%] h-[60%] p-4 flex flex-col justify-between items-center">
             {/* Modal Header */}
             <View className="w-full h-1/4 flex flex-row justify-start items-center gap-x-2">
               <TouchableOpacity
                 className="flex justify-center items-center rounded-lg w-[30%] h-full border-[1.5px] border-gray-400"
-                onPress={pickImage}
-              >
+                onPress={pickImage}>
                 {newProductImage ? (
-                  <Image source={{ uri: newProductImage.uri }} className="w-full h-full rounded-lg" />
+                  <Image
+                    source={{ uri: newProductImage.uri }}
+                    className="w-full h-full rounded-lg"
+                  />
                 ) : (
-                  <Text className="text-[#847958] text-[16px] font-Pretendard-Medium">이미지 선택</Text>
+                  <Text className="text-[#847958] text-[16px] font-Pretendard-Medium">
+                    이미지 선택
+                  </Text>
                 )}
               </TouchableOpacity>
 
@@ -113,7 +127,7 @@ const ProductModal = ({
                     valueField="value"
                     placeholder="인기도"
                     value={null}
-                    onChange={item => {
+                    onChange={(item) => {
                       setNewProductPopularity(item.value);
                     }}
                   />
@@ -129,7 +143,7 @@ const ProductModal = ({
                     valueField="value"
                     placeholder="카테고리"
                     value={null}
-                    onChange={item => {
+                    onChange={(item) => {
                       setNewProductCategory(item.value);
                     }}
                   />
@@ -151,14 +165,12 @@ const ProductModal = ({
             <View className="flex flex-row justify-between items-center w-full h-[10%]">
               <TouchableOpacity
                 className="bg-white flex-1 h-[90%] justify-center items-center rounded-md mr-1 border-[2px] border-gray-800"
-                onPress={addProduct}
-              >
+                onPress={addProduct}>
                 <Text className="text-black text-xl font-Pretendard-Medium">추가</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 className="bg-red-700 flex-1 h-[90%] justify-center items-center ml-1 rounded-lg"
-                onPress={() => setModalVisible(false)}
-              >
+                onPress={() => setModalVisible(false)}>
                 <Text className="text-white text-xl font-Pretendard-Medium">취소</Text>
               </TouchableOpacity>
             </View>

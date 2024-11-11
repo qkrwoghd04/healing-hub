@@ -8,17 +8,17 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontsLoaded, error] = useFonts({
-    "Pretendard-Light": require("../assets/fonts/Pretendard-Light.ttf"),
-    "Pretendard-Medium": require("../assets/fonts/Pretendard-Medium.ttf"),
+    'Pretendard-Light': require('../assets/fonts/Pretendard-Light.ttf'),
+    'Pretendard-Medium': require('../assets/fonts/Pretendard-Medium.ttf'),
   });
 
   useEffect(() => {
-    if (error) throw error
-    
-    if(fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded, error])
+    if (error) throw error;
 
-  if(!fontsLoaded && !error) return null;
+    if (fontsLoaded) SplashScreen.hideAsync();
+  }, [fontsLoaded, error]);
+
+  if (!fontsLoaded && !error) return null;
 
   return (
     <ProductProvider>

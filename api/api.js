@@ -1,12 +1,10 @@
 import axios from 'axios';
 
-export const CLOUDFRONT_URL = "https://dht0320g9uj4a.cloudfront.net";
-
+export const CLOUDFRONT_URL = 'https://dht0320g9uj4a.cloudfront.net';
 
 const cloudfrontApi = axios.create({
   baseURL: CLOUDFRONT_URL,
 });
-
 
 export const fetchProducts = async () => {
   try {

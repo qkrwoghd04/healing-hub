@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-import { styled } from 'nativewind'
-import { View as NativeView, Text as NativeText, TextInput as NativeTextInput, TouchableOpacity as NativeTouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import { styled } from 'nativewind';
+import {
+  View as NativeView,
+  Text as NativeText,
+  TextInput as NativeTextInput,
+  TouchableOpacity as NativeTouchableOpacity,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,11 +15,10 @@ import { Ionicons } from '@expo/vector-icons';
 // API
 import { loginUser } from '../../api/api';
 
-const View = styled(NativeView)
-const Text = styled(NativeText)
-const TextInput = styled(NativeTextInput)
-const TouchableOpacity = styled(NativeTouchableOpacity)
-
+const View = styled(NativeView);
+const Text = styled(NativeText);
+const TextInput = styled(NativeTextInput);
+const TouchableOpacity = styled(NativeTouchableOpacity);
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -37,22 +43,22 @@ const AdminLogin = () => {
 
       await AsyncStorage.setItem('userToken', userData.token);
       await AsyncStorage.setItem('userRole', userData.role);
-      
+
       if (userData.name) {
         await AsyncStorage.setItem('userName', userData.name);
       }
 
       if (userData.role === 'admin') {
         router.push('(admin)/home');
-      } 
+      }
     } catch (error) {
       console.error('Login error:', error);
       let errorMessage = '로그인 중 오류가 발생했습니다.';
-      
+
       if (error.response) {
         console.error('Error data:', error.response.data);
         console.error('Error status:', error.response.status);
-        
+
         if (error.response.status === 404) {
           errorMessage = 'API 엔드포인트를 찾을 수 없습니다. 서버 설정을 확인해주세요.';
         } else if (error.response.status === 401) {
@@ -65,26 +71,25 @@ const AdminLogin = () => {
       } else {
         errorMessage = error.message || '알 수 없는 오류가 발생했습니다.';
       }
-      
-      Alert.alert("로그인 실패", errorMessage);
+
+      Alert.alert('로그인 실패', errorMessage);
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleGoBack = () => {
-    router.back(); 
+    router.back();
   };
 
   return (
     <View className="flex-1 justify-center items-center p-10">
       {/* Return Icon */}
-      <TouchableOpacity className='absolute top-10 left-5' onPress={handleGoBack}>
-        <Ionicons name="chevron-back" size={35} color="black" />
+      <TouchableOpacity className="absolute top-10 left-5" onPress={handleGoBack}>
+        <Ionicons name="chevron-back" size={48} color="black" />
       </TouchableOpacity>
 
-
-      <Text className='font-Pretendard-Medium text-3xl pb-5'>관리자 로그인</Text>
+      <Text className="font-Pretendard-Medium text-3xl pb-5">관리자 로그인</Text>
       <TextInput
         placeholder="이메일"
         value={email}
@@ -92,7 +97,7 @@ const AdminLogin = () => {
         keyboardType="email-address"
         autoCapitalize="none"
         editable={!isLoading}
-        className='w-full h-[50px] border-[1px] border-gray-400 rounded-md px-3 mb-3'
+        className="w-full h-[50px] border-[1px] border-black rounded-md px-3 mb-3"
       />
       <TextInput
         placeholder="비밀번호"
@@ -100,13 +105,15 @@ const AdminLogin = () => {
         onChangeText={setPassword}
         secureTextEntry
         editable={!isLoading}
-        className='w-full h-[50px] border-[1px] border-gray-400 rounded-md px-3 mb-3'
+        className="w-full h-[50px] border-[1px] border-black rounded-md px-3 mb-3"
       />
       {isLoading ? (
         <ActivityIndicator size="large" color="#007AFF" />
       ) : (
-        <TouchableOpacity className="bg-[#20284F] w-full h-12 rounded-md flex justify-center items-center" onPress={handleLogin}>
-          <Text className='text-white font-Pretendard-Medium text-xl'>로그인</Text>
+        <TouchableOpacity
+          className="bg-black w-full h-12 rounded-md flex justify-center items-center"
+          onPress={handleLogin}>
+          <Text className="text-white font-Pretendard-Medium text-xl">로그인</Text>
         </TouchableOpacity>
       )}
     </View>
