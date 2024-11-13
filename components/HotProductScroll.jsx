@@ -1,32 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  View as NativeView,
-  Text as NativeText,
-  ScrollView as NativeScrollView,
-  Animated,
-  TouchableOpacity,
-} from 'react-native';
+import { Animated } from 'react-native';
 import { Image } from 'expo-image';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { styled } from 'nativewind';
+import { View, TouchableOpacity, Text, ScrollView } from './StyledComponents';
 
 //Components
 import { FormatPrice } from './functions/FormatPrice';
 import ProductModal from './modals/ProductModal';
 import { sortProductsByPopularity } from './functions/sortProductsByPopularity';
 
-const View = styled(NativeView);
-const ScrollView = styled(NativeScrollView);
-const Text = styled(NativeText);
 
 const ProductSlide = ({ item, onPress }) => (
   <View className="flex">
-    <TouchableOpacity
-      onPress={onPress}
-      accessible={true}
-      accessibilityLabel={`${item.name}, 가격 ${FormatPrice(item.price)}`}
-      accessibilityHint={`${item.description}. 탭하여 상품 상세정보를 볼 수 있습니다.`}
-      accessibilityRole="button">
+    <TouchableOpacity onPress={onPress}>
       <View className="flex flex-col justify-center items-center w-[15vh] h-[30vh] rounded-lg">
         {/* Image */}
         <View className="w-full h-1/2 flex justify-center items-center">
@@ -42,7 +28,6 @@ const ProductSlide = ({ item, onPress }) => (
             contentFit="cover"
           />
         </View>
-
         <View className="w-full h-1/2 p-2">
           <Text
             className="text-lg mb-2 font-pretendard-light"

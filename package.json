@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "test": "jest",
     "lint": "expo lint",
-    "format": "prettier . --write" 
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.3",

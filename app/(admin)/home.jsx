@@ -9,11 +9,11 @@ import {
   Alert,
 } from 'react-native';
 import { useProducts } from '../../api/ProductContext';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, Feather } from '@expo/vector-icons';
 import { styled } from 'nativewind';
 
 // Components
-import AdminHeader from '../../components/headers/AdminHeader';
+import Header from '../../components/Header';
 import { FormatPrice } from '../../components/functions/FormatPrice';
 import AddProductModal from '../../components/modals/AddProductModal';
 import SearchBar from '../../components/SearchBar';
@@ -106,7 +106,11 @@ const AdminHome = () => {
   return (
     <SafeAreaView className="w-full h-full bg-white">
       {/* Header */}
-      <AdminHeader />
+      <Header  
+        name="Admin Home" 
+        icon={<Feather name="home" size={30} color="black" />}
+        route="/(tabs)"
+      />
 
       {/* SearchBar Component */}
       <SearchBar

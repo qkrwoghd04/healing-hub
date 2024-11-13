@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { styled } from 'nativewind';
-import { SafeAreaView as NativeSafeAreaView, BackHandler, Alert } from 'react-native';
-
+import { SafeAreaView } from '../../components/StyledComponents';
+import { Alert, BackHandler } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 // Components
-import HomeHeader from '../../components/headers/HomeHeader';
+import Header from '../../components/Header';
 import HotProductScroll from '../../components/HotProductScroll';
 import CallButton from '../../components/CallButton';
 import FlatGridProduct from '../../components/FlatGridProduct';
@@ -11,7 +11,6 @@ import FlatGridProduct from '../../components/FlatGridProduct';
 // API
 import { useProducts } from '../../api/ProductContext';
 
-const SafeAreaView = styled(NativeSafeAreaView);
 
 const HomeScreen = () => {
   const { products } = useProducts();
@@ -43,7 +42,13 @@ const HomeScreen = () => {
       accessible={true}
       accessibilityLabel="홈 화면"
       accessibilityHint="홈 화면입니다. 상단에는 헤더가 있고, 메인 컨텐츠로 인기 상품 스크롤 목록, 전체 상품 그리드, 그리고 고객센터 연락 버튼이 있습니다.">
-      <HomeHeader accessible={true} accessibilityLabel="홈 화면 헤더" />
+      <Header 
+        name="힐링허브" 
+        icon={<MaterialIcons name="admin-panel-settings" size={48} color="black" />}
+        route="/(admin)/login" 
+        accessible={true} 
+        accessibilityLabel="홈 화면 헤더" 
+      />
       <HotProductScroll
         products={products}
         accessible={true}
