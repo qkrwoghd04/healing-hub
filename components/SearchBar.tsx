@@ -6,7 +6,13 @@ import { Feather } from '@expo/vector-icons';
 const View = styled(NativeView);
 const TextInput = styled(NativeTextInput);
 
-const SearchBar = ({ searchQuery, onSearch, style }) => {
+interface SearchBarProps {
+  searchQuery: string;
+  onSearch: (query: string) => void;  // 함수 타입 정의
+  style?: React.ComponentProps<typeof NativeView>['style'];  // style 타입 정의
+}
+
+const SearchBar:React.FC<SearchBarProps> = ({ searchQuery, onSearch, style }) => {
   return (
     <View>
       <View className="flex-row" style={style}>

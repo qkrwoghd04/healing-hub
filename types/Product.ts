@@ -1,6 +1,6 @@
 export type Product = {
   id: string;
-  category: string;
+  category: Category;
   description: string;
   image: string;
   name: string;
@@ -14,3 +14,14 @@ export type Popularity = {
   Medium: number;
   Low: number;
 };
+
+export type Category = 
+  | '비타민 및 미네랄'
+  | '콜라겐 및 피부건강'
+  | '소화 및 장 건강'
+  | '오메가3 및 혈관 건강'
+  | '관절 건강'
+  | '면역 강화'
+  | '기타건강 보조제';
+
+

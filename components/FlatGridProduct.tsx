@@ -10,21 +10,26 @@ import { Asset } from 'expo-asset';
 const View = styled(NativeView);
 const Text = styled(NativeText);
 
-const FlatGridProduct = ({ dimension, setName, title }) => {
-  const router = useRouter();
-  // Categories 배열
-  const Categories = [
-    { name: '비타민 및 미네랄', imgKey: '비타민_및_미네랄' },
-    { name: '콜라겐 및 피부건강', imgKey: '콜라겐_및_피부건강' },
-    { name: '소화 및 장 건강', imgKey: '소화_및_장_건강' },
-    { name: '오메가3 및 혈관 건강', imgKey: '오메가3_및_혈관_건강' },
-    { name: '관절 건강', imgKey: '관절_건강' },
-    { name: '면역 강화', imgKey: '면역_강화' },
-    { name: '기타 건강 보조제', imgKey: '기타_건강_보조제' },
-  ];
+interface FlatGridProductProps {
+  dimension: number,
+  setName: boolean,
+  title: string
+}
 
-  // 이미지 상태 관리
-  const [categoryImages, setCategoryImages] = useState({});
+const Categories = [
+  { name: '비타민 및 미네랄', imgKey: '비타민_및_미네랄' },
+  { name: '콜라겐 및 피부건강', imgKey: '콜라겐_및_피부건강' },
+  { name: '소화 및 장 건강', imgKey: '소화_및_장_건강' },
+  { name: '오메가3 및 혈관 건강', imgKey: '오메가3_및_혈관_건강' },
+  { name: '관절 건강', imgKey: '관절_건강' },
+  { name: '면역 강화', imgKey: '면역_강화' },
+  { name: '기타 건강 보조제', imgKey: '기타_건강_보조제' },
+];
+
+const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, title }) => {
+  const router = useRouter();
+  // categoryImages의 타입을 Record<string, Asset>으로 설정
+  const [categoryImages, setCategoryImages] = useState<Record<string, Asset[]>>({});
 
   useEffect(() => {
     const loadImages = async () => {
@@ -37,6 +42,7 @@ const FlatGridProduct = ({ dimension, setName, title }) => {
         면역_강화: await Asset.loadAsync(require('../assets/icons/immune.webp')),
         기타_건강_보조제: await Asset.loadAsync(require('../assets/icons/others.webp')),
       };
+      // categoryImages는 각 카테고리 이름에 해당하는 단일 Asset 객체를 저장
       setCategoryImages(images);
     };
 
@@ -54,17 +60,21 @@ const FlatGridProduct = ({ dimension, setName, title }) => {
       <FlatGrid
         itemDimension={dimension}
         data={Categories}
-        className="py-3 flex-1 bg-gray-50"
+        style={[
+          { paddingTop: 12 },
+          { paddingBottom: 12 },
+          { flex: 1 },
+        ]}
         spacing={10}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() =>
-              router.push({ pathname: 'category/categoryList', params: { category: item.name } })
+              router.push({ pathname: '/category/categoryList', params: { category: item.name } })
             }>
             <View className="justify-center items-center rounded-xl px-3 h-[130px] font-Pretendard-Light bg-white border-[1px] border-gray-900">
               {categoryImages[item.imgKey] ? (
                 <Image
-                  source={categoryImages[item.imgKey]}
+                  source={categoryImages[item.imgKey][0].uri}
                   style={{
                     marginBottom: 2,
                     width: 48,
