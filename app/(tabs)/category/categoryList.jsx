@@ -67,7 +67,7 @@ const CategoryList = () => {
   if (loading) {
     return (
       <SafeAreaview className="flex-1 bg-gray-100 justify-center items-center">
-        <ActivityIndicator size="large" color="#20284F" />
+        <ActivityIndicator size="56" color="#20284F" />
       </SafeAreaview>
     );
   }
