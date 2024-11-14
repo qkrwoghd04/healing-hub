@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { styled } from 'nativewind';
 import { useRouter } from 'expo-router';
 import { Text as NativeText, View as NativeView, TouchableOpacity } from 'react-native';
@@ -42,7 +42,6 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
         면역_강화: await Asset.loadAsync(require('../assets/icons/immune.webp')),
         기타_건강_보조제: await Asset.loadAsync(require('../assets/icons/others.webp')),
       };
-      // categoryImages는 각 카테고리 이름에 해당하는 단일 Asset 객체를 저장
       setCategoryImages(images);
     };
 
@@ -94,4 +93,4 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
   );
 };
 
-export default FlatGridProduct;
+export default memo(FlatGridProduct);

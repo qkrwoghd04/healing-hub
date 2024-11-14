@@ -108,7 +108,7 @@ const AdminLogin = () => {
         className="w-full h-[50px] border-[1px] border-black rounded-md px-3 mb-3"
       />
       {isLoading ? (
-        <ActivityIndicator size="large" color="#007AFF" />
+        <ActivityIndicator size="56" color="#007AFF" />
       ) : (
         <TouchableOpacity
           className="bg-black w-full h-12 rounded-md flex justify-center items-center"
