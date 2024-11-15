@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, ScrollView, SafeAreaView, Image } from '../../../components/StyledComponents'
-import { Asset } from 'expo-asset';
+import { useImage } from 'expo-image';
 
-const Profile = () => {
-  const [shopImage, setShopImage] = useState(null);
+const shop = require("../../../assets/images/shop.webp")
 
-  useEffect(() => {
-    const loadShopImage = async () => {
-      const image = await Asset.loadAsync(require('../../../assets/images/shop.webp'));
-      setShopImage(image);
-    };
+const Profile = async () => {
+  console.log('Profile Rendered')
 
-    loadShopImage();
-  }, []);
+  const image = useImage(shop, {maxWidth: 300, onError(error, retry){console.error('Loading failed:',error.message)}});
+  if (!image) {
+    return <Text>Image is loading...</Text>;
+  }
   return (
     <SafeAreaView className="w-full h-full flex flex-col justify-start items-center relative bg-white">
       <View className="w-full h-full flex flex-col justify-center items-center mt-10">
         {/* Shop Image */}
         <View className="w-full h-[35%] relative px-2">
-          {shopImage ? (
-            <Image source={shopImage} className="w-full h-full bg-cover rounded-lg" />
+          {image ? (
+            <Image source={image} cachePolicy="memory" className="w-full h-full bg-cover rounded-lg" />
           ) : null}
         </View>
         {/* Shop Info */}
