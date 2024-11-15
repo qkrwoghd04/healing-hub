@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
-import {
-  Modal as NativeModal,
-  View as NativeView,
-  Text as NativeText,
-  ScrollView as NativeScrollView,
-  TouchableOpacity as NativeTouchableOpacity,
-} from 'react-native';
-import { Image } from 'expo-image';
+import { View, Text, ScrollView, TouchableOpacity, Image, Modal } from '../StyledComponents'
 import { EvilIcons, Fontisto } from '@expo/vector-icons';
-import { styled } from 'nativewind';
 import { FormatPrice } from '../functions/FormatPrice';
+import { Product } from '../../types/Product'
+import { ImageLoadEventData } from 'expo-image';
 
-const View = styled(NativeView);
-const ScrollView = styled(NativeScrollView);
-const Modal = styled(NativeModal);
-const Text = styled(NativeText);
-const TouchableOpacity = styled(NativeTouchableOpacity);
+interface ProductModalProps {
+  visible: boolean,
+  onClose: () => void,
+  product: Product | undefined,
+}
 
-const ProductModal = ({ visible, onClose, product }) => {
+const ProductModal:React.FC<ProductModalProps> = ({ visible, onClose, product }) => {
   const [imgHeight, setImgHeight] = useState(0);
+  console.log('product is ', product)
 
   if (!product) return null;
 
-  const handleImageLoad = (event) => {
-    const { width, height } = event.source;
+  const handleImageLoad = (event:ImageLoadEventData) => {
+    const {  height } = event.source;
     setImgHeight(height);
   };
 
@@ -41,10 +36,11 @@ const ProductModal = ({ visible, onClose, product }) => {
                 source={{ uri: product.image }}
                 style={{
                   width: '100%',
-                  height: '90%',
+                  height: '100%',
                 }}
+                priority="high"
                 contentFit="contain"
-                className="border-2 border-black rounded-lg bg-black"
+                className="rounded-lg"
               />
             </View>
 
@@ -71,6 +67,7 @@ const ProductModal = ({ visible, onClose, product }) => {
                   contentFit="fill"
                   style={{ width: '100%', height: '100%', backgroundColor: 'black' }}
                   transition={300}
+                  priority="normal"
                   onLoad={handleImageLoad}
                   cachePolicy="memory-disk"
                   className="border-2 border-black rounded-md"

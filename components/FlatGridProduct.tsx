@@ -1,19 +1,14 @@
 import React, { useState, useEffect, memo } from 'react';
-import { styled } from 'nativewind';
 import { useRouter } from 'expo-router';
-import { Text as NativeText, View as NativeView, TouchableOpacity } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Image } from 'expo-image';
+import { View, Text, Image, TouchableOpacity } from './StyledComponents'
 import { FlatGrid } from 'react-native-super-grid';
 import { Asset } from 'expo-asset';
-
-const View = styled(NativeView);
-const Text = styled(NativeText);
 
 interface FlatGridProductProps {
   dimension: number,
   setName: boolean,
-  title: string
+  title: boolean
 }
 
 const Categories = [
@@ -27,6 +22,7 @@ const Categories = [
 ];
 
 const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, title }) => {
+  console.log('FlatGrid Rendered');
   const router = useRouter();
   // categoryImages의 타입을 Record<string, Asset>으로 설정
   const [categoryImages, setCategoryImages] = useState<Record<string, Asset[]>>({});

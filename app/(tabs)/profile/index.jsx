@@ -1,19 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View as NativeView,
-  Text as NativeText,
-  ScrollView as NativeScrollView,
-  SafeAreaView as NativeSafeScrollView,
-} from 'react-native';
-import { styled } from 'nativewind';
-import { Image as NativeImage } from 'expo-image';
+import { View, Text, ScrollView, SafeAreaView, Image } from '../../../components/StyledComponents'
 import { Asset } from 'expo-asset';
-
-const View = styled(NativeView);
-const ScrollView = styled(NativeScrollView);
-const SafeAreaView = styled(NativeSafeScrollView);
-const Text = styled(NativeText);
-const Image = styled(NativeImage);
 
 const Profile = () => {
   const [shopImage, setShopImage] = useState(null);
