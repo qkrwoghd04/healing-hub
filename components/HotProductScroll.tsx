@@ -16,7 +16,8 @@ interface HotProductScrollProps {
 }
 
 const HotProductScroll: React.FC<HotProductScrollProps> = ({ products }) => {
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  console.log('HotProduct Rendered');
+  const [selectedProduct, setSelectedProduct] = useState<Product>();
   const [modalVisible, setModalVisible] = useState(false);
   const sortProductsByPopularityCallback = useCallback(sortProductsByPopularity, [products]);
   const filteredProducts = sortProductsByPopularityCallback(products).slice(0, 10);
@@ -46,7 +47,7 @@ const HotProductScroll: React.FC<HotProductScrollProps> = ({ products }) => {
   };
 
   const closeModal = () => {
-    setSelectedProduct(null);
+    setSelectedProduct(undefined);
     setModalVisible(false);
   };
   

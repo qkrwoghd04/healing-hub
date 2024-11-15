@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Text as NativeText,
-  View as NativeView,
-  ScrollView as NativeScrollView,
-  SafeAreaView as NativeSafeAreaView,
-  ActivityIndicator,
-  TouchableOpacity as NativeTouchableOpacity,
-} from 'react-native';
-import { Image as NativeImage } from 'expo-image';
+import { ActivityIndicator } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { styled } from 'nativewind';
 import { EvilIcons } from '@expo/vector-icons';
+import { View, Text, Image, SafeAreaView, ScrollView, TouchableOpacity } from '../../../components/StyledComponents'
 
 // API and Context
 import { useProducts } from '../../../api/ProductContext';
@@ -19,17 +11,10 @@ import { useProducts } from '../../../api/ProductContext';
 import { FormatPrice } from '../../../components/functions/FormatPrice';
 import ProductModal from '../../../components/modals/ProductModal';
 
-const View = styled(NativeView);
-const Text = styled(NativeText);
-const Image = styled(NativeImage);
-const SafeAreaview = styled(NativeSafeAreaView);
-const ScrollView = styled(NativeScrollView);
-const TouchableOpacity = styled(NativeTouchableOpacity);
-
 const CategoryList = () => {
   const router = useRouter();
   const { category } = useLocalSearchParams();
-  const { products, refreshProducts } = useProducts();
+  const { products, refreshProducts } = useProducts(); // 모든 컴포넌트 렌더링의 이유
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -62,18 +47,18 @@ const CategoryList = () => {
   // Refresh product data
   useEffect(() => {
     refreshProducts();
-  }, []);
+  }, [refreshProducts]);
 
   if (loading) {
     return (
-      <SafeAreaview className="flex-1 bg-gray-100 justify-center items-center">
-        <ActivityIndicator size="56" color="#20284F" />
-      </SafeAreaview>
+      <SafeAreaView className="flex-1 bg-gray-100 justify-center items-center">
+        <ActivityIndicator size="large" color="#20284F" />
+      </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaview className="h-full w-full bg-gray-50">
+    <SafeAreaView className="h-full w-full bg-gray-50">
       <View className="w-full h-full">
         {/* Category Title */}
         <View className="bg-black w-full h-[12%] flex flex-row justify-center items-center relative px-4 pt-8">
@@ -136,7 +121,7 @@ const CategoryList = () => {
       {selectedProduct && (
         <ProductModal visible={isModalVisible} onClose={closeModal} product={selectedProduct} />
       )}
-    </SafeAreaview>
+    </SafeAreaView>
   );
 };
 

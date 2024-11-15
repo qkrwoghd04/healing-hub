@@ -5,9 +5,10 @@ import {
   ScrollView as NativeScrollView,
   Text as NativeText,
   TouchableOpacity as NativeTouchableOpacity,
-  Image as NativeImage,
   TextInput as NativeTextInput,
+  Modal as NativeModal,
 } from 'react-native';
+import { Image as NativeImage } from 'expo-image';
 
 export const View = styled(NativeView);
 export const SafeAreaView = styled(NativeSafeAreaView);
@@ -16,4 +17,5 @@ export const Text = styled(NativeText);
 export const TouchableOpacity = styled(NativeTouchableOpacity);
 export const Image = styled(NativeImage);
 export const TextInput = styled(NativeTextInput);
+export const Modal = styled(NativeModal);
 

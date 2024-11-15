@@ -1,61 +1,116 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { fetchProducts, addProduct, deleteProduct } from './api';
+
 
 const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);  // 로딩 상태 추가
+  const [error, setError] = useState(null);      // 에러 상태 추가
 
-  useEffect(() => {
-    loadProducts();
-  }, []);
-
-  // Load Products
-  const loadProducts = async () => {
+  // loadProducts를 useCallback으로 메모이제이션
+  const loadProducts = useCallback(async () => {
     try {
+      setLoading(true);
+      setError(null);
       const fetchedProducts = await fetchProducts();
       setProducts(fetchedProducts);
     } catch (error) {
       console.error('Failed to load products:', error);
+      setError(error);
+    } finally {
+      setLoading(false);
     }
-  };
+  }, []);
 
-  // Add New Products(Admin)
-  const addNewProduct = async (productData) => {
+  useEffect(() => {
+    let mounted = true;
+
+    const init = async () => {
+      try {
+        setLoading(true);
+        const fetchedProducts = await fetchProducts();
+        if (mounted) {
+          setProducts(fetchedProducts);
+        }
+      } catch (error) {
+        if (mounted) {
+          console.error('Failed to load products:', error);
+          setError(error);
+        }
+      } finally {
+        if (mounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    init();
+
+    // 클린업 함수
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // 메모이제이션된 추가 함수
+  const addNewProduct = useCallback(async (productData) => {
     try {
+      setLoading(true);
       const newProduct = await addProduct(productData);
-      setProducts((prevProducts) => [...prevProducts, newProduct]);
+      setProducts(prev => [...prev, newProduct]);
+      return newProduct;
     } catch (error) {
       console.error('Failed to add product:', error);
+      setError(error);
       throw error;
+    } finally {
+      setLoading(false);
     }
-  };
+  }, []);
 
-  // Remove Existing Products(Admin)
-  const removeProduct = async (id) => {
+  // 메모이제이션된 삭제 함수
+  const removeProduct = useCallback(async (id) => {
     try {
+      setLoading(true);
       await deleteProduct(id);
-      setProducts((prevProducts) => prevProducts.filter((p) => p.id !== id));
+      setProducts(prev => prev.filter(p => p.id !== id));
     } catch (error) {
       console.error('Failed to delete product:', error);
+      setError(error);
       throw error;
+    } finally {
+      setLoading(false);
     }
-  };
-  const refreshProducts = async () => {
+  }, []);
+
+  // 메모이제이션된 새로고침 함수
+  const refreshProducts = useCallback(async () => {
     await loadProducts();
+  }, [loadProducts]);
+
+  const value = {
+    products,
+    loading,
+    error,
+    addNewProduct,
+    removeProduct,
+    refreshProducts,
   };
 
   return (
-    <ProductContext.Provider
-      value={{
-        products,
-        addNewProduct,
-        removeProduct,
-        refreshProducts,
-      }}>
+    <ProductContext.Provider value={value}>
       {children}
     </ProductContext.Provider>
   );
 };
 
-export const useProducts = () => useContext(ProductContext);
+// 커스텀 훅에 loading과 error 상태 추가
+export const useProducts = () => {
+  const context = useContext(ProductContext);
+  if (!context) {
+    throw new Error('useProducts must be used within a ProductProvider');
+  }
+  return context;
+};

@@ -1,40 +1,54 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SafeAreaView } from '../../components/StyledComponents';
-import { Alert, BackHandler } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 // Components
 import Header from '../../components/Header';
 import HotProductScroll from '../../components/HotProductScroll';
 import CallButton from '../../components/CallButton';
 import FlatGridProduct from '../../components/FlatGridProduct';
-
+import { LoadingSpinner } from '../../components/LoadingSpinner';
+import { ErrorMessage } from '../../components/ErrorMessage';
 // API
 import { useProducts } from '../../api/ProductContext';
 
 
 const HomeScreen = () => {
-  const  { products }  = useProducts();
+  const { products, loading, error, refreshProducts } = useProducts();
+  
+  if (loading) {
+    return <LoadingSpinner color="#0066cc" />;
+  }
 
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert('앱 종료', '앱을 종료하시겠습니까?', [
-        {
-          text: '취소',
-          onPress: () => null,
-          style: 'cancel',
-        },
-        {
-          text: '종료',
-          onPress: () => BackHandler.exitApp(),
-        },
-      ]);
-      return true;
-    };
+  if (error) {
+    return (
+      <ErrorMessage 
+        error={error} 
+        onRetry={refreshProducts}
+        message="상품 정보를 불러오는데 실패했습니다."
+      />
+    );
+  }
+  console.log('Main Home')
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     Alert.alert('앱 종료', '앱을 종료하시겠습니까?', [
+  //       {
+  //         text: '취소',
+  //         onPress: () => null,
+  //         style: 'cancel',
+  //       },
+  //       {
+  //         text: '종료',
+  //         onPress: () => BackHandler.exitApp(),
+  //       },
+  //     ]);
+  //     return true;
+  //   };
 
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
 
-    return () => backHandler.remove();
-  }, []);
+  //   return () => backHandler.remove();
+  // }, []);
 
   return (
     <SafeAreaView className="flex bg-white relative h-full w-full">
