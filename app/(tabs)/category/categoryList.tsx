@@ -1,7 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { EvilIcons } from '@expo/vector-icons';
-import { View, Text, Image, SafeAreaView, ScrollView, TouchableOpacity } from '../../../components/StyledComponents';
+import {
+  View,
+  Text,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+} from '../../../components/StyledComponents';
 
 // API and Context
 import { useProducts } from '../../../components/ProductContext';
@@ -9,11 +16,11 @@ import { useProducts } from '../../../components/ProductContext';
 // components
 import { FormatPrice } from '../../../components/functions/FormatPrice';
 import ProductModal from '../../../components/modals/ProductModal';
-import { ErrorMessage } from '../../../components/ErrorMessage'
-import { LoadingSpinner } from '../../../components/LoadingSpinner'
+import { ErrorMessage } from '../../../components/ErrorMessage';
+import { LoadingSpinner } from '../../../components/LoadingSpinner';
 
 //type
-import { Product } from '../../../types/Product'
+import { Product } from '../../../types/Product';
 
 const CategoryList = () => {
   const router = useRouter();
@@ -23,7 +30,7 @@ const CategoryList = () => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   // 모달 열기
-  const openModal = (product:Product) => {
+  const openModal = (product: Product) => {
     setSelectedProduct(product);
     setModalVisible(true);
   };
@@ -35,20 +42,16 @@ const CategoryList = () => {
   };
 
   const filteredProducts = useMemo(
-    () => products.filter((product:Product) => product.category === category),
-    [products, category]
+    () => products.filter((product: Product) => product.category === category),
+    [products, category],
   );
 
   if (loading) {
-    return (
-      <LoadingSpinner />
-    );
+    return <LoadingSpinner />;
   }
 
   if (error) {
-    return (
-      <ErrorMessage />
-    );
+    return <ErrorMessage />;
   }
 
   return (
@@ -69,7 +72,7 @@ const CategoryList = () => {
           className="flex-1"
           contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
           {filteredProducts.length > 0 ? (
-            filteredProducts.map((product:Product) => (
+            filteredProducts.map((product: Product) => (
               <TouchableOpacity key={product.id} onPress={() => openModal(product)}>
                 <View className="bg-white p-4 mb-4 rounded-md shadow-lg border-[1px] border-gray-900">
                   <View className="flex flex-row items-center">

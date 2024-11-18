@@ -3,13 +3,13 @@ import React, { ReactNode } from 'react';
 import { View, TouchableOpacity, Text } from './StyledComponents';
 import { useRouter, Href } from 'expo-router';
 
-interface HearderProps { 
+interface HearderProps {
   name: string;
   icon: ReactNode;
   route: Href;
 }
 
-const Header:React.FC<HearderProps> = ({ name, icon, route }) => {
+const Header: React.FC<HearderProps> = ({ name, icon, route }) => {
   const router = useRouter();
 
   const navigateToAdminLogin = () => {

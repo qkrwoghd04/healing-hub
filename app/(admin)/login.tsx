@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 // API
 import { loginUser } from '../../api/api';
-import { LoginResponse } from '../../types/Admin'
+import { LoginResponse } from '../../types/Admin';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState<string>('');
@@ -26,17 +26,17 @@ const AdminLogin = () => {
 
   const handleLogin = async () => {
     if (!validateInputs()) return;
-  
+
     setIsLoading(true);
     try {
       // 로그인 요청
       const userData: LoginResponse = await loginUser({ email, password });
       // 로그인 성공 후 role 확인
-      if (userData && userData.role === "admin") {
+      if (userData && userData.role === 'admin') {
         // 관리자 권한을 가진 경우
         await AsyncStorage.setItem('userToken', userData.token);
         await AsyncStorage.setItem('userRole', userData.role); // role 저장
-        await AsyncStorage.setItem('userName', userData.name); 
+        await AsyncStorage.setItem('userName', userData.name);
         router.push('/(admin)/home'); // 관리 페이지로 이동
       } else {
         Alert.alert('로그인 실패', '관리자 계정만 로그인할 수 있습니다.');

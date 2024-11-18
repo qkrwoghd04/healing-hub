@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, SafeAreaView } from '../../../components/StyledComponents'
+import { View, Text, SafeAreaView } from '../../../components/StyledComponents';
 
 //components
 // import SearchBar from '../../../components/SearchBar'
 import FlatGridProduct from '../../../components/FlatGridProduct';
-
 
 const CategroyScreen = () => {
   // const [searchQuery, setSearchQuery] = useState('');

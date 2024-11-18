@@ -1,13 +1,12 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { fetchProducts, addProduct, deleteProduct } from '../api/api';
 
-
 const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);  // 로딩 상태 추가
-  const [error, setError] = useState(null);      // 에러 상태 추가
+  const [loading, setLoading] = useState(true); // 로딩 상태 추가
+  const [error, setError] = useState(null); // 에러 상태 추가
 
   // loadProducts를 useCallback으로 메모이제이션
   const loadProducts = useCallback(async () => {
@@ -59,7 +58,7 @@ export const ProductProvider = ({ children }) => {
     try {
       setLoading(true);
       const newProduct = await addProduct(productData);
-      setProducts(prev => [...prev, newProduct]);
+      setProducts((prev) => [...prev, newProduct]);
       return newProduct;
     } catch (error) {
       console.error('Failed to add product:', error);
@@ -75,7 +74,7 @@ export const ProductProvider = ({ children }) => {
     try {
       setLoading(true);
       await deleteProduct(id);
-      setProducts(prev => prev.filter(p => p.id !== id));
+      setProducts((prev) => prev.filter((p) => p.id !== id));
     } catch (error) {
       console.error('Failed to delete product:', error);
       setError(error);
@@ -99,11 +98,7 @@ export const ProductProvider = ({ children }) => {
     refreshProducts,
   };
 
-  return (
-    <ProductContext.Provider value={value}>
-      {children}
-    </ProductContext.Provider>
-  );
+  return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>;
 };
 
 // 커스텀 훅에 loading과 error 상태 추가

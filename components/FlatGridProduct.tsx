@@ -1,15 +1,14 @@
 import React, { useState, useEffect, memo } from 'react';
 import { useRouter } from 'expo-router';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { View, Text, Image, TouchableOpacity } from './StyledComponents'
+import { View, Text, Image, TouchableOpacity } from './StyledComponents';
 import { FlatGrid } from 'react-native-super-grid';
 import { Asset } from 'expo-asset';
 
-
 interface FlatGridProductProps {
-  dimension: number,
-  setName: boolean,
-  title: boolean
+  dimension: number;
+  setName: boolean;
+  title: boolean;
 }
 
 const Categories = [
@@ -56,11 +55,7 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
       <FlatGrid
         itemDimension={dimension}
         data={Categories}
-        style={[
-          { paddingTop: 12 },
-          { paddingBottom: 12 },
-          { flex: 1 },
-        ]}
+        style={[{ paddingTop: 12 }, { paddingBottom: 12 }, { flex: 1 }]}
         spacing={10}
         renderItem={({ item }) => (
           <TouchableOpacity
