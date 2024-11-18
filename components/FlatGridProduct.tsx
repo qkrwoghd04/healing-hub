@@ -5,6 +5,7 @@ import { View, Text, Image, TouchableOpacity } from './StyledComponents'
 import { FlatGrid } from 'react-native-super-grid';
 import { Asset } from 'expo-asset';
 
+
 interface FlatGridProductProps {
   dimension: number,
   setName: boolean,
@@ -42,7 +43,7 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
     };
 
     loadImages();
-  }, []);
+  }, [dimension]);
 
   return (
     <View className="flex-1 px-2">
