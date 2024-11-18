@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { SafeAreaView } from '../../components/StyledComponents';
 import { MaterialIcons } from '@expo/vector-icons';
 // Components
@@ -9,7 +9,7 @@ import FlatGridProduct from '../../components/FlatGridProduct';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { ErrorMessage } from '../../components/ErrorMessage';
 // API
-import { useProducts } from '../../api/ProductContext';
+import { ProductProvider, useProducts } from '../../components/ProductContext';
 
 
 const HomeScreen = () => {
@@ -52,6 +52,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView className="flex bg-white relative h-full w-full">
+      <ProductProvider>
       <Header 
         name="힐링허브" 
         icon={<MaterialIcons name="admin-panel-settings" size={48} color="black" />}
@@ -64,8 +65,9 @@ const HomeScreen = () => {
         title={true}
       />
       <CallButton />
+      </ProductProvider>
     </SafeAreaView>
   );
 };
 
-export default HomeScreen;
+export default memo(HomeScreen);

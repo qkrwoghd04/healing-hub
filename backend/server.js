@@ -4,7 +4,6 @@ import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
   DynamoDBDocumentClient,
-  QueryCommand,
   ScanCommand,
   PutCommand,
   DeleteCommand,

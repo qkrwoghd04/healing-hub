@@ -1,6 +1,6 @@
 import React from 'react';
 import { SplashScreen, Stack } from 'expo-router';
-import { ProductProvider } from '../api/ProductContext';
+import { ProductProvider } from '../components/ProductContext';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 

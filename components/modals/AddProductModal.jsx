@@ -63,9 +63,6 @@ const ProductModal = ({
       quality: 1,
     });
 
-    if (!result.canceled) {
-      setNewProductImage(result.assets[0]);
-    }
   };
   return (
     <Modal

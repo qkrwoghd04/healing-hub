@@ -8,7 +8,7 @@ import {
   SafeAreaView as NativeSafeAreaView,
   Alert,
 } from 'react-native';
-import { useProducts } from '../../api/ProductContext';
+import { useProducts } from '../../components/ProductContext';
 import { Entypo, Feather } from '@expo/vector-icons';
 import { styled } from 'nativewind';
 

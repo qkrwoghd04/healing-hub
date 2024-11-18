@@ -1,27 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import React, { useMemo, useState } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { EvilIcons } from '@expo/vector-icons';
-import { View, Text, Image, SafeAreaView, ScrollView, TouchableOpacity } from '../../../components/StyledComponents'
+import { View, Text, Image, SafeAreaView, ScrollView, TouchableOpacity } from '../../../components/StyledComponents';
 
 // API and Context
-import { useProducts } from '../../../api/ProductContext';
+import { useProducts } from '../../../components/ProductContext';
 
 // components
 import { FormatPrice } from '../../../components/functions/FormatPrice';
 import ProductModal from '../../../components/modals/ProductModal';
+import { ErrorMessage } from '../../../components/ErrorMessage'
+import { LoadingSpinner } from '../../../components/LoadingSpinner'
+
+//type
+import { Product } from '../../../types/Product'
 
 const CategoryList = () => {
   const router = useRouter();
   const { category } = useLocalSearchParams();
-  const { products, refreshProducts } = useProducts(); // 모든 컴포넌트 렌더링의 이유
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const { products, loading, error } = useProducts();
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>();
   const [isModalVisible, setModalVisible] = useState(false);
 
   // 모달 열기
-  const openModal = (product) => {
+  const openModal = (product:Product) => {
     setSelectedProduct(product);
     setModalVisible(true);
   };
@@ -32,28 +34,20 @@ const CategoryList = () => {
     setModalVisible(false);
   };
 
-  // Filter products based on selected category
-  useEffect(() => {
-    setLoading(true);
-    const filterByCategory = () => {
-      const filtered = products.filter((product) => product.category === category);
-      setFilteredProducts(filtered);
-      setLoading(false);
-    };
-
-    filterByCategory();
-  }, [category, products]);
-
-  // Refresh product data
-  useEffect(() => {
-    refreshProducts();
-  }, [refreshProducts]);
+  const filteredProducts = useMemo(
+    () => products.filter((product:Product) => product.category === category),
+    [products, category]
+  );
 
   if (loading) {
     return (
-      <SafeAreaView className="flex-1 bg-gray-100 justify-center items-center">
-        <ActivityIndicator size="large" color="#20284F" />
-      </SafeAreaView>
+      <LoadingSpinner />
+    );
+  }
+
+  if (error) {
+    return (
+      <ErrorMessage />
     );
   }
 
@@ -65,7 +59,7 @@ const CategoryList = () => {
           <Text className="text-white text-2xl font-Pretendard-Medium text-center">{category}</Text>
           <TouchableOpacity
             className="absolute right-3 top-8"
-            onPress={() => router.push('category')}>
+            onPress={() => router.push('/category')}>
             <EvilIcons name="close" size={62} color="white" />
           </TouchableOpacity>
         </View>
@@ -75,8 +69,8 @@ const CategoryList = () => {
           className="flex-1"
           contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
           {filteredProducts.length > 0 ? (
-            filteredProducts.map((product, index) => (
-              <TouchableOpacity key={index} onPress={() => openModal(product)}>
+            filteredProducts.map((product:Product) => (
+              <TouchableOpacity key={product.id} onPress={() => openModal(product)}>
                 <View className="bg-white p-4 mb-4 rounded-md shadow-lg border-[1px] border-gray-900">
                   <View className="flex flex-row items-center">
                     <Image

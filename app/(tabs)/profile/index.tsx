@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, Text, ScrollView, SafeAreaView, Image } from '../../../components/StyledComponents'
 import { useImage } from 'expo-image';
 
 const shop = require("../../../assets/images/shop.webp")
 
-const Profile = async () => {
+const Profile = () => {
   console.log('Profile Rendered')
 
-  const image = useImage(shop, {maxWidth: 300, onError(error, retry){console.error('Loading failed:',error.message)}});
-  if (!image) {
-    return <Text>Image is loading...</Text>;
-  }
+  const image = useImage(shop, {
+    maxWidth: 300,
+    onError(error) {
+      console.error('Loading failed:', error.message);
+    },
+  });
+
   return (
     <SafeAreaView className="w-full h-full flex flex-col justify-start items-center relative bg-white">
       <View className="w-full h-full flex flex-col justify-center items-center mt-10">
@@ -57,4 +60,4 @@ const Profile = async () => {
   );
 };
 
-export default Profile;
+export default memo(Profile);
