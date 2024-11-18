@@ -21,7 +21,7 @@ const HotProductScroll: React.FC<HotProductScrollProps> = ({ products }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const sortProductsByPopularityCallback = useCallback(sortProductsByPopularity, [products]);
   const filteredProducts = sortProductsByPopularityCallback(products).slice(0, 10);
-  
+
   const opacity = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const HotProductScroll: React.FC<HotProductScrollProps> = ({ products }) => {
           duration: 400,
           useNativeDriver: true,
         }),
-      ])
+      ]),
     ).start();
   }, [opacity]);
 
@@ -50,7 +50,7 @@ const HotProductScroll: React.FC<HotProductScrollProps> = ({ products }) => {
     setSelectedProduct(undefined);
     setModalVisible(false);
   };
-  
+
   return (
     <View className="w-full h-[38%] rounded-md">
       <View className="flex flex-row justify-start items-center px-4 pb-2">
@@ -74,16 +74,11 @@ const HotProductScroll: React.FC<HotProductScrollProps> = ({ products }) => {
         contentContainerStyle={{ paddingHorizontal: 20, gap: 20 }}>
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
-            <ProductSlide 
-              key={product.id} 
-              item={product} 
-              onPress={() => openModal(product)} 
-            />
+            <ProductSlide key={product.id} item={product} onPress={() => openModal(product)} />
           ))
         ) : (
           <Text>No products available</Text>
         )}
-
       </ScrollView>
 
       {/* Modal for Product Details */}
@@ -98,7 +93,6 @@ interface ProductSlideProps {
 }
 
 const ProductSlide: React.FC<ProductSlideProps> = ({ item, onPress }) => {
-
   return (
     <View className="flex">
       <TouchableOpacity onPress={onPress}>
@@ -106,7 +100,7 @@ const ProductSlide: React.FC<ProductSlideProps> = ({ item, onPress }) => {
           {/* Image */}
           <View className="w-full h-1/2 flex justify-center items-center">
             <Image
-              source={ {uri: item.image }}
+              source={{ uri: item.image }}
               style={{
                 width: '100%',
                 height: '100%',

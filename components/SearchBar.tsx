@@ -8,11 +8,11 @@ const TextInput = styled(NativeTextInput);
 
 interface SearchBarProps {
   searchQuery: string;
-  onSearch: (query: string) => void;  // 함수 타입 정의
-  style?: React.ComponentProps<typeof NativeView>['style'];  // style 타입 정의
+  onSearch: (query: string) => void; // 함수 타입 정의
+  style?: React.ComponentProps<typeof NativeView>['style']; // style 타입 정의
 }
 
-const SearchBar:React.FC<SearchBarProps> = ({ searchQuery, onSearch, style }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ searchQuery, onSearch, style }) => {
   return (
     <View>
       <View className="flex-row" style={style}>

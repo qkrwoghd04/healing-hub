@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image, Modal } from '../StyledComponents'
+import { View, Text, ScrollView, TouchableOpacity, Image, Modal } from '../StyledComponents';
 import { EvilIcons, Fontisto } from '@expo/vector-icons';
 import { FormatPrice } from '../functions/FormatPrice';
-import { Product } from '../../types/Product'
+import { Product } from '../../types/Product';
 import { ImageLoadEventData } from 'expo-image';
 
 interface ProductModalProps {
-  visible: boolean,
-  onClose: () => void,
-  product: Product | undefined,
+  visible: boolean;
+  onClose: () => void;
+  product: Product | undefined;
 }
 
-const ProductModal:React.FC<ProductModalProps> = ({ visible, onClose, product }) => {
+const ProductModal: React.FC<ProductModalProps> = ({ visible, onClose, product }) => {
   const [imgHeight, setImgHeight] = useState(0);
-  console.log('product is ', product)
+  console.log('product is ', product);
 
   if (!product) return null;
 
-  const handleImageLoad = (event:ImageLoadEventData) => {
-    const {  height } = event.source;
+  const handleImageLoad = (event: ImageLoadEventData) => {
+    const { height } = event.source;
     setImgHeight(height);
   };
 

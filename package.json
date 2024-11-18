@@ -15,7 +15,10 @@
   "expo": {
     "doctor": {
       "reactNativeDirectoryCheck": {
-        "exclude": ["axios", "react-native-element-dropdown"]
+        "exclude": [
+          "axios",
+          "react-native-element-dropdown"
+        ]
       }
     }
   },

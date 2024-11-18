@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
-import { View, Text, ScrollView, SafeAreaView, Image } from '../../../components/StyledComponents'
+import { View, Text, ScrollView, SafeAreaView, Image } from '../../../components/StyledComponents';
 import { useImage } from 'expo-image';
 
-const shop = require("../../../assets/images/shop.webp")
+const shop = require('../../../assets/images/shop.webp');
 
 const Profile = () => {
-  console.log('Profile Rendered')
+  console.log('Profile Rendered');
 
   const image = useImage(shop, {
     maxWidth: 300,
@@ -20,7 +20,11 @@ const Profile = () => {
         {/* Shop Image */}
         <View className="w-full h-[35%] relative px-2">
           {image ? (
-            <Image source={image} cachePolicy="memory" className="w-full h-full bg-cover rounded-lg" />
+            <Image
+              source={image}
+              cachePolicy="memory"
+              className="w-full h-full bg-cover rounded-lg"
+            />
           ) : null}
         </View>
         {/* Shop Info */}

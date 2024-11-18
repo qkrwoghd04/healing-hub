@@ -7,6 +7,7 @@ import {
   TouchableOpacity as NativeTouchableOpacity,
   TextInput as NativeTextInput,
   Modal as NativeModal,
+  TouchableWithoutFeedback as NativeTouchableWithoutFeedback,
 } from 'react-native';
 import { Image as NativeImage } from 'expo-image';
 
@@ -18,4 +19,4 @@ export const TouchableOpacity = styled(NativeTouchableOpacity);
 export const Image = styled(NativeImage);
 export const TextInput = styled(NativeTextInput);
 export const Modal = styled(NativeModal);
-
+export const TouchableWithoutFeedback = styled(NativeTouchableWithoutFeedback);

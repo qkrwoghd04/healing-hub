@@ -8,10 +8,10 @@ interface ErrorMessageProps {
   message?: string;
 }
 
-export const ErrorMessage: React.FC<ErrorMessageProps> = ({ 
-  error, 
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({
+  error,
   onRetry,
-  message = '문제가 발생했습니다.'
+  message = '문제가 발생했습니다.',
 }) => {
   const errorMessage = error?.message || message;
 
@@ -20,10 +20,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
       <MaterialIcons name="error-outline" size={48} color="#FF4444" />
       <Text style={styles.errorText}>{errorMessage}</Text>
       {onRetry && (
-        <TouchableOpacity 
-          style={styles.retryButton} 
-          onPress={onRetry}
-        >
+        <TouchableOpacity style={styles.retryButton} onPress={onRetry}>
           <Text style={styles.retryText}>다시 시도</Text>
         </TouchableOpacity>
       )}
@@ -37,25 +34,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    padding: 20
+    padding: 20,
   },
   errorText: {
     fontSize: 16,
     color: '#333',
     textAlign: 'center',
-    marginVertical: 15
+    marginVertical: 15,
   },
   retryButton: {
     backgroundColor: '#0066cc',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 5,
-    marginTop: 10
+    marginTop: 10,
   },
   retryText: {
     color: 'white',
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });
 
 // types/error.ts
