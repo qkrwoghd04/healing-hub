@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image, Modal } from '../StyledComponents';
+import { View, Text, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import { Image } from 'expo-image'
 import { EvilIcons, Fontisto } from '@expo/vector-icons';
 import { FormatPrice } from '../functions/FormatPrice';
 import { Product } from '../../types/Product';

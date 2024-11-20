@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { Animated } from 'react-native';
 import { Image } from 'expo-image';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { View, TouchableOpacity, Text, ScrollView } from './StyledComponents';
+import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
 // Types
 import { Product } from '../types/Product';
 

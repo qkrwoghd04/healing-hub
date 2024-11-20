@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import { View, Text, ScrollView, SafeAreaView, Image } from '../../../components/StyledComponents';
+import { View, Text, ScrollView, SafeAreaView } from 'react-native';
+import { Image } from 'expo-image'
 import { useImage } from 'expo-image';
 
 const shop = require('../../../assets/images/shop.webp');
@@ -13,6 +14,7 @@ const Profile = () => {
       console.error('Loading failed:', error.message);
     },
   });
+  console.log(image);
 
   return (
     <SafeAreaView className="w-full h-full flex flex-col justify-start items-center relative bg-white">

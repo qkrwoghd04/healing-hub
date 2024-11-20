@@ -7,6 +7,9 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
+    "experiments": {
+      "typedRoutes": true
+    },
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash-v2.png",
@@ -34,24 +37,8 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-asset",
-        {
-          "assets": ["./assets/*"]
-        }
-      ],
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "The app accesses your photos to let you share them with your friends."
-        }
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true
-    },
+    "plugins": ["expo-router", "expo-asset"],
+
     "extra": {
       "router": {
         "origin": false
