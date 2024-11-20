@@ -1,15 +1,13 @@
 import React from 'react';
-import { TextInput as NativeTextInput, View as NativeView } from 'react-native';
-import { styled } from 'nativewind';
+import { TextInput , View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const View = styled(NativeView);
-const TextInput = styled(NativeTextInput);
+
 
 interface SearchBarProps {
   searchQuery: string;
   onSearch: (query: string) => void; // 함수 타입 정의
-  style?: React.ComponentProps<typeof NativeView>['style']; // style 타입 정의
+  style?: React.ComponentProps<typeof View>['style']; // style 타입 정의
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ searchQuery, onSearch, style }) => {

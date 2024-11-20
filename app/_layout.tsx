@@ -3,10 +3,11 @@ import { SplashScreen, Stack } from 'expo-router';
 import { ProductProvider } from '../components/ProductContext';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
+import "../global.css"
 
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
     'Pretendard-Light': require('../assets/fonts/Pretendard-Light.ttf'),
     'Pretendard-Medium': require('../assets/fonts/Pretendard-Medium.ttf'),
@@ -29,3 +30,5 @@ export default function RootLayout() {
     </ProductProvider>
   );
 }
+
+export default RootLayout;

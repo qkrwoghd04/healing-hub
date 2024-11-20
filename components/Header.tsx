@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import { View, TouchableOpacity, Text } from './StyledComponents';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 
 interface HearderProps {

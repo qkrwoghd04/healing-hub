@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  Image,
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
-} from '../../components/StyledComponents';
+} from 'react-native';
+import { Image } from 'expo-image'
 import { Alert } from 'react-native';
 import { useProducts } from '../../components/ProductContext';
 import { Entypo, Feather } from '@expo/vector-icons';

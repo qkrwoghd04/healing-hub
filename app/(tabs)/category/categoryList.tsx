@@ -4,12 +4,11 @@ import { EvilIcons } from '@expo/vector-icons';
 import {
   View,
   Text,
-  Image,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
-} from '../../../components/StyledComponents';
-
+} from 'react-native';
+import  { Image } from 'expo-image';
 // API and Context
 import { useProducts } from '../../../components/ProductContext';
 
@@ -77,9 +76,9 @@ const CategoryList = () => {
                 <View className="bg-white p-4 mb-4 rounded-md shadow-lg border-[1px] border-gray-900">
                   <View className="flex flex-row items-center">
                     <Image
-                      source={{
-                        uri: product.image,
-                      }}
+                      source={
+                        product.image
+                      }
                       className="w-20 h-20 rounded-md mr-4 border-2 border-black bg-black"
                     />
                     <View className="flex-1">

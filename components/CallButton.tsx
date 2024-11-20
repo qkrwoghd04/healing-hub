@@ -1,6 +1,6 @@
 import React from 'react';
 import { Linking } from 'react-native';
-import { View, TouchableOpacity, Text } from './StyledComponents';
+import { View, TouchableOpacity, Text } from 'react-native';
 
 const CallButton = () => {
   const makePhoneCall = () => {

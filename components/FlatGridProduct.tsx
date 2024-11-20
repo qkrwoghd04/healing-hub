@@ -1,7 +1,8 @@
 import React, { useState, useEffect, memo } from 'react';
 import { useRouter } from 'expo-router';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { View, Text, Image, TouchableOpacity } from './StyledComponents';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Image } from 'expo-image'
 import { FlatGrid } from 'react-native-super-grid';
 import { Asset } from 'expo-asset';
 

@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { SafeAreaView } from '../../components/StyledComponents';
+import React from 'react';
+import { SafeAreaView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 // Components
 import Header from '../../components/Header';
@@ -65,4 +65,4 @@ const HomeScreen = () => {
   );
 };
 
-export default memo(HomeScreen);
+export default HomeScreen;

@@ -2,12 +2,12 @@ import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   Modal,
   TextInput,
   TouchableWithoutFeedback,
-} from '../StyledComponents';
+} from 'react-native';
+import { Image } from 'expo-image'
 import { Keyboard, StyleSheet, Alert } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import * as ImagePicker from 'expo-image-picker';
