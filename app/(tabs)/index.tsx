@@ -9,7 +9,7 @@ import FlatGridProduct from '../../components/FlatGridProduct';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { ErrorMessage } from '../../components/ErrorMessage';
 // API
-import { ProductProvider, useProducts } from '../../components/ProductContext';
+import { useProducts } from '../../components/ProductContext';
 
 const HomeScreen = () => {
   const { products, loading, error, refreshProducts } = useProducts();
@@ -27,40 +27,19 @@ const HomeScreen = () => {
       />
     );
   }
-  console.log('Main Home');
-  // useEffect(() => {
-  //   const backAction = () => {
-  //     Alert.alert('앱 종료', '앱을 종료하시겠습니까?', [
-  //       {
-  //         text: '취소',
-  //         onPress: () => null,
-  //         style: 'cancel',
-  //       },
-  //       {
-  //         text: '종료',
-  //         onPress: () => BackHandler.exitApp(),
-  //       },
-  //     ]);
-  //     return true;
-  //   };
-
-  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-
-  //   return () => backHandler.remove();
-  // }, []);
+  console.log('[Main Home] Rendered');
+  
 
   return (
-    <SafeAreaView className="flex bg-white relative h-full w-full">
-      <ProductProvider>
-        <Header
-          name="힐링허브"
-          icon={<MaterialIcons name="admin-panel-settings" size={48} color="black" />}
-          route="/(admin)/login"
-        />
-        <HotProductScroll products={products} />
-        <FlatGridProduct dimension={80} setName={true} title={true} />
-        <CallButton />
-      </ProductProvider>
+    <SafeAreaView className="flex relative h-full w-full">
+      <Header
+        name="힐링허브"
+        icon={<MaterialIcons name="manage-accounts" size={48} color="black" />}
+        route="/(admin)/login"
+      />
+      <HotProductScroll products={products} />
+      <FlatGridProduct dimension={80} setName={true} title={true} height='h-[45%]'/>
+      <CallButton />
     </SafeAreaView>
   );
 };

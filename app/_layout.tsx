@@ -1,7 +1,7 @@
 import React from 'react';
 import { SplashScreen, Stack } from 'expo-router';
-import { ProductProvider } from '../components/ProductContext';
 import { useFonts } from 'expo-font';
+import { ProductProvider } from '../components/ProductContext';
 import { useEffect } from 'react';
 import "../global.css"
 
@@ -26,6 +26,14 @@ const RootLayout = () => {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="(admin)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="modal"
+          options={{
+            presentation: 'modal',
+            headerTitle: '상품 정보',
+            headerTitleAlign: 'center'
+          }}
+        />
       </Stack>
     </ProductProvider>
   );

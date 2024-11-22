@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-
 import { View, TouchableOpacity, Text } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 
@@ -12,15 +11,15 @@ interface HearderProps {
 const Header: React.FC<HearderProps> = ({ name, icon, route }) => {
   const router = useRouter();
 
-  const navigateToAdminLogin = () => {
+  const navToAdminLogin = () => {
     router.push(route);
   };
 
   return (
-    <View className="relative w-full mt-10 flex-row justify-center items-center">
-      <Text className="text-2xl color-[#443F3D] font-Pretendard-Medium">{name}</Text>
+    <View className="relative w-full h-[7%] flex-row justify-center items-center bg-white rounded-2xl mb-2">
+      <Text className="text-2xl font-black font-Pretendard-Medium">{name}</Text>
 
-      <TouchableOpacity onPress={navigateToAdminLogin} className="absolute right-5">
+      <TouchableOpacity onPress={navToAdminLogin} className="absolute right-5">
         {icon}
       </TouchableOpacity>
     </View>
