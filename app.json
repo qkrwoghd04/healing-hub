@@ -12,41 +12,48 @@
     },
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/splash-v2.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#20284F"
     },
     "ios": {
-      "supportsTablet": true,
-      "infoPlist": {
-        "NSAppTransportSecurity": {
-          "NSAllowsArbitraryLoads": true
-        }
-      }
+      "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.jaehongpark.HealingHub",
-      "permissions": ["INTERNET", "ACCESS_NETWORK_STATE"]
+      "package": "com.jaehongpark.HealingHub"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": ["expo-router", "expo-asset"],
-
+    "plugins": [
+      "expo-router",
+      "expo-asset",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
+    ],
     "extra": {
-      "router": {
-        "origin": false
-      },
       "eas": {
         "projectId": "a99a8002-5afe-4b34-bbab-7c8ef1c9e195"
       }
     },
-    "assetBundlePatterns": ["**/*"]
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/a99a8002-5afe-4b34-bbab-7c8ef1c9e195"
+    }
   }
 }

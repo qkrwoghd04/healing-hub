@@ -79,7 +79,12 @@ const CategoryList = () => {
                       source={
                         product.image
                       }
-                      className="w-20 h-20 rounded-md mr-4 border-2 border-black bg-black"
+                      style={{
+                        width: 80,
+                        height: 80,
+                        borderRadius: 10,
+                        marginRight: 16
+                      }}
                     />
                     <View className="flex-1">
                       <Text

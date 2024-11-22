@@ -3,14 +3,14 @@ import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 import { Image } from 'expo-image'
 import { useImage } from 'expo-image';
 
-const shop = require('../../../assets/images/shop.webp');
+const shop = require('../../../assets/images/shop.jpg');
 
 const Profile = () => {
   console.log('Profile Rendered');
 
   const image = useImage(shop, {
-    maxWidth: 300,
-    onError(error) {
+    maxWidth: 1000,
+    onError(error:Error) {
       console.error('Loading failed:', error.message);
     },
   });
@@ -25,7 +25,7 @@ const Profile = () => {
             <Image
               source={image}
               cachePolicy="memory"
-              className="w-full h-full bg-cover rounded-lg"
+              style={{width:"100%", height:"100%", borderRadius: 10}}
             />
           ) : null}
         </View>

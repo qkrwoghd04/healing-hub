@@ -31,13 +31,13 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
   useEffect(() => {
     const loadImages = async () => {
       const images = {
-        비타민_및_미네랄: await Asset.loadAsync(require('../assets/icons/vitamin.webp')),
-        콜라겐_및_피부건강: await Asset.loadAsync(require('../assets/icons/collagen.webp')),
-        소화_및_장_건강: await Asset.loadAsync(require('../assets/icons/digestion.webp')),
-        오메가3_및_혈관_건강: await Asset.loadAsync(require('../assets/icons/omega3.webp')),
-        관절_건강: await Asset.loadAsync(require('../assets/icons/joint.webp')),
-        면역_강화: await Asset.loadAsync(require('../assets/icons/immune.webp')),
-        기타_건강_보조제: await Asset.loadAsync(require('../assets/icons/others.webp')),
+        비타민_및_미네랄: await Asset.loadAsync(require('../assets/images/vitamin.png')),
+        콜라겐_및_피부건강: await Asset.loadAsync(require('../assets/images/collagen.png')),
+        소화_및_장_건강: await Asset.loadAsync(require('../assets/images/digestion.png')),
+        오메가3_및_혈관_건강: await Asset.loadAsync(require('../assets/images/omega3.png')),
+        관절_건강: await Asset.loadAsync(require('../assets/images/joint.png')),
+        면역_강화: await Asset.loadAsync(require('../assets/images/immune.png')),
+        기타_건강_보조제: await Asset.loadAsync(require('../assets/images/others.png')),
       };
       setCategoryImages(images);
     };
@@ -63,7 +63,7 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
             onPress={() =>
               router.push({ pathname: '/category/categoryList', params: { category: item.name } })
             }>
-            <View className="justify-center items-center rounded-xl px-3 h-[130px] font-Pretendard-Light bg-white border-[1px] border-gray-900">
+            <View className="justify-center items-center rounded-xl px-3 h-[130px] font-Pretendard-Light border-[1px] border-gray-900">
               {categoryImages[item.imgKey] ? (
                 <Image
                   source={categoryImages[item.imgKey][0].uri}
