@@ -5,8 +5,8 @@ const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // 로딩 상태 추가
-  const [error, setError] = useState(null); // 에러 상태 추가
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
 
   // loadProducts를 useCallback으로 메모이제이션
   const loadProducts = useCallback(async () => {

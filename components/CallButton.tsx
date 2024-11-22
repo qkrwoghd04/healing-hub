@@ -7,9 +7,9 @@ const CallButton = () => {
     Linking.openURL('tel:010-4040-1669');
   };
   return (
-    <View className="relative h-16 w-full flex items-center justify-center mb-2">
+    <View className='relative w-full h-[10%]'>
       <TouchableOpacity
-        className="bg-black rounded-md h-full w-[90%] flex justify-center items-center border-2 border-[#45403D]"
+        className="w-full h-full flex justify-center items-center border-2 border-[#45403D] rounded-2xl bg-black"
         onPress={makePhoneCall}>
         <Text className="text-3xl font-Pretendard-Medium text-white">매장 주문</Text>
       </TouchableOpacity>

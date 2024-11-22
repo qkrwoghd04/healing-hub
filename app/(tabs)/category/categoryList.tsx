@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import React, { useMemo } from 'react';
+import { useLocalSearchParams, router } from 'expo-router';
 import { EvilIcons } from '@expo/vector-icons';
 import {
   View,
@@ -14,7 +14,6 @@ import { useProducts } from '../../../components/ProductContext';
 
 // components
 import { FormatPrice } from '../../../components/functions/FormatPrice';
-import ProductModal from '../../../components/modals/ProductModal';
 import { ErrorMessage } from '../../../components/ErrorMessage';
 import { LoadingSpinner } from '../../../components/LoadingSpinner';
 
@@ -22,24 +21,8 @@ import { LoadingSpinner } from '../../../components/LoadingSpinner';
 import { Product } from '../../../types/Product';
 
 const CategoryList = () => {
-  const router = useRouter();
   const { category } = useLocalSearchParams();
   const { products, loading, error } = useProducts();
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>();
-  const [isModalVisible, setModalVisible] = useState(false);
-
-  // 모달 열기
-  const openModal = (product: Product) => {
-    setSelectedProduct(product);
-    setModalVisible(true);
-  };
-
-  // 모달 닫기
-  const closeModal = () => {
-    setSelectedProduct(null);
-    setModalVisible(false);
-  };
-
   const filteredProducts = useMemo(
     () => products.filter((product: Product) => product.category === category),
     [products, category],
@@ -57,7 +40,7 @@ const CategoryList = () => {
     <SafeAreaView className="h-full w-full bg-gray-50">
       <View className="w-full h-full">
         {/* Category Title */}
-        <View className="bg-black w-full h-[12%] flex flex-row justify-center items-center relative px-4 pt-8">
+        <View className="bg-black w-full h-[7%] flex flex-row justify-center items-center relative">
           <Text className="text-white text-2xl font-Pretendard-Medium text-center">{category}</Text>
           <TouchableOpacity
             className="absolute right-3 top-8"
@@ -72,7 +55,19 @@ const CategoryList = () => {
           contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product: Product) => (
-              <TouchableOpacity key={product.id} onPress={() => openModal(product)}>
+              <TouchableOpacity 
+                key={product.id} 
+                onPress={() => router.push({
+                  pathname: '/modal',
+                  params: {
+                    id: product.id, 
+                    name: product.name, 
+                    price: product.price, 
+                    description: product.description, 
+                    image: product.image, 
+                    product_detail_url: product.product_detail_url
+                  }
+                })}>
                 <View className="bg-white p-4 mb-4 rounded-md shadow-lg border-[1px] border-gray-900">
                   <View className="flex flex-row items-center">
                     <Image
@@ -119,9 +114,6 @@ const CategoryList = () => {
           )}
         </ScrollView>
       </View>
-      {selectedProduct && (
-        <ProductModal visible={isModalVisible} onClose={closeModal} product={selectedProduct} />
-      )}
     </SafeAreaView>
   );
 };

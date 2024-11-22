@@ -14,7 +14,6 @@ const Profile = () => {
       console.error('Loading failed:', error.message);
     },
   });
-  console.log(image);
 
   return (
     <SafeAreaView className="w-full h-full flex flex-col justify-start items-center relative bg-white">

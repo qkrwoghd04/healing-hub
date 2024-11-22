@@ -10,6 +10,7 @@ interface FlatGridProductProps {
   dimension: number;
   setName: boolean;
   title: boolean;
+  height: string;
 }
 
 const Categories = [
@@ -22,8 +23,8 @@ const Categories = [
   { name: '기타 건강 보조제', imgKey: '기타_건강_보조제' },
 ];
 
-const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, title }) => {
-  console.log('FlatGrid Rendered');
+const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, title, height }) => {
+  console.log('FlatGrid 렌더링');
   const router = useRouter();
   // categoryImages의 타입을 Record<string, Asset>으로 설정
   const [categoryImages, setCategoryImages] = useState<Record<string, Asset[]>>({});
@@ -46,17 +47,19 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
   }, [dimension]);
 
   return (
-    <View className="flex-1 px-2">
+    <View className={`w-full ${height} bg-white rounded-2xl mb-2`}>
+      {/* Title */}
       {title && (
         <View className="flex-row justify-start items-center px-4 gap-x-2">
           <Text className="text-black text-2xl font-Pretendard-Medium">카테고리별</Text>
           <FontAwesome5 name="capsules" size={24} color="black" />
         </View>
       )}
+      {/* FlatGrid */}
       <FlatGrid
         itemDimension={dimension}
         data={Categories}
-        style={[{ paddingTop: 12 }, { paddingBottom: 12 }, { flex: 1 }]}
+        style={[{ paddingTop: 10 }, { paddingBottom: 10 }, { flex: 1 }]}
         spacing={10}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -69,15 +72,13 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
                   source={categoryImages[item.imgKey][0].uri}
                   style={{
                     marginBottom: 2,
-                    width: 48,
-                    height: 48,
-                    borderWidth: 2,
-                    borderColor: '#000000',
+                    width: 56,
+                    height: 56,
                     borderRadius: 15,
                   }}
                 />
               ) : null}
-              {setName && <Text className="mt-2 text-center text-sm">{item.name}</Text>}
+              {setName && <Text className="mt-2 text-center text-[16px]">{item.name}</Text>}
             </View>
           </TouchableOpacity>
         )}
