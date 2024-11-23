@@ -19,9 +19,10 @@ import { LoadingSpinner } from '../../../components/LoadingSpinner';
 
 //type
 import { Product } from '../../../types/Product';
+import Header from '@/components/Header';
 
 const CategoryList = () => {
-  const { category } = useLocalSearchParams();
+  const { category } = useLocalSearchParams<{category: string}>();
   const { products, loading, error } = useProducts();
   const filteredProducts = useMemo(
     () => products.filter((product: Product) => product.category === category),
@@ -37,18 +38,10 @@ const CategoryList = () => {
   }
 
   return (
-    <SafeAreaView className="h-full w-full bg-gray-50">
+    <SafeAreaView className="h-full w-full">
       <View className="w-full h-full">
         {/* Category Title */}
-        <View className="bg-black w-full h-[7%] flex flex-row justify-center items-center relative">
-          <Text className="text-white text-2xl font-Pretendard-Medium text-center">{category}</Text>
-          <TouchableOpacity
-            className="absolute right-3 top-8"
-            onPress={() => router.push('/category')}>
-            <EvilIcons name="close" size={62} color="white" />
-          </TouchableOpacity>
-        </View>
-
+          <Header name={category} icon={<EvilIcons name="close" size={62} color="black" />} route="/(tabs)/category"/> 
         {/* Product List in ScrollView */}
         <ScrollView
           className="flex-1"

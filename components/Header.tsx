@@ -16,7 +16,7 @@ const Header: React.FC<HearderProps> = ({ name, icon, route }) => {
   };
 
   return (
-    <View className="relative w-full h-[7%] flex-row justify-center items-center bg-white rounded-2xl mb-2">
+    <View className="relative w-full h-[7%] flex-row justify-center items-center mb-2">
       <Text className="text-2xl font-black font-Pretendard-Medium">{name}</Text>
 
       <TouchableOpacity onPress={navToAdminLogin} className="absolute right-5">

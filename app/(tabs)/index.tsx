@@ -1,10 +1,10 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, Linking } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 // Components
 import Header from '../../components/Header';
 import HotProductScroll from '../../components/HotProductScroll';
-import CallButton from '../../components/CallButton';
+import CallButton from '../../components/CustomButton';
 import FlatGridProduct from '../../components/FlatGridProduct';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { ErrorMessage } from '../../components/ErrorMessage';
@@ -29,7 +29,9 @@ const HomeScreen = () => {
   }
   console.log('[Main Home] Rendered');
   
-
+  function makePhoneCall (){
+    Linking.openURL('tel:010-4040-1669');
+  };
   return (
     <SafeAreaView className="flex relative h-full w-full">
       <Header
@@ -39,7 +41,7 @@ const HomeScreen = () => {
       />
       <HotProductScroll products={products} />
       <FlatGridProduct dimension={80} setName={true} title={true} height='h-[45%]'/>
-      <CallButton />
+      <CallButton onPress={makePhoneCall} color="bg-black" text="매장 주문"/>
     </SafeAreaView>
   );
 };
