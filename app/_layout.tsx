@@ -30,8 +30,7 @@ const RootLayout = () => {
           name="modal"
           options={{
             presentation: 'modal',
-            headerTitle: '상품 정보',
-            headerTitleAlign: 'center'
+            headerShown: false
           }}
         />
       </Stack>

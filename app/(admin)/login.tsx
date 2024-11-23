@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 // API
 import { loginUser } from '../../api/api';
 import { LoginResponse } from '../../types/Admin';
+import CustomButton from '@/components/CustomButton';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState<string>('');
@@ -55,7 +56,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <View className="flex-1 justify-center items-center p-10">
+    <View className="flex-1 justify-center items-center p-5">
       {/* 뒤로가기 아이콘 */}
       <TouchableOpacity className="absolute top-10 left-5" onPress={handleGoBack}>
         <Ionicons name="chevron-back" size={48} color="black" />
@@ -64,29 +65,27 @@ const AdminLogin = () => {
       <Text className="font-Pretendard-Medium text-3xl pb-5">관리자 로그인</Text>
       <TextInput
         placeholder="이메일"
+        placeholderTextColor="black"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
         editable={!isLoading}
-        className="w-full h-[50px] border-[1px] border-black rounded-md px-3 mb-3"
+        className="w-full h-[60px] border-[1px] border-black rounded-md px-3 mb-3"
       />
       <TextInput
         placeholder="비밀번호"
+        placeholderTextColor="black"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
         editable={!isLoading}
-        className="w-full h-[50px] border-[1px] border-black rounded-md px-3 mb-3"
+        className="w-full h-[60px] border-[1px] border-black rounded-md px-3 mb-3"
       />
       {isLoading ? (
         <ActivityIndicator size="large" color="#007AFF" />
       ) : (
-        <TouchableOpacity
-          className="bg-black w-full h-12 rounded-md flex justify-center items-center"
-          onPress={handleLogin}>
-          <Text className="text-white font-Pretendard-Medium text-xl">로그인</Text>
-        </TouchableOpacity>
+        <CustomButton text="로그인" color="bg-black" onPress={handleLogin}/>
       )}
     </View>
   );

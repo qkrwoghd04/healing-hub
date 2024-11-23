@@ -64,7 +64,10 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() =>
-              router.push({ pathname: '/category/categoryList', params: { category: item.name } })
+              router.push({ 
+                pathname: '/category/categoryList', 
+                params: { category: item.name } 
+              })
             }>
             <View className="justify-center items-center rounded-xl px-3 h-[130px] font-Pretendard-Light border-[1px] border-gray-900">
               {categoryImages[item.imgKey] ? (
