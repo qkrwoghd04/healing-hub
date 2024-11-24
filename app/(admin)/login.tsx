@@ -85,7 +85,7 @@ const AdminLogin = () => {
       {isLoading ? (
         <ActivityIndicator size="large" color="#007AFF" />
       ) : (
-        <CustomButton text="로그인" color="bg-black" onPress={handleLogin}/>
+        <CustomButton text="로그인" color="bg-white" onPress={handleLogin}/>
       )}
     </View>
   );

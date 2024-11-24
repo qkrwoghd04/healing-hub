@@ -74,7 +74,9 @@ const CategoryList = () => {
                         borderRadius: 10,
                         borderWidth: 1,
                         borderColor: '#000000',
+                        backgroundColor: '#20284F'
                       }}
+                      placeholder="이미지 없음"
                     />
                     <View className="flex-1">
                       <Text

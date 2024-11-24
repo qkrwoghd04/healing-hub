@@ -41,7 +41,7 @@ const HomeScreen = () => {
       />
       <HotProductScroll products={products} />
       <FlatGridProduct dimension={80} setName={true} title={true} height='h-[45%]'/>
-      <CallButton onPress={makePhoneCall} color="bg-black" text="매장 주문"/>
+      <CallButton onPress={makePhoneCall} color="bg-white" text="매장 주문"/>
     </SafeAreaView>
   );
 };

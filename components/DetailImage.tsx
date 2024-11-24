@@ -10,7 +10,13 @@ const DetailImage = (({uri}: {uri : string}) => {
       <Image
         source={{ uri: uri }}
         contentFit="fill"
-        style={{width:"100%", height: "100%"}}
+        style={{
+          width:"100%", 
+          height: "100%",
+          borderRadius: 10,
+          borderWidth: 1,
+          borderColor: '#000000',
+        }}
         transition={300}
         priority="normal"
         onLoad={(event) => { const { height } = event.source; setImgHeight(height)}}
