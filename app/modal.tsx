@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { View, Text, ScrollView } from 'react-native';
 import { Image } from 'expo-image'
 import { FormatPrice } from '../components/functions/FormatPrice';
-import { ImageLoadEventData } from 'expo-image';
+
+
+//Components
+import  DetailImage  from '../components/DetailImage'
 
 const Modal = () => {
   console.log("모달 렌더링")
@@ -15,14 +18,8 @@ const Modal = () => {
     description: string,
     product_detail_url: string,
   }>();
-  const [imgHeight, setImgHeight] = useState(0);
 
   if (!id) return null;
-
-  const handleImageLoad = (event: ImageLoadEventData) => {
-    const { height } = event.source;
-    setImgHeight(height);
-  }
 
   return (
     <View className="relative w-full h-full bg-white">
@@ -35,7 +32,6 @@ const Modal = () => {
             style={{ width: '100%', height: '100%' }}
             transition={300}
             priority="high"
-            onLoad={handleImageLoad}
             cachePolicy="memory-disk"
           >
           </Image>
@@ -52,17 +48,7 @@ const Modal = () => {
           </View>
 
           {/* 긴 이미지 */}
-          <View className="w-full" style={{ height: imgHeight ? imgHeight : 'auto' }}>
-            <Image
-              source={{ uri: product_detail_url }}
-              contentFit="fill"
-              style={{width:"100%", height: "100%"}}
-              transition={300}
-              priority="normal"
-              onLoad={handleImageLoad}
-              cachePolicy="memory-disk"
-            />
-          </View>
+          <DetailImage uri={product_detail_url}/>
         </View>
       </ScrollView>
     </View>

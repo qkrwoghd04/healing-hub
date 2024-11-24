@@ -35,7 +35,7 @@ const AdminLogin = () => {
       if (userData && userData.role === 'admin') {
         // 관리자 권한을 가진 경우
         await AsyncStorage.setItem('userToken', userData.token);
-        await AsyncStorage.setItem('userRole', userData.role); // role 저장
+        await AsyncStorage.setItem('userRole', userData.role);
         await AsyncStorage.setItem('userName', userData.name);
         router.push('/(admin)/home'); // 관리 페이지로 이동
       } else {
