@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
 export default function TabsLayout() {
   return (
@@ -32,6 +32,16 @@ export default function TabsLayout() {
           title: '홈',
           headerShown: false,
           tabBarIcon: ({ color, size }) => <AntDesign name="home" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="pedometer"
+        options={{
+          title: '만보기',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="shoe-prints" size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen

@@ -74,7 +74,7 @@ const CategoryList = () => {
                         borderRadius: 10,
                         borderWidth: 1,
                         borderColor: '#000000',
-                        backgroundColor: '#20284F'
+                        backgroundColor: '#000000'
                       }}
                       placeholder="이미지 없음"
                     />
