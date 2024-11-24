@@ -6,7 +6,7 @@ import { useImage } from 'expo-image';
 const shop = require('../../../assets/images/shop.jpg');
 
 const Profile = () => {
-  console.log('Profile Rendered');
+  console.log("[Profile] Rendered");
 
   const image = useImage(shop, {
     maxWidth: 1000,

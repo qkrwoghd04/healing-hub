@@ -7,6 +7,7 @@ import "../global.css"
 
 SplashScreen.preventAutoHideAsync();
 
+
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
     'Pretendard-Light': require('../assets/fonts/Pretendard-Light.ttf'),
@@ -30,7 +31,9 @@ const RootLayout = () => {
           name="modal"
           options={{
             presentation: 'modal',
-            headerShown: false
+            headerShown: true,
+            headerTitle: '상품 정보',
+            headerTitleAlign: 'center'
           }}
         />
       </Stack>

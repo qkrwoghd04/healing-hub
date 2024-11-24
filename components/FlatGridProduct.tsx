@@ -24,7 +24,7 @@ const Categories = [
 ];
 
 const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, title, height }) => {
-  console.log('FlatGrid 렌더링');
+  console.log("[FlatGrid] Rendered");
   const router = useRouter();
   // categoryImages의 타입을 Record<string, Asset>으로 설정
   const [categoryImages, setCategoryImages] = useState<Record<string, Asset[]>>({});
@@ -44,7 +44,7 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
     };
 
     loadImages();
-  }, [dimension]);
+  }, []);
 
   return (
     <View className={`w-full ${height} bg-white rounded-2xl mb-2`}>

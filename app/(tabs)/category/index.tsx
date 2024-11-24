@@ -6,6 +6,7 @@ import { View, Text, SafeAreaView } from 'react-native';
 import FlatGridProduct from '../../../components/FlatGridProduct';
 
 const CategroyScreen = () => {
+  console.log("[FlatGrid] Rendered");
   // const [searchQuery, setSearchQuery] = useState('');
   // const handleSearch = (query) => {
   //   setSearchQuery(query);
