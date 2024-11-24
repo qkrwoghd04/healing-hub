@@ -9,7 +9,7 @@
       "distribution": "internal"
     },
     "production": {
-      "channel": "production",
+      "autoIncrement": true,
       "resourceClass": "medium"
     },
     "preview": {

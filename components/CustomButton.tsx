@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, Pressable, Text } from 'react-native';
 
 interface ButtonProps {
   color: string;
@@ -11,11 +11,11 @@ const CustomButton:React.FC<ButtonProps> = ({ color, onPress, text }) => {
 
   return (
     <View className='relative w-full h-[10%] flex items-center'>
-      <TouchableOpacity
-        className={`w-full h-full flex justify-center items-center rounded-2xl ${color}`}
+      <Pressable
+        className={`w-full h-full flex justify-center items-center rounded-2xl ${color} border-4`}
         onPress={onPress}>
-        <Text className="text-3xl font-Pretendard-Medium color-white">{text}</Text>
-      </TouchableOpacity>
+        <Text className="text-4xl font-Pretendard-Medium color-black">{text}</Text>
+      </Pressable>
     </View>
   );
 };
