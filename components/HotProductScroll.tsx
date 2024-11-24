@@ -14,6 +14,7 @@ interface HotProductScrollProps {
 }
 
 const HotProductScroll: React.FC<HotProductScrollProps> = ({ products }) => {
+  console.log("[Hot Product] Rendered");
   const sortProductsByPopularityCallback = useCallback(sortProductsByPopularity, [products]);
   const filteredProducts = sortProductsByPopularityCallback(products).slice(0, 10);
 

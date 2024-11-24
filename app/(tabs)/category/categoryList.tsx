@@ -70,8 +70,10 @@ const CategoryList = () => {
                       style={{
                         width: 80,
                         height: 80,
+                        marginRight: 16,
                         borderRadius: 10,
-                        marginRight: 16
+                        borderWidth: 1,
+                        borderColor: '#000000',
                       }}
                     />
                     <View className="flex-1">

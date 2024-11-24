@@ -3,15 +3,10 @@ import { View, Text, SafeAreaView } from 'react-native';
 
 //components
 // import SearchBar from '../../../components/SearchBar'
-import FlatGridProduct from '../../../components/FlatGridProduct';
+import FlatGrid from '../../../components/FlatGridProduct';
 
 const CategroyScreen = () => {
-  console.log("[FlatGrid] Rendered");
-  // const [searchQuery, setSearchQuery] = useState('');
-  // const handleSearch = (query) => {
-  //   setSearchQuery(query);
-  // };
-
+  console.log("[Category Index] Rendered");
   return (
     <SafeAreaView className="h-full w-full">
       {/* Category Header with SearchBar */}
@@ -22,7 +17,7 @@ const CategroyScreen = () => {
       </View>
 
       {/* 카테고리 FlatGrid */}
-      <FlatGridProduct dimension={130} setName={true} title={false} height='h-full'/>
+      <FlatGrid dimension={130} setName={true} title={false} height='h-full'/>
     </SafeAreaView>
   );
 };
