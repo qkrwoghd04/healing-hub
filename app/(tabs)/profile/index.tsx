@@ -1,32 +1,20 @@
 import React, { memo } from 'react';
 import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 import { Image } from 'expo-image'
-import { useImage } from 'expo-image';
 
-const shop = require('../../../assets/images/shop.jpg');
 
 const Profile = () => {
   console.log("[Profile] Rendered");
-
-  const image = useImage(shop, {
-    maxWidth: 1000,
-    onError(error:Error) {
-      console.error('Loading failed:', error.message);
-    },
-  });
 
   return (
     <SafeAreaView className="w-full h-full flex flex-col justify-start items-center relative bg-white">
       <View className="w-full h-full flex flex-col justify-center items-center mt-10">
         {/* Shop Image */}
         <View className="w-full h-[35%] relative px-2">
-          {image ? (
-            <Image
-              source={image}
-              cachePolicy="memory"
-              style={{width:"100%", height:"100%", borderRadius: 10}}
-            />
-          ) : null}
+          <Image
+            source="shop"
+            style={{ width: "100%", height: "100%", borderRadius: 10 }}
+          />
         </View>
         {/* Shop Info */}
         <View className="flex justify-center items-center w-full h-[70%] relative">

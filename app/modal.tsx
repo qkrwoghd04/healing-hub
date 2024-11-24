@@ -29,7 +29,13 @@ const Modal = () => {
           <Image
             source={image} 
             contentFit="cover"
-            style={{ width: '100%', height: '100%' }}
+            style={{ 
+              width: '100%', 
+              height: '100%',
+              borderRadius: 10,
+              borderWidth: 1,
+              borderColor: '#000000',
+            }}
             transition={300}
             priority="high"
             cachePolicy="memory-disk"

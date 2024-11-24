@@ -33,7 +33,29 @@
     },
     "plugins": [
       "expo-router",
-      "expo-asset",
+      [
+        "expo-asset",
+        {
+          "assets": [
+            "./assets/images/collagen.png",
+            "./assets/images/digestion.png",
+            "./assets/images/immune.png",
+            "./assets/images/joint.png",
+            "./assets/images/omega3.png",
+            "./assets/images/others.png",
+            "./assets/images/vitamin.png",
+            "./assets/images/shop.jpg"
+          ]
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableProguardInReleaseBuilds": true
+          }
+        }
+      ],
       [
         "expo-splash-screen",
         {
@@ -42,7 +64,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-build-properties"
     ],
     "extra": {
       "eas": {

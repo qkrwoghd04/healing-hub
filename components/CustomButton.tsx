@@ -12,9 +12,9 @@ const CustomButton:React.FC<ButtonProps> = ({ color, onPress, text }) => {
   return (
     <View className='relative w-full h-[10%] flex items-center'>
       <TouchableOpacity
-        className={`w-full h-full flex justify-center items-center border-2 border-[#45403D] rounded-2xl ${color}`}
+        className={`w-full h-full flex justify-center items-center rounded-2xl ${color}`}
         onPress={onPress}>
-        <Text className="text-3xl font-Pretendard-Medium text-white">{text}</Text>
+        <Text className="text-3xl font-Pretendard-Medium color-white">{text}</Text>
       </TouchableOpacity>
     </View>
   );
