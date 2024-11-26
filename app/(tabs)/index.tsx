@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, Linking } from 'react-native';
+import { SafeAreaView, View, Linking } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 // Components
 import Header from '../../components/Header';
@@ -33,15 +33,17 @@ const HomeScreen = () => {
     Linking.openURL('tel:010-4040-1669');
   };
   return (
-    <SafeAreaView className="flex relative h-full w-full">
-      <Header
-        name="힐링허브"
-        icon={<MaterialIcons name="manage-accounts" size={48} color="black" />}
-        route="/(admin)/login"
-      />
-      <HotProductScroll products={products} />
-      <FlatGridProduct dimension={80} setName={true} title={true} height='h-[45%]'/>
-      <CallButton onPress={makePhoneCall} color="bg-white" text="매장 주문"/>
+    <SafeAreaView className="flex-1 relative">
+      <View className="flex-1 px-2">
+        <Header
+          name="힐링허브"
+          icon={<MaterialIcons name="manage-accounts" size={48} color="black" />}
+          route="/(admin)/login"
+        />
+        <HotProductScroll products={products} />
+        <FlatGridProduct dimension={80} setName={true} title={true} height='h-[45%]'/>
+        <CallButton onPress={makePhoneCall} backgroudColor="bg-[#20284F]" text="매장 주문"/>
+      </View>
     </SafeAreaView>
   );
 };

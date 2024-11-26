@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,6 +14,11 @@ const AdminLogin = () => {
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const inputRef = useRef();
+
+  useEffect(() => {
+    console.log(inputRef);
+  })
 
   // 입력값 검증 함수
   const validateInputs = (): boolean => {
@@ -71,6 +76,7 @@ const AdminLogin = () => {
         keyboardType="email-address"
         autoCapitalize="none"
         editable={!isLoading}
+        autoFocus={true}
         className="w-full h-[60px] border-[1px] border-black rounded-md px-3 mb-3"
       />
       <TextInput
@@ -85,7 +91,7 @@ const AdminLogin = () => {
       {isLoading ? (
         <ActivityIndicator size="large" color="#007AFF" />
       ) : (
-        <CustomButton text="로그인" color="bg-white" onPress={handleLogin}/>
+        <CustomButton text="로그인" backgroudColor="bg-white" onPress={handleLogin}/>
       )}
     </View>
   );

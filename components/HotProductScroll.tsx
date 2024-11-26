@@ -38,7 +38,7 @@ const HotProductScroll: React.FC<HotProductScrollProps> = ({ products }) => {
   }, [opacity]);
 
   return (
-    <View className="w-full h-[33%] bg-white rounded-2xl mb-2">
+    <View className="w-full h-[33%] bg-white rounded-2xl mb-2 shadow-xs">
         {/* Title Content */}
         <View className="flex-row justify-start items-center px-3 py-2">
           <Animated.Text

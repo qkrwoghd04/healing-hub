@@ -49,7 +49,7 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
   ), [categoryImages, setName]);
 
   return (
-    <View className={`w-full ${height} bg-white rounded-2xl mb-2`}>
+    <View className={`w-full ${height} bg-white rounded-2xl mb-2 shadow-xs`}>
       {/* Title */}
       {title && (
         <View className="flex-row justify-start items-center px-4 gap-x-2">
