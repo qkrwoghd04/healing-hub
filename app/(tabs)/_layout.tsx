@@ -10,7 +10,7 @@ export default function TabsLayout() {
           backgroundColor: '#fff',
           borderTopWidth: 0.3,
           borderColor: '#000',
-          padding: 0,
+          padding: 10,
         },
         tabBarShowLabel: true,
         tabBarActiveTintColor: '#dba40d',
@@ -27,14 +27,6 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="index"
-        options={{
-          title: '홈',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => <AntDesign name="home" size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="pedometer"
         options={{
           title: '만보기',
@@ -45,12 +37,30 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="index"
+        options={{
+          title: '홈',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => <AntDesign name="home" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: '매장 정보',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="questioncircleo" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="userInfo"
+        options={{
+          title: '내 정보',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="user" size={size} color={color} />
           ),
         }}
       />
