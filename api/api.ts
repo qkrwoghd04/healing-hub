@@ -69,7 +69,6 @@ export const addProduct = async (productData: ProductForm): Promise<Product> => 
         name: productData.image.name,
       } as any);
     }
-
     const response = await URL.post<Product>('/products', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',

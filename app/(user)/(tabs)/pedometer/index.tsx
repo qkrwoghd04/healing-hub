@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { SafeAreaView, Text, View, Alert, TouchableOpacity, Linking } from 'react-native';
+import { SafeAreaView, Text, View, Alert, Linking } from 'react-native';
 import { ImageBackground } from 'expo-image';
 import { Pedometer } from 'expo-sensors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,29 +9,26 @@ import CustomButton from '@/components/CustomButton';
 
 const selectStepImage = (steps: number) => {
   if (steps < 2000) {
-    return require('../../../assets/images/step1.jpg');
+    return require('../../../../assets/images/step1.jpg');
   } else if (steps < 4000) {
-    return require('../../../assets/images/step2.jpg');
+    return require('../../../../assets/images/step2.jpg');
   } else if (steps < 6000) {
-    return require('../../../assets/images/step3.jpg');
+    return require('../../../../assets/images/step3.jpg');
   } else if (steps < 8000) {
-    return require('../../../assets/images/step4.jpg');
+    return require('../../../../assets/images/step4.jpg');
   } else if (steps < 10000) {
-    return require('../../../assets/images/step5.jpg');
+    return require('../../../../assets/images/step5.jpg');
   } else {
-    return require('../../../assets/images/step6.jpg');
+    return require('../../../../assets/images/step6.jpg');
   }
 };
 
 const Walk = () => {
   console.log("[Pedometer] Rendered")
-  const [currentStepCount, setCurrentStepCount] = useState(0); //오늘 걸음 상태
-  const [pastStepCount, setPastStepCount] = useState(0); //어제 걸음 상태
-  const [permissionDenied, setPermissionDenied] = useState(true); // 권한 허용 여부
-  const animationRef = useRef<LottieView | null>(null); // Lottiefile Ref 관리
-
-  // 구독을 저장할 ref 추가
-  const subscriptionRef = useRef<any>(null);
+  const [currentStepCount, setCurrentStepCount] = useState(0); 
+  const [permissionDenied, setPermissionDenied] = useState(true); 
+  const animationRef = useRef<LottieView | null>(null); 
+  const subscriptionRef = useRef<any>(null); 
 
   const handlePress = useCallback(async () => {
     await Linking.openSettings();
@@ -65,9 +62,9 @@ const Walk = () => {
   }, []);
 
   const loadSavedData = async () => {
+    console.log("loadSavedData 호출됨");
     try {
       const savedCurrentSteps = await AsyncStorage.getItem('currentSteps');
-      const savedPastSteps = await AsyncStorage.getItem('pastSteps');
       const lastUpdateDate = await AsyncStorage.getItem('lastUpdateDate');
 
       const today = new Date().toDateString();
@@ -76,7 +73,6 @@ const Walk = () => {
         // Date has changed, move current steps to past steps
         if (savedCurrentSteps) {
           await AsyncStorage.setItem('pastSteps', savedCurrentSteps);
-          setPastStepCount(parseInt(savedCurrentSteps, 10) || 0); // Ensure fallback value
         }
         // Reset current steps to 0
         await AsyncStorage.setItem('currentSteps', '0');
@@ -84,9 +80,7 @@ const Walk = () => {
         // Update date
         await AsyncStorage.setItem('lastUpdateDate', today);
       } else {
-        // Same day, restore saved data
-        setCurrentStepCount(parseInt(savedCurrentSteps || '0', 10)); // Use default value if null
-        setPastStepCount(parseInt(savedPastSteps || '0', 10));       // Use default value if null
+        setCurrentStepCount(parseInt(savedCurrentSteps || '0', 10)); 
       }
     } catch (error) {
       console.error('Error loading saved data:', error);
@@ -94,7 +88,8 @@ const Walk = () => {
   };
 
   const checkPermissions = async () => {
-    const { status, canAskAgain } = await Pedometer.getPermissionsAsync(); // 디바이스에서 권한 체크
+    console.log("checkPermissions 호출됨");
+    const { status, canAskAgain } = await Pedometer.getPermissionsAsync(); 
     console.log("권한 상태 : ", status, "canAskAgain : ", canAskAgain)
 
     // 권한이 부여되어 있다면,
@@ -141,6 +136,7 @@ const Walk = () => {
   };
 
   const subscribe = async () => {
+    console.log("subscribe 호출됨");
     const isAvailable = await Pedometer.isAvailableAsync();
     console.log(isAvailable)
     if (isAvailable) {
@@ -166,13 +162,14 @@ const Walk = () => {
       )
     }
   };
+
   function CalculateKillometer(step: number) {
     return ((currentStepCount * 0.4) / 1000).toFixed(2);
   }
   function CalculateCalorie(step: number) {
     return ((currentStepCount * 0.0336)).toFixed(1);
   }
-
+  
   return (
     <View className="flex-1">
       <ImageBackground
@@ -183,10 +180,10 @@ const Walk = () => {
         priority="high"
       >
         <SafeAreaView className='flex-1'>
-          <View className="px-2 flex-1">
+          <View className="flex-1 p-2 justify-between">
             {/* Steps Interface*/}
-            <View className="bg-white rounded-xl shadow-xl p-4 opacity-70">
-              <Text className="text-2xl font-medium text-black mb-2">오늘 걸음 수</Text>
+            <View className="bg-white rounded-xl shadow-2xl p-4 opacity-90">
+              <Text className="text-2xl font-Pretendard-Medium mb-2">오늘 걸음 수</Text>
               <View className='flex-row justify-between'>
                 <Text className="text-2xl mb-4">
                   👟{currentStepCount}
@@ -202,14 +199,14 @@ const Walk = () => {
                 <Animated.View
                   style={[
                     emojiPositionStyle,
-                    { position: 'absolute', top: -25, zIndex: 10 }
+                    { position: 'absolute', top: -15, zIndex: 10 }
                   ]}
                 >
-                  <Text className="text-2xl">👟</Text>
+                  <Text className="text-sm">📍</Text>
                 </Animated.View>
 
                 <Animated.View
-                  className="h-2 bg-blue-600 rounded-full"
+                  className="h-2 bg-yellow-400 rounded-full"
                   style={progressStyle}
                 />
               </View>
@@ -219,18 +216,6 @@ const Walk = () => {
               </View>
             </View>
 
-            {/* 권한 요청 버튼 */}
-
-            {permissionDenied && (
-              <CustomButton
-                backgroudColor="bg-blue-500"
-                onPress={requestPermission}
-                text="만보기 권한 허용하기"
-                
-              />
-            )}
-          </View>
-
           <View className="items-center justify-center">
             <LottieView
               autoPlay
@@ -239,9 +224,20 @@ const Walk = () => {
                 width: 200,
                 height: 200,
               }}
-              source={require('../../../assets/walking.json')}
+              source={require('../../../../assets/walking.json')}
             />
+            {/* 권한 요청 버튼 */}
+            {permissionDenied && (
+              <CustomButton
+                backgroudColor="bg-blue-500"
+                onPress={requestPermission}
+                text="만보기 권한 허용하기"
+              />
+            )}
           </View>
+
+          </View>
+
         </SafeAreaView>
       </ImageBackground>
     </View>

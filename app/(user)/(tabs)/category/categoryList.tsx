@@ -10,15 +10,15 @@ import {
 } from 'react-native';
 import  { Image } from 'expo-image';
 // API and Context
-import { useProducts } from '../../../components/ProductContext';
+import { useProducts } from '../../../../components/ProductContext';
 
 // components
-import { FormatPrice } from '../../../components/functions/FormatPrice';
-import { ErrorMessage } from '../../../components/ErrorMessage';
-import { LoadingSpinner } from '../../../components/LoadingSpinner';
+import { FormatPrice } from '../../../../components/functions/FormatPrice';
+import { ErrorMessage } from '../../../../components/ErrorMessage';
+import { LoadingSpinner } from '../../../../components/LoadingSpinner';
 
 //type
-import { Product } from '../../../types/Product';
+import { Product } from '../../../../types/Product';
 import Header from '@/components/Header';
 
 const CategoryList = () => {
@@ -41,7 +41,7 @@ const CategoryList = () => {
     <SafeAreaView className="h-full w-full">
       <View className="w-full h-full">
         {/* Category Title */}
-          <Header name={category} icon={<EvilIcons name="close" size={62} color="black" />} route="/(tabs)/category"/> 
+          <Header name={category} iconRight={<EvilIcons name="close" size={48} color="black" />} rightRoute="/(tabs)/category"/> 
         {/* Product List in ScrollView */}
         <ScrollView
           className="flex-1"
@@ -61,26 +61,26 @@ const CategoryList = () => {
                     product_detail_url: product.product_detail_url
                   }
                 })}>
-                <View className="bg-white p-4 mb-4 rounded-md shadow-lg border-[1px] border-gray-900">
+                <View className="bg-white p-4 mb-4 rounded-md shadow-lg">
                   <View className="flex flex-row items-center">
                     <Image
                       source={
                         product.image
                       }
                       style={{
-                        width: 80,
-                        height: 80,
+                        width: 90,
+                        height: 90,
                         marginRight: 16,
-                        borderRadius: 10,
+                        backgroundColor: "white",
+                        borderRadius: 15,
                         borderWidth: 1,
-                        borderColor: '#000000',
-                        backgroundColor: '#000000'
+                        borderColor: "#e8e8e8"
                       }}
                       placeholder="이미지 없음"
                     />
                     <View className="flex-1">
                       <Text
-                        className="text-xl font-Pretendard-Medium text-[#20284F]"
+                        className="text-lg font-Pretendard-Medium text-[#20284F]"
                         numberOfLines={2}
                         ellipsizeMode="tail">
                         {product.name}
@@ -91,7 +91,7 @@ const CategoryList = () => {
                             {FormatPrice(product.price)}
                           </Text>
                           <Text
-                            className="flex-1 text-gray-600"
+                            className="flex-1 text-gray-600 font-Pretendard-Light"
                             numberOfLines={1}
                             ellipsizeMode="tail">
                             {' '}

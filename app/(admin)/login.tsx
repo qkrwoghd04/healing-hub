@@ -14,11 +14,6 @@ const AdminLogin = () => {
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
-  const inputRef = useRef();
-
-  useEffect(() => {
-    console.log(inputRef);
-  })
 
   // 입력값 검증 함수
   const validateInputs = (): boolean => {
@@ -42,7 +37,7 @@ const AdminLogin = () => {
         await AsyncStorage.setItem('userToken', userData.token);
         await AsyncStorage.setItem('userRole', userData.role);
         await AsyncStorage.setItem('userName', userData.name);
-        router.push('/(admin)/home'); // 관리 페이지로 이동
+        router.push('/(admin)/(tabs)'); // 관리 페이지로 이동
       } else {
         Alert.alert('로그인 실패', '관리자 계정만 로그인할 수 있습니다.');
         throw new Error('관리자 계정이 아닙니다');
@@ -91,7 +86,7 @@ const AdminLogin = () => {
       {isLoading ? (
         <ActivityIndicator size="large" color="#007AFF" />
       ) : (
-        <CustomButton text="로그인" backgroudColor="bg-white" onPress={handleLogin}/>
+        <CustomButton text="로그인" backgroudColor="bg-[#20284F]" onPress={handleLogin}/>
       )}
     </View>
   );

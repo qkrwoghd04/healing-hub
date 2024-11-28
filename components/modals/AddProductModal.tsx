@@ -59,23 +59,21 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
       mediaTypes:  ['images'],
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      quality: 0.5,
     });
-  
-    console.log(image);
 
     if (!image.canceled) {
       setImage(image.assets[0].uri);
 
-      // 이미지 데이터를 formData에 추가
       setFormData(prev => ({
         ...prev,
         image: {
           uri: image.assets[0].uri,
           type: 'image/jpeg',
-          name: 'product.jpg'
+          name: 'product.jpg',
         }
       }));
+      setImage(image.assets[0].uri);
     }
   }
   

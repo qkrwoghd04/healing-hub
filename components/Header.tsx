@@ -1,31 +1,43 @@
 import React, { ReactNode } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 
 interface HearderProps {
   name: string;
-  icon?: ReactNode;
-  route?: Href;
+  iconRight?: ReactNode;
+  iconLeft?: ReactNode;
+  rightRoute?: Href;
+  leftRoute?: Href;
 }
 
-const Header: React.FC<HearderProps> = ({ name, icon, route }) => {
+const Header: React.FC<HearderProps> = ({ name,  iconRight, iconLeft, rightRoute , leftRoute }) => {
   const router = useRouter();
 
 
-  const handleNavigation = () => {
-    if (icon && route) {
-      router.push(route);
+  const handleNavigationRight = () => {
+    if (rightRoute) {
+      router.push(rightRoute);
     }
   };
 
+  const handleNavigationLeft = () => {
+    if (leftRoute) {
+      router.push(leftRoute);
+    }
+  }
+
 
   return (
-    <View className="relative w-full h-[7%] flex-row justify-center items-center mb-2">
-      <Text className="text-2xl font-black font-Pretendard-Medium">{name}</Text>
+    <View className="relative w-full h-[7%] flex-row justify-between items-center mb-2">
+      <Pressable onPress={handleNavigationLeft} className="w-1/5 pl-4">
+        {iconLeft}
+      </Pressable>
 
-      <TouchableOpacity onPress={handleNavigation} className="absolute right-5">
-        {icon}
-      </TouchableOpacity>
+      <Text className="text-2xl font-black font-Pretendard-Medium w-3/5 text-center">{name}</Text>
+
+      <Pressable onPress={handleNavigationRight} className="w-1/5 pl-8">
+          {iconRight}
+      </Pressable>
     </View>
   );
 };

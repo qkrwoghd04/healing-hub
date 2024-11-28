@@ -6,7 +6,7 @@ import { FormatPrice } from '../components/functions/FormatPrice';
 
 
 //Components
-import  DetailImage  from '../components/DetailImage'
+import DetailImage from '../components/DetailImage'
 
 const Modal = () => {
   console.log("모달 렌더링")
@@ -27,14 +27,13 @@ const Modal = () => {
         {/* Top Image */}
         <View className="w-full h-[35vh] flex justify-center items-center rounded-lg">
           <Image
-            source={image} 
+            source={image}
             contentFit="cover"
-            style={{ 
-              width: '100%', 
+            style={{
+              width: '100%',
               height: '100%',
-              borderRadius: 10,
               borderWidth: 1,
-              borderColor: '#000000',
+              borderColor: '#e8e8e8',
             }}
             transition={300}
             priority="high"
@@ -44,18 +43,16 @@ const Modal = () => {
         </View>
 
         {/* Product Info */}
-        <View className="flex-col justify-center items-start">
-          <View className="w-full flex-col justify-center items-start border-y-[1px] border-gray-300 p-2 rounded-xl">
-            <Text className="text-2xl font-Pretendard-Medium">{name}</Text>
-            <Text className="text-xl font-Pretendard-Medium text-gray-700">
-              {description}
-            </Text>
-            <Text className="text-2xl font-extrabold">{FormatPrice(price)}</Text>
-          </View>
 
-          {/* 긴 이미지 */}
-          <DetailImage uri={product_detail_url}/>
+        <View className="w-full flex-col justify-center items-start p-2 my-4 gap-2">
+          <Text className="text-2xl font-Pretendard-Medium">{name}</Text>
+          <Text className="text-xl font-Pretendard-Medium text-gray-700">
+            {description}
+          </Text>
+          <Text className="text-2xl font-extrabold">{FormatPrice(price)}</Text>
         </View>
+          {/* 긴 이미지 */}
+        <DetailImage uri={product_detail_url} />
       </ScrollView>
     </View>
   );

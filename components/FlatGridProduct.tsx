@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { FontAwesome5 } from '@expo/vector-icons';
 import { View, Text, ListRenderItem } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { Asset } from 'expo-asset'
@@ -49,12 +48,11 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
   ), [categoryImages, setName]);
 
   return (
-    <View className={`w-full ${height} bg-white rounded-2xl mb-2 shadow-xs`}>
+    <View className={`w-full ${height} bg-white mb-2 shadow-xs`}>
       {/* Title */}
       {title && (
-        <View className="flex-row justify-start items-center px-4 gap-x-2">
+        <View className="flex-row justify-start items-center px-4 pt-2 gap-x-2">
           <Text className="text-black text-2xl font-Pretendard-Medium">카테고리별</Text>
-          <FontAwesome5 name="capsules" size={24} color="black" />
         </View>
       )}
       {/* FlatGrid */}

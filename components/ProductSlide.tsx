@@ -31,7 +31,7 @@ const ProductSlide = React.memo<ProductSlideProps>(({ item }) => {
                 width: '100%',
                 height: '100%',
                 borderWidth: 1,
-                borderColor: '#000000',
+                borderColor: '#e8e8e8',
                 borderRadius: 12,
               }}
               contentFit="cover"
