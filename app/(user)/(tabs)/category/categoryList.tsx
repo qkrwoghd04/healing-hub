@@ -8,8 +8,8 @@ import { useProducts } from '../../../../components/ProductContext';
 
 // components
 import { FormatPrice } from '../../../../components/functions/FormatPrice';
-import { ErrorMessage } from '../../../../components/ErrorMessage';
-import { LoadingSpinner } from '../../../../components/LoadingSpinner';
+// import { ErrorMessage } from '../../../../components/ErrorMessage';
+// import { LoadingSpinner } from '../../../../components/LoadingSpinner';
 
 //type
 import { Product } from '../../../../types/Product';
@@ -17,19 +17,19 @@ import Header from '@/components/Header';
 
 const CategoryList = () => {
   const { category } = useLocalSearchParams<{ category: string }>();
-  const { products, loading, error } = useProducts();
+  const { products  } = useProducts();
   const filteredProducts = useMemo(
     () => products.filter((product: Product) => product.category === category),
     [products, category],
   );
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
+  // if (loading) {
+  //   return <LoadingSpinner />;
+  // }
 
-  if (error) {
-    return <ErrorMessage />;
-  }
+  // if (error) {
+  //   return <ErrorMessage />;
+  // }
 
   return (
     <SafeAreaView className="h-full w-full">
@@ -38,7 +38,7 @@ const CategoryList = () => {
         <Header
           name={category}
           iconRight={<EvilIcons name="close" size={48} color="black" />}
-          rightRoute="/(tabs)/category"
+          rightRoute="/(user)/(tabs)/category"
         />
         {/* Product List in ScrollView */}
         <ScrollView

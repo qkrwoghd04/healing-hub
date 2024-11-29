@@ -156,7 +156,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
             <View className="w-full h-1/4 flex flex-row justify-start items-center gap-x-2">
               <Pressable
                 className="flex justify-center items-center rounded-lg w-[30%] h-full border-[1.5px] border-gray-400"
-                onPress={pickImage}>
+                onPressOut={pickImage}>
                 {image ? (
                   <Image source={image} style={{ width: '100%', height: '100%' }} />
                 ) : (

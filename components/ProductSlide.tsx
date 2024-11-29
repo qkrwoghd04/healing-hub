@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, Pressable, Text } from 'react-native';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { Product } from '../types/Product';
@@ -12,7 +12,7 @@ interface ProductSlideProps {
 const ProductSlide = React.memo<ProductSlideProps>(({ item }) => {
   return (
     <View className="flex">
-      <TouchableOpacity
+      <Pressable
         onPress={() =>
           router.push({
             pathname: '/modal',
@@ -52,7 +52,7 @@ const ProductSlide = React.memo<ProductSlideProps>(({ item }) => {
             </Text>
           </View>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 });
