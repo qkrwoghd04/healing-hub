@@ -6,16 +6,24 @@ import { Product } from '@/types/Product'
 import { Image } from 'expo-image'
 
 import { FormatPrice } from './functions/FormatPrice';
+import  ProductModal  from '@/components/modals/AdminProductModal'
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { products, removeProduct } = useProducts();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product | undefined>(undefined);
 
   const filteredProducts = () => {
     if (!searchQuery) return [];
     return products.filter((product: Product) =>
       product.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+  };
+
+  const handleEditProduct = (product: Product) => {
+    setEditingProduct(product);
+    setModalVisible(true);
   };
 
   const confirmRemoveProduct = (id: string) => {
@@ -39,7 +47,7 @@ const SearchBar = () => {
       Alert.alert('최소 개수 초과', '최소 1개의 상품은 존재해야 합니다.');
     }
   };
-
+  
   return (
     <View className='flex-1 relative'>
       <View className="flex-row p-1 mx-2 justify-center items-center rounded-md z-10 h-[50px]">
@@ -55,54 +63,55 @@ const SearchBar = () => {
         />
       </View>
 
-      {searchQuery.length > 0 && (
-        <View className="absolute top-[50px] z-20 w-full bg-white pl-6">
-          <ScrollView>
-            {filteredProducts().length > 0 ? (
-              filteredProducts().map((product: Product) => (
-                <View
-                  key={product.id}
-                  className="w-full h-20 flex flex-row justify-start items-center my-1 border-b-[0.5px] border-gray-300">
-                  {/* Product Image */}
-                  <View className="w-[15%] h-full mr-2">
-                    <Image
-                      source={{ uri: product.image }}
-                      style={{
-                        width: "100%",
-                        height: "100%"
-                      }}
-                    />
-                  </View>
 
-                  {/* Product Info */}
-                  <View className="w-[70%] h-full flex justify-center items-start border-l-[0.5px] border-gray-700 px-2">
-                    <Text className="font-Pretendard-Medium mb-2">{product.name}</Text>
-                    <Text>{FormatPrice(product.price)}</Text>
-                  </View>
-
-                  {/* Delete Button */}
-                  <Pressable onPress={() => confirmRemoveProduct(product.id)}>
-                    <Entypo name="cross" size={30} color="gray" />
-                  </Pressable>
+      <View className="absolute top-[50px] z-20 w-full bg-white pl-6">
+        <ScrollView>
+          {filteredProducts().map((product: Product) => (
+            <View
+              key={product.id}
+              className="w-full h-20 flex flex-row justify-start items-center my-1 border-b-[0.5px] border-gray-300">
+              <Pressable onPress={() => handleEditProduct(product)} className='w-full h-20 flex-row justify-start items-center'>
+                {/* Product Image */}
+                <View className="w-[15%] h-full mr-2">
+                  <Image
+                    source={{ uri: product.image }}
+                    style={{
+                      width: "100%",
+                      height: "100%"
+                    }}
+                  />
                 </View>
-              ))
-            ) : (
-              <View className="w-full flex justify-center items-center p-4">
-                <Text className="text-gray-500">검색 결과가 없습니다.</Text>
-              </View>
-            )}
-          </ScrollView>
-        </View>
-      )}
+
+                {/* Product Info */}
+                <View className="w-[70%] h-full flex justify-center items-start border-l-[0.5px] border-gray-700 px-2">
+                  <Text className="font-Pretendard-Medium mb-2">{product.name}</Text>
+                  <Text>{FormatPrice(product.price)}</Text>
+                </View>
+              </Pressable>
+
+                {/* Delete Button */}
+                <Pressable onPress={() => confirmRemoveProduct(product.id)}>
+                  <Entypo name="cross" size={30} color="gray" />
+                </Pressable>
+            </View>
+          ))
+          }
+        </ScrollView>
+      </View>
 
       {/* 기존 컨텐츠 영역 */}
       <View className="w-full h-full border-b-[1px] border-gray-400">
         <ScrollView className="w-full h-full mx-2">
-          <View className='w-full h-full'> 
+          <View className='w-full h-full'>
             <Text className='text-2xl'>안녕하세요</Text>
           </View>
         </ScrollView>
       </View>
+      <ProductModal 
+        modalVisible={modalVisible} 
+        setModalVisible={setModalVisible}
+        editingProduct={editingProduct}
+      />
     </View>
   );
 };

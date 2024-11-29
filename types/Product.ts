@@ -22,7 +22,7 @@ export type Category =
   | '오메가3 및 혈관 건강'
   | '관절 건강'
   | '면역 강화'
-  | '기타건강 보조제';
+  | '기타 건강 보조제';
 
 export type ProductForm = Pick<Product, "category" | "description" | "name" | "popularity" | "price" | "image">
 

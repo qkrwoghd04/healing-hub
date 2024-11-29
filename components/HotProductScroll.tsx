@@ -3,18 +3,17 @@ import { Animated } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { View, Text, ScrollView } from 'react-native';
 // Types
-import { Product } from '../types/Product';
+// 
+import { useProducts } from '@/components/ProductContext'
 
 // Components
 import ProductSlide from './ProductSlide';
 import { sortProductsByPopularity } from './functions/sortProductsByPopularity';
 
-interface HotProductScrollProps {
-  products: Product[];
-}
 
-const HotProductScroll: React.FC<HotProductScrollProps> = ({ products }) => {
+const HotProductScroll= () => {
   console.log("[Hot Product] Rendered");
+  const { products } = useProducts();
   const sortProductsByPopularityCallback = useCallback(sortProductsByPopularity, [products]);
   const filteredProducts = sortProductsByPopularityCallback(products).slice(0, 10);
 

@@ -82,20 +82,21 @@ export const addProduct = async (productData: ProductForm): Promise<Product> => 
     return response.data;
   } catch (error) {
     console.log(formData)
-    console.error('[api.ts] Error adding product:', error);
+    console.error('Error adding product:', error);
     throw error;
   }
 };
 
-// export const updateProduct = async (id: string, productData: ProductFormData): Promise<Product> => {
-//   try {
-//     const response = await URL.put<Product>(`/products/${id}`, productData);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error updating product:', error);
-//     throw error;
-//   }
-// };
+export const patchProduct = async (id: string, productData: ProductForm): Promise<Product> => {
+  try {
+    const response = await URL.patch<Product>(`/products/${id}`, productData);
+    return response.data;
+  } catch (error) {
+    console.log('Response : ' , productData)
+    console.error('Error updating product:', error);
+    throw error;
+  }
+};
 
 export const deleteProduct = async (id: string): Promise<void> => {
   try {

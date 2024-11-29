@@ -10,7 +10,7 @@ import { router } from 'expo-router'
 
 // Components
 import Header from '../../../components/Header';
-import AddProductModal from '../../../components/modals/AddProductModal';
+import AddProductModal from '../../../components/modals/AdminProductModal';
 import { FlatGrid } from 'react-native-super-grid';
 
 const items = [

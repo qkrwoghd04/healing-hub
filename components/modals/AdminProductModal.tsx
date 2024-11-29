@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import { Keyboard, StyleSheet, Alert } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import * as ImagePicker from 'expo-image-picker';
 import { useProducts } from '../ProductContext';
-import { ProductForm } from '../../types/Product'
+import { ProductForm, Product } from '../../types/Product'
 
 interface DropdownItem {
   label: string;
@@ -39,24 +39,89 @@ const CATEGORY_OPTIONS: DropdownItem[] = [
 interface ProductModalProps {
   modalVisible: boolean;
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  editingProduct?: Product;
 }
 
-const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisible }) => {
-  const { addNewProduct } = useProducts();
+const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisible, editingProduct }) => {
+  const { addNewProduct, updateProduct } = useProducts();
   const [formData, setFormData] = useState<ProductForm>({
-    name: '',
-    price: '',
-    popularity: 'Low', 
-    category: '기타건강 보조제', 
-    description: '',
-    image: '',
+    name: editingProduct?.name || '',
+    price: editingProduct ? editingProduct.price.toString() : '',
+    popularity: editingProduct?.popularity || 'Low',
+    category: editingProduct?.category || '기타 건강 보조제',
+    description: editingProduct?.description || '',
+    image: editingProduct?.image || '',
   });
-  
-  const [image, setImage] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (editingProduct) {
+      setFormData({
+        name: editingProduct.name,
+        price: editingProduct.price.toString(),
+        popularity: editingProduct.popularity,
+        category: editingProduct.category,
+        description: editingProduct.description,
+        image: editingProduct.image,
+      });
+      setImage(editingProduct.image);
+    } else {
+      // 새로운 상품 추가 모드일 때 폼 초기화
+      resetForm();
+    }
+  }, [editingProduct]);
+
+  const [image, setImage] = useState<string | undefined>(editingProduct?.image);
+
+  const isEditMode = !!editingProduct;
+
+  const resetForm = useCallback(() => {
+    setFormData({
+      name: '',
+      price: '',
+      popularity: 'Low', // 기본값
+      category: '기타 건강 보조제', // 기본값
+      description: '',
+      image: '',
+    });
+    setImage('');
+  }, []);
+
+  const handleSubmit = useCallback(async () => {
+    if (!formData.name || !formData.price || !formData.image || !formData.description) {
+      Alert.alert('입력 오류', '모든 필드를 입력해주세요.');
+      return;
+    }
+
+    try {
+      if (isEditMode && editingProduct) {
+        // 수정 모드 - id와 함께 데이터 전달
+        await updateProduct(editingProduct.id, {
+          name: formData.name,
+          price: formData.price,
+          popularity: formData.popularity,
+          category: formData.category,
+          description: formData.description,
+          image: formData.image
+        });
+        Alert.alert('성공', '상품이 수정되었습니다.');
+      } else {
+        // 추가 모드
+        await addNewProduct(formData);
+        Alert.alert('성공', '새 상품이 추가되었습니다.');
+      }
+
+      resetForm();
+      setModalVisible(false);
+    } catch (error) {
+      console.error('Error saving product:', error);
+      Alert.alert('오류', '상품 저장에 실패했습니다.');
+    }
+  }, [formData, addNewProduct, updateProduct, isEditMode, editingProduct, resetForm, setModalVisible]);
+
 
   const pickImage = async () => {
     const image = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes:  ['images'],
+      mediaTypes: ['images'],
       allowsEditing: true,
       aspect: [4, 3],
       quality: 0.5,
@@ -69,43 +134,29 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
       handleInputChange('image', uri);
     }
   }
-  
-
-  const resetForm = useCallback(() => {
-    setFormData({
-      name: '',
-      price: '',
-      popularity: 'Low', // 기본값
-      category: '기타건강 보조제', // 기본값
-      description: '',
-      image: '',
-    });
-    setImage('');
-  }, []);
-  
 
   const handleInputChange = useCallback((field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   }, []);
 
-  const addProduct = useCallback(async () => {
-    if (!formData.name || !formData.price || !formData.image || !formData.description) {
-      Alert.alert('입력 오류', '모든 필드를 입력해주세요.');
-      return;
-    }
-  
-    try {
-      await addNewProduct(formData); // ProductContext에서 제공하는 함수 사용
-      resetForm();
-      setModalVisible(false);
-      Alert.alert('성공', '새 상품이 추가되었습니다.');
-    } catch (error) {
-      console.error('Error adding product:', error);
-      Alert.alert('오류', '상품 추가에 실패했습니다.');
-    }
-  }, [formData, addNewProduct, resetForm, setModalVisible]);
-  
-  
+  // const addProduct = useCallback(async () => {
+  //   if (!formData.name || !formData.price || !formData.image || !formData.description) {
+  //     Alert.alert('입력 오류', '모든 필드를 입력해주세요.');
+  //     return;
+  //   }
+
+  //   try {
+  //     await addNewProduct(formData); // ProductContext에서 제공하는 함수 사용
+  //     resetForm();
+  //     setModalVisible(false);
+  //     Alert.alert('성공', '새 상품이 추가되었습니다.');
+  //   } catch (error) {
+  //     console.error('Error adding product:', error);
+  //     Alert.alert('오류', '상품 추가에 실패했습니다.');
+  //   }
+  // }, [formData, addNewProduct, resetForm, setModalVisible]);
+
+
   return (
     <Modal
       animationType="slide"
@@ -123,7 +174,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
                 onPress={pickImage}
               >
                 {image ? (
-                  <Image source={image} style={{width: '100%', height: '100%'}} />
+                  <Image source={image} style={{ width: '100%', height: '100%' }} />
                 ) : (
                   <Text className="text-[#847958] text-[16px] font-Pretendard-Medium">
                     이미지 선택
@@ -195,9 +246,11 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
             <View className="flex flex-row justify-between items-center w-full h-[10%]">
               <Pressable
                 className="bg-white flex-1 h-[90%] justify-center items-center rounded-md mr-1 border-[2px] border-gray-800"
-                onPress={addProduct}
+                onPress={handleSubmit}
               >
-                <Text className="text-black text-xl font-Pretendard-Medium">추가</Text>
+                <Text className="text-black text-xl font-Pretendard-Medium">
+                  {isEditMode ? '수정' : '추가'}
+                </Text>
               </Pressable>
               <Pressable
                 className="bg-red-700 flex-1 h-[90%] justify-center items-center ml-1 rounded-lg"

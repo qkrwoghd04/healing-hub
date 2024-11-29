@@ -7,6 +7,7 @@ import {
   ScanCommand,
   PutCommand,
   DeleteCommand,
+  UpdateCommand,
 } from '@aws-sdk/lib-dynamodb';
 import { v4 as uuidv4 } from 'uuid';
 import multer from 'multer';
@@ -111,6 +112,62 @@ app.delete('/products/:id', async (req, res) => {
   } catch (error) {
     console.error('Error deleting product:', error);
     res.status(500).json({ error: 'Could not delete product' });
+  }
+});
+
+// 상품 업데이트
+app.patch('/products/:id', upload.single('image'), async (req, res) => {
+  const { id } = req.params;
+  const { name, price, category, popularity, description } = req.body;
+
+  try {
+    const updateFields = {};
+    if (name) updateFields.name = name;
+    if (price) updateFields.price = price;
+    if (category) updateFields.category = category;
+    if (popularity) updateFields.popularity = popularity;
+    if (description) updateFields.description = description;
+
+    // 이미지 업데이트 로직 수정
+    if (req.file) {
+      const imageKey = `${id}.jpg`;
+      
+      // 기존 이미지 삭제
+      await s3Client.send(
+        new DeleteObjectCommand({
+          Bucket: S3_BUCKET_NAME,
+          Key: imageKey,
+        })
+      );
+
+      // 새 이미지 업로드
+      await s3Client.send(
+        new PutObjectCommand({
+          Bucket: S3_BUCKET_NAME,
+          Key: imageKey,
+          Body: req.file.buffer,
+          ContentType: req.file.mimetype,
+        })
+      );
+
+      updateFields.image = `https://${S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${imageKey}`;
+    }
+
+    const params = {
+      TableName: DYNAMODB_TABLE_NAME,
+      Key: { id },
+      UpdateExpression: 'SET ' + Object.keys(updateFields).map((key, index) => `#${key} = :${key}`).join(', '),
+      ExpressionAttributeNames: Object.keys(updateFields).reduce((acc, key) => ({...acc, [`#${key}`]: key}), {}),
+      ExpressionAttributeValues: Object.keys(updateFields).reduce((acc, key) => ({...acc, [`:${key}`]: updateFields[key]}), {}),
+      ReturnValues: 'ALL_NEW'
+    };
+
+    const result = await ddbDocClient.send(new UpdateCommand(params));
+
+    res.json(result.Attributes);
+  } catch (error) {
+    console.error('Error updating product:', error);
+    res.status(500).json({ error: 'Could not update product' });
   }
 });
 
