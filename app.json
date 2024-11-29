@@ -12,7 +12,7 @@
     },
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/splash_icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#20284F"
     },
@@ -34,14 +34,6 @@
     "plugins": [
       "expo-router",
       [
-        "@react-native-seoul/kakao-login",
-        {
-          "kakaoAppKey": "e6b1b3f5e6e616b6f75e926f9514ba8e",
-          "overrideKakaoSDKVersion": "2.11.2",
-          "kotlinVersion": "1.9.0"
-        }
-      ],
-      [
         "expo-asset",
         {
           "assets": [
@@ -60,18 +52,16 @@
         "expo-build-properties",
         {
           "android": {
-            "enableProguardInReleaseBuilds": true,
-            "extraMavenRepos": ["https://devrepo.kakao.com/nexus/content/groups/public/"]
+            "enableProguardInReleaseBuilds": true
           }
         }
       ],
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash.png",
+          "image": "./assets/images/splash_icon.png",
           "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "resizeMode": "contain"
         }
       ],
       "expo-build-properties"
