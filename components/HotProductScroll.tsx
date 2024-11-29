@@ -3,16 +3,15 @@ import { Animated } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { View, Text, ScrollView } from 'react-native';
 // Types
-// 
-import { useProducts } from '@/components/ProductContext'
+//
+import { useProducts } from '@/components/ProductContext';
 
 // Components
 import ProductSlide from './ProductSlide';
 import { sortProductsByPopularity } from './functions/sortProductsByPopularity';
 
-
-const HotProductScroll= () => {
-  console.log("[Hot Product] Rendered");
+const HotProductScroll = () => {
+  console.log('[Hot Product] Rendered');
   const { products } = useProducts();
   const sortProductsByPopularityCallback = useCallback(sortProductsByPopularity, [products]);
   const filteredProducts = sortProductsByPopularityCallback(products).slice(0, 10);
@@ -38,36 +37,33 @@ const HotProductScroll= () => {
 
   return (
     <View className="w-full h-[33%] bg-white rounded-t-2xl mb-2 shadow-2xl">
-        {/* Title Content */}
-        <View className="flex-row justify-start items-center px-3 py-2">
-          <Animated.Text
-            style={[
-              { opacity }, // Apply the animated opacity value
-              {
-                fontSize: 24,
-                fontWeight: 'medium',
-                marginRight: 8,
-                color: '#FFC300',
-              },
-            ]}>
-            인기 상품
-          </Animated.Text>
-          <FontAwesome name="thumbs-o-up" size={24} color="black" style={{marginTop: 5}}/>
-        </View>
-        {/* 컨텐츠 */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 12, gap: 20 }}>
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <ProductSlide key={product.id} item={product} />
-            ))
-          ) : (
-            <Text>No products available</Text>
-          )}
-        </ScrollView>
-
+      {/* Title Content */}
+      <View className="flex-row justify-start items-center px-3 py-2">
+        <Animated.Text
+          style={[
+            { opacity }, // Apply the animated opacity value
+            {
+              fontSize: 24,
+              fontWeight: 'medium',
+              marginRight: 8,
+              color: '#FFC300',
+            },
+          ]}>
+          인기 상품
+        </Animated.Text>
+        <FontAwesome name="thumbs-o-up" size={24} color="black" style={{ marginTop: 5 }} />
+      </View>
+      {/* 컨텐츠 */}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 12, gap: 20 }}>
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => <ProductSlide key={product.id} item={product} />)
+        ) : (
+          <Text>No products available</Text>
+        )}
+      </ScrollView>
     </View>
   );
 };

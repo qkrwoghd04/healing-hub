@@ -6,11 +6,11 @@ export default function CategoryLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen
-          name="categoryList"
-          options={{
-            headerShown: false
-          }}
-        />
+        name="categoryList"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 }

@@ -7,11 +7,9 @@ interface ButtonProps {
   text: string;
 }
 
-const CustomButton:React.FC<ButtonProps> = ({ backgroudColor
-  , onPress, text }) => {
-
+const CustomButton: React.FC<ButtonProps> = ({ backgroudColor, onPress, text }) => {
   return (
-    <View className='relative w-full h-[70px] flex items-center'>
+    <View className="relative w-full h-[70px] flex items-center">
       <Pressable
         className={`w-full h-full flex justify-center items-center rounded-2xl  ${backgroudColor}`}
         onPress={onPress}>

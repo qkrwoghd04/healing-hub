@@ -3,10 +3,9 @@ import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { ProductProvider } from '../components/ProductContext';
 import { useEffect } from 'react';
-import "../global.css"
+import '../global.css';
 
 SplashScreen.preventAutoHideAsync();
-
 
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
@@ -33,12 +32,12 @@ const RootLayout = () => {
             presentation: 'modal',
             headerShown: true,
             headerTitle: '상품 정보',
-            headerTitleAlign: 'center'
+            headerTitleAlign: 'center',
           }}
         />
       </Stack>
     </ProductProvider>
   );
-}
+};
 
 export default RootLayout;

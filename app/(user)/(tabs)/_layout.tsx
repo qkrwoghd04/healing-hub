@@ -59,9 +59,7 @@ export default function TabsLayout() {
         options={{
           title: '내 정보',
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="user" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) => <FontAwesome5 name="user" size={size} color={color} />,
         }}
       />
       <Tabs.Screen

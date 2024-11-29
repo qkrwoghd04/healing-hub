@@ -11,7 +11,6 @@ import FlatGridProduct from '../../../components/FlatGridProduct';
 // API
 
 const HomeScreen = () => {
-
   // if (loading) {
   //   return <LoadingSpinner color="#0066cc" />;
   // }
@@ -26,25 +25,24 @@ const HomeScreen = () => {
   //   );
   // }
   console.log('[Main Home] Rendered');
-  
-  function makePhoneCall (){
+
+  function makePhoneCall() {
     Linking.openURL('tel:010-4040-1669');
-  };
+  }
   return (
     <SafeAreaView className="flex-1 relative">
       <View className="flex-1">
         <Header
           name="힐링 허브"
           iconRight={<MaterialIcons name="manage-accounts" size={48} color="black" />}
-          iconLeft={<AntDesign name="search1" size={28} color="black"/>}
+          iconLeft={<AntDesign name="search1" size={28} color="black" />}
           leftRoute="/search"
           rightRoute="/(admin)/login"
         />
         <HotProductScroll />
-        <FlatGridProduct dimension={80} setName={true} title={true} height='h-[45%]'/>
-        <View className='px-2'>
-          <CallButton onPress={makePhoneCall} backgroudColor="bg-[#20284F]" text="매장 주문"/>  
-
+        <FlatGridProduct dimension={80} setName={true} title={true} height="h-[45%]" />
+        <View className="px-2">
+          <CallButton onPress={makePhoneCall} backgroudColor="bg-[#20284F]" text="매장 주문" />
         </View>
       </View>
     </SafeAreaView>

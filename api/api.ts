@@ -59,17 +59,17 @@ export const addProduct = async (productData: ProductForm): Promise<Product> => 
     formData.append('category', productData.category);
     formData.append('description', productData.description);
 
-    if(productData.image) {
+    if (productData.image) {
       const uri = productData.image.split('.');
-      console.log(uri)
+      console.log(uri);
       const fileType = uri[uri.length - 1];
 
       const file = {
         uri: productData.image,
         name: `${productData.name}.${fileType}`,
-        type: `'image/${fileType}`
-      }
-      console.log(file)
+        type: `'image/${fileType}`,
+      };
+      console.log(file);
       formData.append('image', file as any);
     }
 
@@ -78,10 +78,10 @@ export const addProduct = async (productData: ProductForm): Promise<Product> => 
         'Content-Type': 'multipart/form-data',
       },
     });
-    
+
     return response.data;
   } catch (error) {
-    console.log(formData)
+    console.log(formData);
     console.error('Error adding product:', error);
     throw error;
   }
@@ -92,7 +92,7 @@ export const patchProduct = async (id: string, productData: ProductForm): Promis
     const response = await URL.patch<Product>(`/products/${id}`, productData);
     return response.data;
   } catch (error) {
-    console.log('Response : ' , productData)
+    console.log('Response : ', productData);
     console.error('Error updating product:', error);
     throw error;
   }

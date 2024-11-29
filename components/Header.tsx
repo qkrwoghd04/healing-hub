@@ -10,9 +10,8 @@ interface HearderProps {
   leftRoute?: Href;
 }
 
-const Header: React.FC<HearderProps> = ({ name,  iconRight, iconLeft, rightRoute , leftRoute }) => {
+const Header: React.FC<HearderProps> = ({ name, iconRight, iconLeft, rightRoute, leftRoute }) => {
   const router = useRouter();
-
 
   const handleNavigationRight = () => {
     if (rightRoute) {
@@ -24,8 +23,7 @@ const Header: React.FC<HearderProps> = ({ name,  iconRight, iconLeft, rightRoute
     if (leftRoute) {
       router.push(leftRoute);
     }
-  }
-
+  };
 
   return (
     <View className="relative w-full h-[7%] flex-row justify-between items-center mb-2">
@@ -36,7 +34,7 @@ const Header: React.FC<HearderProps> = ({ name,  iconRight, iconLeft, rightRoute
       <Text className="text-2xl font-black font-Pretendard-Medium w-3/5 text-center">{name}</Text>
 
       <Pressable onPress={handleNavigationRight} className="w-1/5 pl-8">
-          {iconRight}
+        {iconRight}
       </Pressable>
     </View>
   );

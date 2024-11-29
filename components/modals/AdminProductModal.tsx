@@ -1,18 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import {
-  View,
-  Text,
-  Modal,
-  TextInput,
-  TouchableWithoutFeedback,
-  Pressable,
-} from 'react-native';
-import { Image } from 'expo-image'
+import { View, Text, Modal, TextInput, TouchableWithoutFeedback, Pressable } from 'react-native';
+import { Image } from 'expo-image';
 import { Keyboard, StyleSheet, Alert } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import * as ImagePicker from 'expo-image-picker';
 import { useProducts } from '../ProductContext';
-import { ProductForm, Product } from '../../types/Product'
+import { ProductForm, Product } from '../../types/Product';
 
 interface DropdownItem {
   label: string;
@@ -42,7 +35,11 @@ interface ProductModalProps {
   editingProduct?: Product;
 }
 
-const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisible, editingProduct }) => {
+const ProductModal: React.FC<ProductModalProps> = ({
+  modalVisible,
+  setModalVisible,
+  editingProduct,
+}) => {
   const { addNewProduct, updateProduct } = useProducts();
   const [formData, setFormData] = useState<ProductForm>({
     name: editingProduct?.name || '',
@@ -101,7 +98,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
           popularity: formData.popularity,
           category: formData.category,
           description: formData.description,
-          image: formData.image
+          image: formData.image,
         });
         Alert.alert('성공', '상품이 수정되었습니다.');
       } else {
@@ -116,8 +113,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
       console.error('Error saving product:', error);
       Alert.alert('오류', '상품 저장에 실패했습니다.');
     }
-  }, [formData, addNewProduct, updateProduct, isEditMode, editingProduct, resetForm, setModalVisible]);
-
+  }, [
+    formData,
+    addNewProduct,
+    updateProduct,
+    isEditMode,
+    editingProduct,
+    resetForm,
+    setModalVisible,
+  ]);
 
   const pickImage = async () => {
     const image = await ImagePicker.launchImageLibraryAsync({
@@ -133,37 +137,18 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
       setImage(uri);
       handleInputChange('image', uri);
     }
-  }
+  };
 
   const handleInputChange = useCallback((field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   }, []);
-
-  // const addProduct = useCallback(async () => {
-  //   if (!formData.name || !formData.price || !formData.image || !formData.description) {
-  //     Alert.alert('입력 오류', '모든 필드를 입력해주세요.');
-  //     return;
-  //   }
-
-  //   try {
-  //     await addNewProduct(formData); // ProductContext에서 제공하는 함수 사용
-  //     resetForm();
-  //     setModalVisible(false);
-  //     Alert.alert('성공', '새 상품이 추가되었습니다.');
-  //   } catch (error) {
-  //     console.error('Error adding product:', error);
-  //     Alert.alert('오류', '상품 추가에 실패했습니다.');
-  //   }
-  // }, [formData, addNewProduct, resetForm, setModalVisible]);
-
 
   return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={modalVisible}
-      onRequestClose={() => setModalVisible(false)}
-    >
+      onRequestClose={() => setModalVisible(false)}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View className="flex-1 justify-center items-center bg-black/60">
           <View className="bg-white rounded-lg w-[90%] h-[60%] p-4 flex flex-col justify-between items-center">
@@ -171,8 +156,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
             <View className="w-full h-1/4 flex flex-row justify-start items-center gap-x-2">
               <Pressable
                 className="flex justify-center items-center rounded-lg w-[30%] h-full border-[1.5px] border-gray-400"
-                onPress={pickImage}
-              >
+                onPress={pickImage}>
                 {image ? (
                   <Image source={image} style={{ width: '100%', height: '100%' }} />
                 ) : (
@@ -246,16 +230,14 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
             <View className="flex flex-row justify-between items-center w-full h-[10%]">
               <Pressable
                 className="bg-white flex-1 h-[90%] justify-center items-center rounded-md mr-1 border-[2px] border-gray-800"
-                onPress={handleSubmit}
-              >
+                onPress={handleSubmit}>
                 <Text className="text-black text-xl font-Pretendard-Medium">
                   {isEditMode ? '수정' : '추가'}
                 </Text>
               </Pressable>
               <Pressable
                 className="bg-red-700 flex-1 h-[90%] justify-center items-center ml-1 rounded-lg"
-                onPress={() => setModalVisible(false)}
-              >
+                onPress={() => setModalVisible(false)}>
                 <Text className="text-white text-xl font-Pretendard-Medium">취소</Text>
               </Pressable>
             </View>

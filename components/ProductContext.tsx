@@ -1,20 +1,30 @@
-import React, { createContext, useState, useContext, useEffect, useCallback, ReactNode } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  useCallback,
+  ReactNode,
+} from 'react';
 import { fetchProducts, addProduct, deleteProduct, patchProduct } from '../api/api';
 import { Product, ProductForm } from '@/types/Product';
 
-const ProductContext = createContext<{
-  products: Product[];
-  addNewProduct: (productData: ProductForm) => Promise<Product>;
-  removeProduct: (id: string) => Promise<void>;
-  updateProduct: (id: string, productData: ProductForm) => Promise<Product>;
-  refreshProducts: () => Promise<void>;
-} | undefined>(undefined);
+const ProductContext = createContext<
+  | {
+      products: Product[];
+      addNewProduct: (productData: ProductForm) => Promise<Product>;
+      removeProduct: (id: string) => Promise<void>;
+      updateProduct: (id: string, productData: ProductForm) => Promise<Product>;
+      refreshProducts: () => Promise<void>;
+    }
+  | undefined
+>(undefined);
 
 interface ProductProviderProps {
   children: ReactNode;
 }
 
-export const ProductProvider:React.FC<ProductProviderProps> = ({ children }) => {
+export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   // 상품 불러오기
@@ -27,14 +37,12 @@ export const ProductProvider:React.FC<ProductProviderProps> = ({ children }) => 
     loadProducts();
   }, [loadProducts]);
 
-
   // 상품 추가
   const addNewProduct = useCallback(async (productData: ProductForm) => {
     const newProduct = await addProduct(productData);
     setProducts((prev) => [...prev, newProduct]);
     return newProduct;
   }, []);
-
 
   // 상품 삭제
   const removeProduct = useCallback(async (id: string) => {
@@ -45,11 +53,7 @@ export const ProductProvider:React.FC<ProductProviderProps> = ({ children }) => 
   // 상품 업데이트
   const updateProduct = useCallback(async (id: string, productData: ProductForm) => {
     const updatedProduct = await patchProduct(id, productData);
-    setProducts((prev) => 
-      prev.map((product) => 
-        product.id === id ? updatedProduct : product
-      )
-    );
+    setProducts((prev) => prev.map((product) => (product.id === id ? updatedProduct : product)));
     return updatedProduct;
   }, []);
 
@@ -62,7 +66,7 @@ export const ProductProvider:React.FC<ProductProviderProps> = ({ children }) => 
     products,
     addNewProduct,
     removeProduct,
-    updateProduct, 
+    updateProduct,
     refreshProducts,
   };
 

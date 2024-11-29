@@ -1,26 +1,25 @@
 import React from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { View, Text, ScrollView } from 'react-native';
-import { Image } from 'expo-image'
+import { Image } from 'expo-image';
 import { FormatPrice } from '../components/functions/FormatPrice';
 
-
 //Components
-import DetailImage from '../components/DetailImage'
+import DetailImage from '../components/DetailImage';
 
 const Modal = () => {
-  console.log("모달 렌더링")
+  console.log('모달 렌더링');
   const { id, name, price, image, description, product_detail_url } = useLocalSearchParams<{
     id: string;
-    name: string,
-    price: string,
-    image: string,
-    description: string,
-    product_detail_url: string,
+    name: string;
+    price: string;
+    image: string;
+    description: string;
+    product_detail_url: string;
   }>();
 
   if (!id) return null;
-  console.log(image)
+  console.log(image);
 
   return (
     <View className="relative w-full h-full bg-white">
@@ -38,21 +37,17 @@ const Modal = () => {
             }}
             transition={300}
             priority="high"
-            cachePolicy="memory-disk"
-          >
-          </Image>
+            cachePolicy="memory-disk"></Image>
         </View>
 
         {/* Product Info */}
 
         <View className="w-full flex-col justify-center items-start p-2 my-4 gap-2">
           <Text className="text-2xl font-Pretendard-Medium">{name}</Text>
-          <Text className="text-xl font-Pretendard-Medium text-gray-700">
-            {description}
-          </Text>
+          <Text className="text-xl font-Pretendard-Medium text-gray-700">{description}</Text>
           <Text className="text-2xl font-extrabold">{FormatPrice(price)}</Text>
         </View>
-          {/* 긴 이미지 */}
+        {/* 긴 이미지 */}
         <DetailImage uri={product_detail_url} />
       </ScrollView>
     </View>

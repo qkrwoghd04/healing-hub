@@ -21,7 +21,9 @@ export default function AdminTabsLayout() {
         options={{
           title: '상품 관리',
           headerShown: false,
-          tabBarIcon: ({ color, size }) => <MaterialIcons name="manage-search" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="manage-search" size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -37,7 +39,9 @@ export default function AdminTabsLayout() {
         options={{
           title: '글 관리',
           headerShown: false,
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="post-outline" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="post-outline" size={size} color={color} />
+          ),
         }}
       />
     </Tabs>

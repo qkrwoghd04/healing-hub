@@ -1,20 +1,16 @@
 import React, { memo } from 'react';
 import { View, Text, ScrollView, SafeAreaView } from 'react-native';
-import { Image } from 'expo-image'
-
+import { Image } from 'expo-image';
 
 const Profile = () => {
-  console.log("[Profile] Rendered");
+  console.log('[Profile] Rendered');
 
   return (
     <SafeAreaView className="w-full h-full flex flex-col justify-start items-center relative bg-white">
       <View className="w-full h-full flex flex-col justify-center items-center mt-10">
         {/* Shop Image */}
         <View className="w-full h-[35%] relative px-2">
-          <Image
-            source="shop"
-            style={{ width: "100%", height: "100%", borderRadius: 10 }}
-          />
+          <Image source="shop" style={{ width: '100%', height: '100%', borderRadius: 10 }} />
         </View>
         {/* Shop Info */}
         <View className="flex justify-center items-center w-full h-[70%] relative">

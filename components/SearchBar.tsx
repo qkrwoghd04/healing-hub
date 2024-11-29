@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { TextInput, View, Alert, ScrollView, Pressable, Text } from 'react-native';
 import { Feather, Entypo } from '@expo/vector-icons';
 import { useProducts } from './ProductContext';
-import { Product } from '@/types/Product'
-import { Image } from 'expo-image'
+import { Product } from '@/types/Product';
+import { Image } from 'expo-image';
 
 import { FormatPrice } from './functions/FormatPrice';
-import  ProductModal  from '@/components/modals/AdminProductModal'
+import ProductModal from '@/components/modals/AdminProductModal';
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -17,7 +17,7 @@ const SearchBar = () => {
   const filteredProducts = () => {
     if (!searchQuery) return [];
     return products.filter((product: Product) =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   };
 
@@ -47,9 +47,9 @@ const SearchBar = () => {
       Alert.alert('최소 개수 초과', '최소 1개의 상품은 존재해야 합니다.');
     }
   };
-  
+
   return (
-    <View className='flex-1 relative'>
+    <View className="flex-1 relative">
       <View className="flex-row p-1 mx-2 justify-center items-center rounded-md z-10 h-[50px]">
         <Feather name="search" size={24} color="gray" className="ml-5" />
         <TextInput
@@ -63,21 +63,22 @@ const SearchBar = () => {
         />
       </View>
 
-
       <View className="absolute top-[50px] z-20 w-full bg-white pl-6">
         <ScrollView>
           {filteredProducts().map((product: Product) => (
             <View
               key={product.id}
               className="w-full h-20 flex flex-row justify-start items-center my-1 border-b-[0.5px] border-gray-300">
-              <Pressable onPress={() => handleEditProduct(product)} className='w-full h-20 flex-row justify-start items-center'>
+              <Pressable
+                onPress={() => handleEditProduct(product)}
+                className="w-full h-20 flex-row justify-start items-center">
                 {/* Product Image */}
                 <View className="w-[15%] h-full mr-2">
                   <Image
                     source={{ uri: product.image }}
                     style={{
-                      width: "100%",
-                      height: "100%"
+                      width: '100%',
+                      height: '100%',
                     }}
                   />
                 </View>
@@ -89,26 +90,25 @@ const SearchBar = () => {
                 </View>
               </Pressable>
 
-                {/* Delete Button */}
-                <Pressable onPress={() => confirmRemoveProduct(product.id)}>
-                  <Entypo name="cross" size={30} color="gray" />
-                </Pressable>
+              {/* Delete Button */}
+              <Pressable onPress={() => confirmRemoveProduct(product.id)}>
+                <Entypo name="cross" size={30} color="gray" />
+              </Pressable>
             </View>
-          ))
-          }
+          ))}
         </ScrollView>
       </View>
 
       {/* 기존 컨텐츠 영역 */}
       <View className="w-full h-full border-b-[1px] border-gray-400">
         <ScrollView className="w-full h-full mx-2">
-          <View className='w-full h-full'>
-            <Text className='text-2xl'>안녕하세요</Text>
+          <View className="w-full h-full">
+            <Text className="text-2xl">안녕하세요</Text>
           </View>
         </ScrollView>
       </View>
-      <ProductModal 
-        modalVisible={modalVisible} 
+      <ProductModal
+        modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         editingProduct={editingProduct}
       />

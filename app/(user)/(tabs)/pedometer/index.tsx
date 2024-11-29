@@ -24,11 +24,11 @@ const selectStepImage = (steps: number) => {
 };
 
 const Walk = () => {
-  console.log("[Pedometer] Rendered")
-  const [currentStepCount, setCurrentStepCount] = useState(0); 
-  const [permissionDenied, setPermissionDenied] = useState(true); 
-  const animationRef = useRef<LottieView | null>(null); 
-  const subscriptionRef = useRef<any>(null); 
+  console.log('[Pedometer] Rendered');
+  const [currentStepCount, setCurrentStepCount] = useState(0);
+  const [permissionDenied, setPermissionDenied] = useState(true);
+  const animationRef = useRef<LottieView | null>(null);
+  const subscriptionRef = useRef<any>(null);
 
   const handlePress = useCallback(async () => {
     await Linking.openSettings();
@@ -38,9 +38,7 @@ const Walk = () => {
     const progress = Math.min((currentStepCount / 10000) * 100, 100);
     return {
       left: `${progress}%`,
-      transform: [
-        { translateX: -10 },
-      ]
+      transform: [{ translateX: -10 }],
     };
   });
 
@@ -62,7 +60,7 @@ const Walk = () => {
   }, []);
 
   const loadSavedData = async () => {
-    console.log("loadSavedData 호출됨");
+    console.log('loadSavedData 호출됨');
     try {
       const savedCurrentSteps = await AsyncStorage.getItem('currentSteps');
       const lastUpdateDate = await AsyncStorage.getItem('lastUpdateDate');
@@ -80,7 +78,7 @@ const Walk = () => {
         // Update date
         await AsyncStorage.setItem('lastUpdateDate', today);
       } else {
-        setCurrentStepCount(parseInt(savedCurrentSteps || '0', 10)); 
+        setCurrentStepCount(parseInt(savedCurrentSteps || '0', 10));
       }
     } catch (error) {
       console.error('Error loading saved data:', error);
@@ -88,9 +86,9 @@ const Walk = () => {
   };
 
   const checkPermissions = async () => {
-    console.log("checkPermissions 호출됨");
-    const { status, canAskAgain } = await Pedometer.getPermissionsAsync(); 
-    console.log("권한 상태 : ", status, "canAskAgain : ", canAskAgain)
+    console.log('checkPermissions 호출됨');
+    const { status, canAskAgain } = await Pedometer.getPermissionsAsync();
+    console.log('권한 상태 : ', status, 'canAskAgain : ', canAskAgain);
 
     // 권한이 부여되어 있다면,
     if (status === 'granted') {
@@ -119,26 +117,21 @@ const Walk = () => {
       setPermissionDenied(false);
       subscribe();
     } else {
-      Alert.alert(
-        '신체 활동 권한을 허용해주세요',
-        '걸음 수를 측청하기 위해 꼭 필요해요',
-        [
-          {
-            text: '확인',
-            onPress: () => {
-              handlePress()
-            }
-          }
-        ]
-      );
-
+      Alert.alert('신체 활동 권한을 허용해주세요', '걸음 수를 측청하기 위해 꼭 필요해요', [
+        {
+          text: '확인',
+          onPress: () => {
+            handlePress();
+          },
+        },
+      ]);
     }
   };
 
   const subscribe = async () => {
-    console.log("subscribe 호출됨");
+    console.log('subscribe 호출됨');
     const isAvailable = await Pedometer.isAvailableAsync();
-    console.log(isAvailable)
+    console.log(isAvailable);
     if (isAvailable) {
       const subscription = Pedometer.watchStepCount(async (result) => {
         const savedSteps = (await AsyncStorage.getItem('currentSteps')) || '0';
@@ -153,13 +146,9 @@ const Walk = () => {
       // Store subscription in the ref
       subscriptionRef.current = subscription;
     } else {
-      Alert.alert(
-        "사용 불가",
-        "현재 가지고 계신 폰으로는 만보기 사용이 불가합니다",
-        [
-          { text: '확인' }
-        ]
-      )
+      Alert.alert('사용 불가', '현재 가지고 계신 폰으로는 만보기 사용이 불가합니다', [
+        { text: '확인' },
+      ]);
     }
   };
 
@@ -167,48 +156,34 @@ const Walk = () => {
     return ((currentStepCount * 0.4) / 1000).toFixed(2);
   }
   function CalculateCalorie(step: number) {
-    return ((currentStepCount * 0.0336)).toFixed(1);
+    return (currentStepCount * 0.0336).toFixed(1);
   }
-  
+
   return (
     <View className="flex-1">
       <ImageBackground
         source={selectStepImage(currentStepCount)}
         style={{
-          flex: 1
+          flex: 1,
         }}
-        priority="high"
-      >
-        <SafeAreaView className='flex-1'>
+        priority="high">
+        <SafeAreaView className="flex-1">
           <View className="flex-1 p-2 justify-between">
             {/* Steps Interface*/}
             <View className="bg-white rounded-xl shadow-2xl p-4 opacity-90">
               <Text className="text-2xl font-Pretendard-Medium mb-2">오늘 걸음 수</Text>
-              <View className='flex-row justify-between'>
-                <Text className="text-2xl mb-4">
-                  👟{currentStepCount}
-                </Text>
-                <Text className="text-2xl mb-4">
-                  {CalculateKillometer(currentStepCount)}km
-                </Text>
-                <Text className="text-2xl mb-4">
-                  {CalculateCalorie(currentStepCount)}kcal
-                </Text>
+              <View className="flex-row justify-between">
+                <Text className="text-2xl mb-4">👟{currentStepCount}</Text>
+                <Text className="text-2xl mb-4">{CalculateKillometer(currentStepCount)}km</Text>
+                <Text className="text-2xl mb-4">{CalculateCalorie(currentStepCount)}kcal</Text>
               </View>
               <View className="w-full h-2 bg-gray-100 rounded-full mt-2">
                 <Animated.View
-                  style={[
-                    emojiPositionStyle,
-                    { position: 'absolute', top: -15, zIndex: 10 }
-                  ]}
-                >
+                  style={[emojiPositionStyle, { position: 'absolute', top: -15, zIndex: 10 }]}>
                   <Text className="text-sm">📍</Text>
                 </Animated.View>
 
-                <Animated.View
-                  className="h-2 bg-yellow-400 rounded-full"
-                  style={progressStyle}
-                />
+                <Animated.View className="h-2 bg-yellow-400 rounded-full" style={progressStyle} />
               </View>
               <View className="flex-row justify-between mt-1">
                 <Text className="text-xs text-gray-500">0</Text>
@@ -216,28 +191,26 @@ const Walk = () => {
               </View>
             </View>
 
-          <View className="items-center justify-center">
-            <LottieView
-              autoPlay
-              ref={animationRef}
-              style={{
-                width: 200,
-                height: 200,
-              }}
-              source={require('../../../../assets/walking.json')}
-            />
-            {/* 권한 요청 버튼 */}
-            {permissionDenied && (
-              <CustomButton
-                backgroudColor="bg-blue-500"
-                onPress={requestPermission}
-                text="만보기 권한 허용하기"
+            <View className="items-center justify-center">
+              <LottieView
+                autoPlay
+                ref={animationRef}
+                style={{
+                  width: 200,
+                  height: 200,
+                }}
+                source={require('../../../../assets/walking.json')}
               />
-            )}
+              {/* 권한 요청 버튼 */}
+              {permissionDenied && (
+                <CustomButton
+                  backgroudColor="bg-blue-500"
+                  onPress={requestPermission}
+                  text="만보기 권한 허용하기"
+                />
+              )}
+            </View>
           </View>
-
-          </View>
-
         </SafeAreaView>
       </ImageBackground>
     </View>

@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, ListRenderItem } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import { Asset } from 'expo-asset'
-import { CategoryImgMap } from '../types/Product'
+import { Asset } from 'expo-asset';
+import { CategoryImgMap } from '../types/Product';
 import { FlatGridItem } from './FlatGridItem';
-
 
 interface FlatGridProductProps {
   dimension: number;
@@ -38,14 +37,17 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
     loadImages();
   }, []);
 
-  const renderItem: ListRenderItem<CategoryItem> = useCallback(({item }) => (
-    <FlatGridItem
-      name={item.name}
-      imgKey={item.imgKey}
-      categoryImages={categoryImages}
-      setName={setName}
-    />
-  ), [categoryImages, setName]);
+  const renderItem: ListRenderItem<CategoryItem> = useCallback(
+    ({ item }) => (
+      <FlatGridItem
+        name={item.name}
+        imgKey={item.imgKey}
+        categoryImages={categoryImages}
+        setName={setName}
+      />
+    ),
+    [categoryImages, setName],
+  );
 
   return (
     <View className={`w-full ${height} bg-white mb-2 shadow-xs`}>

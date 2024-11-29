@@ -19,7 +19,7 @@ export function FlatGridItem({ name, imgKey, categoryImages, setName }: ItemProp
       onPress={() =>
         router.push({
           pathname: '/category/categoryList',
-          params: { category: name }
+          params: { category: name },
         })
       }>
       <View className="justify-center items-center rounded-xl px-3 h-[130px] font-Pretendard-Light border-[1px] border-gray-300">

@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Text,
-  View,
-  SafeAreaView,
-  Pressable,
-} from 'react-native';
+import { Text, View, SafeAreaView, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { router } from 'expo-router'
+import { router } from 'expo-router';
 
 // Components
 import Header from '../../../components/Header';
@@ -14,14 +9,13 @@ import AddProductModal from '../../../components/modals/AdminProductModal';
 import { FlatGrid } from 'react-native-super-grid';
 
 const items = [
-  { name: "상품 관리", code: "#1abc9c", route: "mngProduct" },
-  { name: "글 관리", code: "#3498db", route: "mngPost" }
-]
+  { name: '상품 관리', code: '#1abc9c', route: 'mngProduct' },
+  { name: '글 관리', code: '#3498db', route: 'mngPost' },
+];
 
 const AdminHome = () => {
-  console.log('[Admin Home] Rendered')
+  console.log('[Admin Home] Rendered');
   const [modalVisible, setModalVisible] = useState(false);
-
 
   return (
     <SafeAreaView className="w-full h-full bg-white">
@@ -38,8 +32,10 @@ const AdminHome = () => {
         spacing={10}
         renderItem={({ item }) => (
           <Pressable onPress={() => router.push(item.route as `/mngProduct` | `/mngPost`)}>
-            <View className="items-center justify-center rounded-xl p-4 h-[100px]" style={{ backgroundColor: item.code }}>
-              <Text className='font-Pretendard-Medium text-2xl text-white'>{item.name}</Text>
+            <View
+              className="items-center justify-center rounded-xl p-4 h-[100px]"
+              style={{ backgroundColor: item.code }}>
+              <Text className="font-Pretendard-Medium text-2xl text-white">{item.name}</Text>
             </View>
           </Pressable>
         )}
