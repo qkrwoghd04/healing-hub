@@ -2,7 +2,7 @@ export type Product = {
   id: string;
   category: Category;
   description: string;
-  image: { uri: string; type: string; name: string } | null;
+  image: string;
   name: string;
   popularity: keyof Popularity;
   price: string;
@@ -24,7 +24,8 @@ export type Category =
   | '면역 강화'
   | '기타건강 보조제';
 
-export type ProductForm = Pick<Product, "category" | "description" | "image" | "name" | "popularity" | "price">
+export type ProductForm = Pick<Product, "category" | "description" | "name" | "popularity" | "price" | "image">
+
 
 export const CategoryImgMap = [
   { name: '비타민 및 미네랄', imgKey: '비타민_및_미네랄' },

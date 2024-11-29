@@ -2,10 +2,10 @@ import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   Modal,
   TextInput,
   TouchableWithoutFeedback,
+  Pressable,
 } from 'react-native';
 import { Image } from 'expo-image'
 import { Keyboard, StyleSheet, Alert } from 'react-native';
@@ -49,10 +49,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
     popularity: 'Low', 
     category: '기타건강 보조제', 
     description: '',
-    image: null,
+    image: '',
   });
   
-  const [image, setImage] = useState<string | null>();
+  const [image, setImage] = useState<string | undefined>(undefined);
 
   const pickImage = async () => {
     const image = await ImagePicker.launchImageLibraryAsync({
@@ -63,17 +63,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
     });
 
     if (!image.canceled) {
-      setImage(image.assets[0].uri);
-
-      setFormData(prev => ({
-        ...prev,
-        image: {
-          uri: image.assets[0].uri,
-          type: 'image/jpeg',
-          name: 'product.jpg',
-        }
-      }));
-      setImage(image.assets[0].uri);
+      const uri = image.assets[0].uri;
+      console.log('Selected image URI:', uri);
+      setImage(uri);
+      handleInputChange('image', uri);
     }
   }
   
@@ -85,9 +78,9 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
       popularity: 'Low', // 기본값
       category: '기타건강 보조제', // 기본값
       description: '',
-      image: null,
+      image: '',
     });
-    setImage(undefined);
+    setImage('');
   }, []);
   
 
@@ -125,18 +118,18 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
           <View className="bg-white rounded-lg w-[90%] h-[60%] p-4 flex flex-col justify-between items-center">
             {/* Modal Header */}
             <View className="w-full h-1/4 flex flex-row justify-start items-center gap-x-2">
-              <TouchableOpacity
+              <Pressable
                 className="flex justify-center items-center rounded-lg w-[30%] h-full border-[1.5px] border-gray-400"
                 onPress={pickImage}
               >
                 {image ? (
-                  <Image source={{ uri: image }} className="w-full h-full rounded-lg" />
+                  <Image source={image} style={{width: '100%', height: '100%'}} />
                 ) : (
                   <Text className="text-[#847958] text-[16px] font-Pretendard-Medium">
                     이미지 선택
                   </Text>
                 )}
-              </TouchableOpacity>
+              </Pressable>
 
               <View className="flex flex-col justify-between items-center w-[65%] h-full gap-y-2">
                 <TextInput
@@ -200,18 +193,18 @@ const ProductModal: React.FC<ProductModalProps> = ({ modalVisible, setModalVisib
 
             {/* Buttons */}
             <View className="flex flex-row justify-between items-center w-full h-[10%]">
-              <TouchableOpacity
+              <Pressable
                 className="bg-white flex-1 h-[90%] justify-center items-center rounded-md mr-1 border-[2px] border-gray-800"
                 onPress={addProduct}
               >
                 <Text className="text-black text-xl font-Pretendard-Medium">추가</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </Pressable>
+              <Pressable
                 className="bg-red-700 flex-1 h-[90%] justify-center items-center ml-1 rounded-lg"
                 onPress={() => setModalVisible(false)}
               >
                 <Text className="text-white text-xl font-Pretendard-Medium">취소</Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
         </View>

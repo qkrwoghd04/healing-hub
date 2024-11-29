@@ -20,6 +20,7 @@ const Modal = () => {
   }>();
 
   if (!id) return null;
+  console.log(image)
 
   return (
     <View className="relative w-full h-full bg-white">

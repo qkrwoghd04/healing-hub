@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
-import { Product,ProductForm } from '../types/Product';
+import { Product, ProductForm } from '../types/Product';
 import { LoginResponse, LoginRequest } from '../types/Admin';
 
 export const BASEURL = 'https://dht0320g9uj4a.cloudfront.net';
@@ -51,24 +51,28 @@ export const loginUser = async (credentials: LoginRequest): Promise<LoginRespons
 };
 
 export const addProduct = async (productData: ProductForm): Promise<Product> => {
+  const formData = new FormData();
   try {
-    const formData = new FormData();
-    
-    // 일반 필드 추가
     formData.append('name', productData.name);
-    formData.append('description', productData.description);
     formData.append('price', productData.price);
     formData.append('popularity', productData.popularity);
     formData.append('category', productData.category);
-    
-    // 이미지 처리
-    if (productData.image) {
-      formData.append('image', {
-        uri: productData.image.uri,
-        type: productData.image.type,
-        name: productData.image.name,
-      } as any);
+    formData.append('description', productData.description);
+
+    if(productData.image) {
+      const uri = productData.image.split('.');
+      console.log(uri)
+      const fileType = uri[uri.length - 1];
+
+      const file = {
+        uri: productData.image,
+        name: `${productData.name}.${fileType}`,
+        type: `'image/${fileType}`
+      }
+      console.log(file)
+      formData.append('image', file as any);
     }
+
     const response = await URL.post<Product>('/products', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -77,7 +81,8 @@ export const addProduct = async (productData: ProductForm): Promise<Product> => 
     
     return response.data;
   } catch (error) {
-    console.error('Error adding product:', error);
+    console.log(formData)
+    console.error('[api.ts] Error adding product:', error);
     throw error;
   }
 };
