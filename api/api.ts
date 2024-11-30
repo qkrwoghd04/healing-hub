@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { Product, ProductForm } from '../types/Product';
 import { LoginResponse, LoginRequest } from '../types/Admin';
+import { PushNotification } from '@/types/PushNotification';
 
 export const BASEURL = 'https://dht0320g9uj4a.cloudfront.net';
 
@@ -103,6 +104,27 @@ export const deleteProduct = async (id: string): Promise<void> => {
     await URL.delete(`/products/${id}`);
   } catch (error) {
     console.error('Error deleting product:', error);
+    throw error;
+  }
+};
+
+
+export const registerPushNotification = async (user_id: string, pushToken: string): Promise<PushNotification> => {
+  const formData = new FormData();
+  try {
+    formData.append('user_id', user_id);
+    formData.append('pushToken', pushToken);
+
+    const response = await URL.post<PushNotification>('/push/register', formData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(formData);
+    console.error('Error register token:', error);
     throw error;
   }
 };

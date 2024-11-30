@@ -11,6 +11,7 @@ import {
 } from '@aws-sdk/lib-dynamodb';
 import { v4 as uuidv4 } from 'uuid';
 import multer from 'multer';
+import PushService from './PushService.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -31,6 +32,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use('/push', PushService);
 
 // 제품 목록 조회
 app.get('/products', async (req, res) => {

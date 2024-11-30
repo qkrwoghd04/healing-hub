@@ -2,6 +2,7 @@ import * as Notifications from 'expo-notifications'
 import * as Device from 'expo-device'
 import Constants from 'expo-constants'
 import { Platform} from 'react-native';
+import { registerPushNotification } from '@/api/api'
 
 export async function registerForPushNotificationsAsync() {
   if(Platform.OS === "android") {
@@ -25,7 +26,7 @@ export async function registerForPushNotificationsAsync() {
         "Permission not granted to get push token for push notification"
       )
     }
-
+    
     const projectId = 
       Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId;
     if(!projectId) {
@@ -37,13 +38,21 @@ export async function registerForPushNotificationsAsync() {
           projectId,
         })
       ).data;
-      console.log(pushTokenString);
+      
+      const deviceId = Device.osBuildFingerprint;
+      if (deviceId !== null){
+        registerPushNotification(deviceId, pushTokenString)
+      }else{ 
+        throw new Error("No deviceId");
+      }
+      console.log(deviceId)
+      console.log(pushTokenString)
       return pushTokenString;
     } catch (error : unknown) {
       throw new Error(`${error}`);
     }
-
     
+
   } else{
     throw new Error("Must use physical device for push notifications")
   }
