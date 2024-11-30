@@ -4,7 +4,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { View, Text, ScrollView } from 'react-native';
 // Types
 //
-import { useProducts } from '@/components/ProductContext';
+import { useProducts } from '@/context/ProductContext'
 
 // Components
 import ProductSlide from './ProductSlide';

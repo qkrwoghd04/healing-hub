@@ -4,7 +4,7 @@ import { Image } from 'expo-image';
 import { Keyboard, StyleSheet, Alert } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import * as ImagePicker from 'expo-image-picker';
-import { useProducts } from '../ProductContext';
+import { useProducts } from '../../context/ProductContext';
 import { ProductForm, Product } from '../../types/Product';
 
 interface DropdownItem {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, View, Alert, ScrollView, Pressable, Text } from 'react-native';
 import { Feather, Entypo } from '@expo/vector-icons';
-import { useProducts } from './ProductContext';
+import { useProducts } from '../context/ProductContext';
 import { Product } from '@/types/Product';
 import { Image } from 'expo-image';
 

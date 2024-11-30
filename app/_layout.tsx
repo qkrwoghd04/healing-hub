@@ -1,9 +1,19 @@
 import React from 'react';
 import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
-import { ProductProvider } from '../components/ProductContext';
+import { ProductProvider } from '../context/ProductContext';
 import { useEffect } from 'react';
 import '../global.css';
+import { NotificationProvider } from '@/context/NotificationContext';
+import * as Notifications from 'expo-notifications'
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,19 +33,21 @@ const RootLayout = () => {
 
   return (
     <ProductProvider>
-      <Stack initialRouteName="(user)">
-        <Stack.Screen name="(user)" options={{ headerShown: false }} />
-        <Stack.Screen name="(admin)" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="modal"
-          options={{
-            presentation: 'modal',
-            headerShown: true,
-            headerTitle: '상품 정보',
-            headerTitleAlign: 'center',
-          }}
-        />
-      </Stack>
+      <NotificationProvider>
+        <Stack initialRouteName="(user)">
+          <Stack.Screen name="(user)" options={{ headerShown: false }} />
+          <Stack.Screen name="(admin)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="modal"
+            options={{
+              presentation: 'modal',
+              headerShown: true,
+              headerTitle: '상품 정보',
+              headerTitleAlign: 'center',
+            }}
+          />
+        </Stack>
+      </NotificationProvider>
     </ProductProvider>
   );
 };

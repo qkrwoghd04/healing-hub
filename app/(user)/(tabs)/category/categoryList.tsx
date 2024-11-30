@@ -4,7 +4,7 @@ import { EvilIcons } from '@expo/vector-icons';
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
 // API and Context
-import { useProducts } from '../../../../components/ProductContext';
+import { useProducts } from '../../../../context/ProductContext';
 
 // components
 import { FormatPrice } from '../../../../components/functions/FormatPrice';
