@@ -4,31 +4,35 @@ import { useRef } from 'react'
 
 export const usePressAnimation = ( initialScale=1, pressedScale=0.95 ) => {
   const scaleValue = useRef(new Animated.Value(initialScale)).current;
-
+  
   const pressIn = () => {
     Animated.spring(scaleValue, {
       toValue: pressedScale,
       useNativeDriver: true,
       bounciness: 12,
-      speed: 40
-    }).start();
+      speed: 200
+    }).start()
   };
 
-  const pressOut = () => {
+  const pressOut = (onPress?: () => void) => {
     Animated.spring(scaleValue, {
       toValue: initialScale,
       useNativeDriver: true,
       bounciness: 12,
-      speed: 40
-    }).start();
+      speed: 200
+    }).start(() => {
+      if(onPress){
+        onPress();
+      }
+    });
   };
 
-  const pressHandlers = {
+  const pressHandlers = (onPress: () => void) => ({
     onPressIn: pressIn,
-    onPressOut: pressOut,
-  };
+    onPressOut: () => pressOut(onPress),
+  });
 
-  return { scaleValue, pressHandlers };
+  return { scaleValue , pressHandlers };
 }
 
 

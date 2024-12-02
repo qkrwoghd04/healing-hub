@@ -15,7 +15,7 @@ const ProductSlide = React.memo<ProductSlideProps>(({ item }) => {
       <Pressable
         onPress={() =>
           router.push({
-            pathname: '/modal',
+            pathname: '/productModal',
             params: {
               id: item.id,
               name: item.name,

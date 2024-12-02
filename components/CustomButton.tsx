@@ -1,33 +1,33 @@
 import React from 'react';
-import { View, Pressable, Text, Animated } from 'react-native';
+import { Pressable, Text, Animated } from 'react-native';
 import { usePressAnimation } from '@/hook/usePressAnimation'
 
 interface ButtonProps {
-  backgroudColor: string;
+  buttonStyle: string;
+  textStyle: string;
   onPress: () => void;
   text: string;
 }
 
-const CustomButton: React.FC<ButtonProps> = ({ backgroudColor, onPress, text }) => {
+const CustomButton: React.FC<ButtonProps> = ({ buttonStyle, onPress, text, textStyle }) => {
   const { scaleValue, pressHandlers } = usePressAnimation();
 
   return (
-    <View className="relative w-full h-[70px] flex items-center">
+    // <View className="relative w-full h-[70px] flex items-center">
       <Animated.View 
         style={{
           transform: [{ scale: scaleValue }],
-          width: '100%',
-          height: '100%'
+          height: 70
         }}
       >
         <Pressable
-          className={`w-full h-full flex justify-center items-center rounded-2xl ${backgroudColor}`}
-          {...pressHandlers} onPress={onPress}
+          className={`${buttonStyle}`}
+          {...pressHandlers(onPress)}
         >
-          <Text className="text-4xl font-Pretendard-Medium color-white">{text}</Text>
+          <Text className={`${textStyle}`}>{text}</Text>
         </Pressable>
       </Animated.View>
-    </View>
+    // </View>
   );
 };
 

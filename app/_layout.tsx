@@ -21,6 +21,11 @@ const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
     'Pretendard-Light': require('../assets/fonts/Pretendard-Light.ttf'),
     'Pretendard-Medium': require('../assets/fonts/Pretendard-Medium.ttf'),
+    'SpoqaHanSansNeo-Bold': require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
+    'SpoqaHanSansNeo-Light': require('../assets/fonts/SpoqaHanSansNeo-Light.ttf'),
+    'SpoqaHanSansNeo-Medium': require('../assets/fonts/SpoqaHanSansNeo-Medium.ttf'),
+    'SpoqaHanSansNeo-Regular': require('../assets/fonts/SpoqaHanSansNeo-Regular.ttf'),
+    'SpoqaHanSansNeo-Thin': require('../assets/fonts/SpoqaHanSansNeo-Thin.ttf'),
   });
 
   useEffect(() => {
@@ -38,7 +43,7 @@ const RootLayout = () => {
           <Stack.Screen name="(user)" options={{ headerShown: false }} />
           <Stack.Screen name="(admin)" options={{ headerShown: false }} />
           <Stack.Screen
-            name="modal"
+            name="productModal"
             options={{
               presentation: 'modal',
               headerShown: true,
@@ -46,7 +51,15 @@ const RootLayout = () => {
               headerTitleAlign: 'center',
             }}
           />
+          <Stack.Screen
+            name="sendNotification"
+            options={{
+              presentation: 'transparentModal',
+              headerShown: false
+            }}
+          />
         </Stack>
+
       </NotificationProvider>
     </ProductProvider>
   );

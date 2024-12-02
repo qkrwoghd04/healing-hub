@@ -23,7 +23,7 @@ const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
 const EXPO_TOKEN_TABLE = process.env.DYNAMODB_EXPO_TOKEN_TABLE;
 
 router.post('/register', async (req, res) => {
-  const { user_id, pushToken } = req.body;
+  const { id, pushToken } = req.body;
 
   // Validate Expo push token
   if (!Expo.isExpoPushToken(pushToken)) {
@@ -34,7 +34,7 @@ router.post('/register', async (req, res) => {
     const params = {
       TableName: EXPO_TOKEN_TABLE,
       Item: {
-        user_id,
+        id,
         pushToken,
         createdAt: new Date().toISOString()
       }
@@ -48,13 +48,13 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.delete('/deregister', async (req, res) => {
-  const { user_id } = req.body;
+router.delete('/deregister/:id', async (req, res) => {
+  const { id } = req.params;
 
   try {
     const params = {
       TableName: EXPO_TOKEN_TABLE,
-      Key: { user_id }
+      Key: { id }
     };
 
     await ddbDocClient.send(new DeleteCommand(params));

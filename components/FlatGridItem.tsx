@@ -19,13 +19,12 @@ export function FlatGridItem({ name, imgKey, categoryImages, setName }: ItemProp
   return (
     <Animated.View style={{ transform: [{scale : scaleValue}]}}>
       <Pressable
-        {...pressHandlers}
-        onPress={() =>
+        {...pressHandlers(() =>
           router.push({
             pathname: '/category/categoryList',
             params: { category: name },
-          })
-        }>
+          }))}
+        >
         <View className="justify-center items-center rounded-xl px-3 h-[130px] font-Pretendard-Light border-[1px] border-gray-300">
           {categoryImages[imgKey] ? (
             <Image

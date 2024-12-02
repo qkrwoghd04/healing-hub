@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { Product, ProductForm } from '../types/Product';
 import { LoginResponse, LoginRequest } from '../types/Admin';
-import { PushNotification } from '@/types/PushNotification';
+import { PushNotification, SendNotification } from '@/types/PushNotification';
 
 export const BASEURL = 'https://dht0320g9uj4a.cloudfront.net';
 
@@ -109,22 +109,50 @@ export const deleteProduct = async (id: string): Promise<void> => {
 };
 
 
-export const registerPushNotification = async (user_id: string, pushToken: string): Promise<PushNotification> => {
-  const formData = new FormData();
+export const registerPushNotification = async (id: string, pushToken: string): Promise<PushNotification> => {
+  const formData = new FormData()
   try {
-    formData.append('user_id', user_id);
-    formData.append('pushToken', pushToken);
+    formData.append('id', id)
+    formData.append('pushToken', pushToken)
 
     const response = await URL.post<PushNotification>('/push/register', formData, {
       headers: {
         'Content-Type': 'application/json',
       },
-    });
+    })
 
+    return response.data
+  } catch (error) {
+    console.log(formData)
+    console.error('Error register token:', error)
+    throw error
+  }
+}
+
+export const deregisterPushNotification = async (id: string): Promise<void> => {
+  try {
+    await URL.delete(`/push/deregister/${id}`);
+  } catch (error) {
+    console.error('Error deleting pushToken:', error);
+    throw error;
+  }
+}
+
+export const sendNotification = async (inputData: { 
+  title: string; 
+  body: string; 
+  data?: object; 
+}): Promise<SendNotification> => {
+  try {
+    const response = await URL.post<SendNotification>('/push/send', inputData, {
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+    });
     return response.data;
   } catch (error) {
-    console.log(formData);
-    console.error('Error register token:', error);
+    console.log(inputData);
+    console.error('Error sending notification', error);
     throw error;
   }
 };

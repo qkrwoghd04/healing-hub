@@ -11,11 +11,6 @@
       "typedRoutes": true
     },
     "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/images/splash_icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#20284F"
-    },
     "ios": {
       "supportsTablet": false
     },
@@ -62,7 +57,9 @@
         {
           "image": "./assets/images/splash_icon.png",
           "imageWidth": 200,
-          "resizeMode": "contain"
+          "resizeMode": "contain",
+          "backgroundColor": "#20284F"
+          
         }
       ],
       "expo-build-properties"

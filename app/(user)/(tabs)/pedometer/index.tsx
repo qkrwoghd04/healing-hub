@@ -60,7 +60,6 @@ const Walk = () => {
   }, []);
 
   const loadSavedData = async () => {
-    console.log('loadSavedData 호출됨');
     try {
       const savedCurrentSteps = await AsyncStorage.getItem('currentSteps');
       const lastUpdateDate = await AsyncStorage.getItem('lastUpdateDate');
@@ -86,9 +85,7 @@ const Walk = () => {
   };
 
   const checkPermissions = async () => {
-    console.log('checkPermissions 호출됨');
     const { status, canAskAgain } = await Pedometer.getPermissionsAsync();
-    console.log('권한 상태 : ', status, 'canAskAgain : ', canAskAgain);
 
     // 권한이 부여되어 있다면,
     if (status === 'granted') {
@@ -129,9 +126,7 @@ const Walk = () => {
   };
 
   const subscribe = async () => {
-    console.log('subscribe 호출됨');
     const isAvailable = await Pedometer.isAvailableAsync();
-    console.log(isAvailable);
     if (isAvailable) {
       const subscription = Pedometer.watchStepCount(async (result) => {
         const savedSteps = (await AsyncStorage.getItem('currentSteps')) || '0';

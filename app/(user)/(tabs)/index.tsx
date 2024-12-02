@@ -42,7 +42,11 @@ const HomeScreen = () => {
         <HotProductScroll />
         <FlatGridProduct dimension={80} setName={true} title={true} height="h-[45%]" />
         <View className="px-2">
-          <CallButton onPress={makePhoneCall} backgroudColor="bg-[#20284F]" text="매장 주문" />
+          <CallButton
+            onPress={makePhoneCall}
+            buttonStyle="w-full h-full flex justify-center items-center rounded-2xl bg-[#20284F]"
+            textStyle='text-4xl font-Pretendard-Medium color-white'
+            text="매장 주문" />
         </View>
       </View>
     </SafeAreaView>

@@ -50,7 +50,7 @@ const CategoryList = () => {
                 key={product.id}
                 onPress={() =>
                   router.push({
-                    pathname: '/modal',
+                    pathname: '/productModal',
                     params: {
                       id: product.id,
                       name: product.name,

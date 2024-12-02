@@ -86,7 +86,13 @@ const AdminLogin = () => {
       {isLoading ? (
         <ActivityIndicator size="large" color="#007AFF" />
       ) : (
-        <CustomButton text="로그인" backgroudColor="bg-[#20284F]" onPress={handleLogin} />
+        <View className='w-full'>
+          <CustomButton 
+            text="로그인" 
+            buttonStyle="w-full h-full flex justify-center items-center rounded-2xl bg-[#20284F]" 
+            textStyle='text-3xl font-Pretendard-Medium color-white'
+            onPress={handleLogin} />
+        </View>
       )}
     </View>
   );
