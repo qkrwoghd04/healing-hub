@@ -1,6 +1,7 @@
 import React from 'react';
 import { SafeAreaView, View, Linking } from 'react-native';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+
 // Components
 import Header from '../../../components/Header';
 import HotProductScroll from '../../../components/HotProductScroll';
@@ -11,6 +12,7 @@ import FlatGridProduct from '../../../components/FlatGridProduct';
 // API
 
 const HomeScreen = () => {
+
   // if (loading) {
   //   return <LoadingSpinner color="#0066cc" />;
   // }

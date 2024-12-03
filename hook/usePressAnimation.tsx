@@ -11,7 +11,7 @@ export const usePressAnimation = (initialScale = 1, pressedScale = 0.95) => {
       toValue: pressedScale,
       useNativeDriver: true,
       bounciness: 12,
-      speed: 200,
+      speed: 100,
     }).start();
   };
 
@@ -20,7 +20,7 @@ export const usePressAnimation = (initialScale = 1, pressedScale = 0.95) => {
       toValue: initialScale,
       useNativeDriver: true,
       bounciness: 12,
-      speed: 200,
+      speed: 100,
     }).start();
   };
 

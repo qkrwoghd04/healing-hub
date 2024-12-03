@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, Text, View, Pressable } from 'react-native';
 import { Image } from 'expo-image';
+
 // import { login } from '@react-native-seoul/kakao-login';
 
 const UserInfo = () => {
+  
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1 justify-center items-center">
         <Text>index</Text>
-        {/* <Pressable onPress={login}>
+        {/* <Pressable onPress={() => login()} className='w-full h-full bg-blue'>
           <Image
             source="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
             style={{

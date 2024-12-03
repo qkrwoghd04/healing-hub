@@ -6,6 +6,8 @@ import { Dropdown } from 'react-native-element-dropdown';
 import * as ImagePicker from 'expo-image-picker';
 import { useProducts } from '../../context/ProductContext';
 import { ProductForm, Product } from '../../types/Product';
+import CustomButton from '../CustomButton';
+import CustomTextInput from '@/components/CustomTextInput'
 
 interface DropdownItem {
   label: string;
@@ -151,14 +153,14 @@ const ProductModal: React.FC<ProductModalProps> = ({
       onRequestClose={() => setModalVisible(false)}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View className="flex-1 justify-center items-center bg-black/60">
-          <View className="bg-white rounded-lg w-[90%] h-[60%] p-4 flex flex-col justify-between items-center">
+          <View className="bg-white rounded-lg w-[90%] h-[460px] p-4 flex flex-col justify-between items-center">
             {/* Modal Header */}
-            <View className="w-full h-1/4 flex flex-row justify-start items-center gap-x-2">
+            <View className="w-full h-[140px] flex flex-row justify-start items-center gap-x-2">
               <Pressable
-                className="flex justify-center items-center rounded-lg w-[30%] h-full border-[1.5px] border-gray-400"
+                className="flex justify-center items-center w-[30%] h-full "
                 onPressOut={pickImage}>
                 {image ? (
-                  <Image source={image} style={{ width: '100%', height: '100%' }} />
+                  <Image source={image} style={{ width: '100%', height: '100%', borderRadius: 10, borderWidth: 1, borderColor: '#e8e8e8' }} />
                 ) : (
                   <Text className="text-[#847958] text-[16px] font-Pretendard-Medium">
                     이미지 선택
@@ -167,14 +169,12 @@ const ProductModal: React.FC<ProductModalProps> = ({
               </Pressable>
 
               <View className="flex flex-col justify-between items-center w-[65%] h-full gap-y-2">
-                <TextInput
-                  className="bg-white w-full h-[40%] rounded-lg border-[1.5px] border-gray-400 p-2"
+                <CustomTextInput
                   placeholder="제품명"
                   value={formData.name}
                   onChangeText={(value) => handleInputChange('name', value)}
                 />
-                <TextInput
-                  className="bg-white w-full h-[40%] rounded-lg border-[1.5px] border-gray-400 p-2"
+                <CustomTextInput
                   placeholder="가격"
                   value={formData.price}
                   onChangeText={(value) => handleInputChange('price', value)}
@@ -184,9 +184,9 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </View>
 
             {/* Dropdowns and Description */}
-            <View className="flex flex-col w-full h-2/4 gap-2">
-              <View className="flex-2 flex flex-row">
-                <View className="flex-[40%] bg-white p-4 rounded-lg border-[1.5px] border-gray-400 mr-2">
+            <View className="flex flex-col w-full h-[200px] gap-2">
+              <View className="flex flex-row">
+                <View className="flex-[40%] bg-white p-4">
                   <Dropdown
                     style={styles.dropdown}
                     placeholderStyle={styles.placeholderStyle}
@@ -200,7 +200,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                     onChange={(item) => handleInputChange('popularity', item.value)}
                   />
                 </View>
-                <View className="flex-[60%] bg-white p-4 rounded-lg border-[1.5px] border-gray-400">
+                <View className="flex-[60%] bg-white p-4">
                   <Dropdown
                     style={styles.dropdown}
                     placeholderStyle={styles.placeholderStyle}
@@ -215,31 +215,35 @@ const ProductModal: React.FC<ProductModalProps> = ({
                   />
                 </View>
               </View>
-              <View className="flex-1 rounded-lg border-[1.5px] border-gray-400">
-                <TextInput
-                  className="w-full p-2 relative"
+              <View className="flex-1">
+                <CustomTextInput
                   placeholder="상품 상세 설명"
                   value={formData.description}
                   onChangeText={(value) => handleInputChange('description', value)}
                   multiline
+                  height={120}
                 />
               </View>
             </View>
 
             {/* Buttons */}
-            <View className="flex flex-row justify-between items-center w-full h-[10%]">
-              <Pressable
-                className="bg-white flex-1 h-[90%] justify-center items-center rounded-md mr-1 border-[2px] border-gray-800"
-                onPress={handleSubmit}>
-                <Text className="text-black text-xl font-Pretendard-Medium">
-                  {isEditMode ? '수정' : '추가'}
-                </Text>
-              </Pressable>
-              <Pressable
-                className="bg-red-700 flex-1 h-[90%] justify-center items-center ml-1 rounded-lg"
-                onPress={() => setModalVisible(false)}>
-                <Text className="text-white text-xl font-Pretendard-Medium">취소</Text>
-              </Pressable>
+            <View className="flex flex-row justify-center items-center w-full h-[12%]">
+              <View className='flex-1'>
+                <CustomButton
+                  buttonStyle=" w-[150px] h-16 p-2 border-2 border-blue rounded-lg flex justify-center items-center"
+                  textStyle="text-2xl font-Pretendard-Medium text-blue"
+                  onPress={() => setModalVisible(false)}
+                  text="취소"
+                />
+              </View>
+              <View className='flex-1'>
+                <CustomButton
+                  buttonStyle="w-[150px] h-16 p-2 bg-blue rounded-lg flex justify-center items-center"
+                  textStyle="text-2xl font-Pretendard-Medium color-white"
+                  onPress={handleSubmit}
+                  text="수정"
+                />
+              </View>
             </View>
           </View>
         </View>

@@ -5,12 +5,14 @@ interface CustomTextInputProps extends TextInputProps {
   focusedBorderColor? : string;
   defaultBorderColor? : string;
   containerStyle? : any;
+  height?: number; 
 }
 
 const CustomTextInput : React.FC<CustomTextInputProps> = ({
   focusedBorderColor = '#4C80F1', 
   defaultBorderColor='#D3D3D3',
   containerStyle,
+  height = 60,
   onFocus,
   onBlur,
   ...rest
@@ -36,7 +38,8 @@ const CustomTextInput : React.FC<CustomTextInputProps> = ({
         containerStyle,
         { 
           borderColor: isFocused ? focusedBorderColor : defaultBorderColor,
-          borderWidth: 1
+          borderWidth: 1,
+          height
         }
       ]}
       onFocus={handleFocus}
@@ -48,7 +51,6 @@ const CustomTextInput : React.FC<CustomTextInputProps> = ({
 const styles = StyleSheet.create({
   input: {
     width: '100%',
-    height: 60,
     paddingHorizontal: 12,
     borderRadius: 8,
     marginBottom: 12,
