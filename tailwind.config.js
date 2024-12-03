@@ -8,8 +8,6 @@ module.exports = {
         'blue': '#4C80F1',
         'navy': '#20284F',
         'red' : '#E05D67',
-        'gray': '#CCD1D7',
-        DEFAULT: '#191F28'
       },
       fontFamily: {
         'Pretendard-Light': ['Pretendard-Light', 'sans-serif'],

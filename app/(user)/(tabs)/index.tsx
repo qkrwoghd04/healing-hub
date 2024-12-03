@@ -43,7 +43,7 @@ const HomeScreen = () => {
         <FlatGridProduct dimension={80} setName={true} title={true} height="h-[45%]" />
         <CallButton
           onPress={makePhoneCall}
-          buttonStyle="w-full h-full flex justify-center items-center rounded-2xl bg-[#20284F]"
+          buttonStyle="w-[95%] h-full flex justify-center items-center rounded-2xl bg-navy"
           textStyle="text-4xl font-SpoqaMedium color-white"
           text="매장 주문"
         />

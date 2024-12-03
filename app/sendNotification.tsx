@@ -1,17 +1,16 @@
-import { TextInput, View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import React, { useState } from 'react';
 import Animated, { FadeIn, SlideInDown } from 'react-native-reanimated';
 
 import { router } from 'expo-router';
 import CustomButton from '@/components/CustomButton';
 import { sendNotification } from '@/api/api';
+import CustomTextInput from '@/components/CustomTextInput';
 
 const SendNotification = () => {
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
   const [data, setData] = useState<object>();
-  const [isFocusedTitle, setIsFocusedTitle] = useState<boolean>(false);
-  const [isFocusedBody, setIsFocusedBody] = useState<boolean>(false);
 
   return (
     <Animated.View entering={FadeIn} style={styles.background}>
@@ -22,21 +21,14 @@ const SendNotification = () => {
           </View>
 
           <View style={styles.inputContainer}>
-            <TextInput
+            <CustomTextInput
               placeholder="알림 제목"
-              className="inputBox"
-              style={[{ borderColor: isFocusedTitle ? '#4C80F1' : '#D3D3D3' }]}
-              onFocus={() => setIsFocusedTitle(true)}
-              onBlur={() => setIsFocusedTitle(false)}
               onChangeText={setTitle}
               value={title}
             />
-            <TextInput
+
+            <CustomTextInput
               placeholder="새로운 상품이 등록되었습니다!"
-              className="inputBox"
-              style={[{ borderColor: isFocusedBody ? '#4C80F1' : '#D3D3D3' }]}
-              onFocus={() => setIsFocusedBody(true)}
-              onBlur={() => setIsFocusedBody(false)}
               onChangeText={setBody}
               value={body}
             />

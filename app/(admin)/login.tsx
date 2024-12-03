@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
+
+//Components
+import  CustomTextInput  from '@/components/CustomTextInput'
 
 // API
 import { loginUser } from '../../api/api';
@@ -15,7 +18,6 @@ const AdminLogin = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  // 입력값 검증 함수
   const validateInputs = (): boolean => {
     if (!email.trim() || !password.trim()) {
       Alert.alert('입력 오류', '이메일과 비밀번호를 모두 입력해주세요.');
@@ -63,37 +65,31 @@ const AdminLogin = () => {
       </TouchableOpacity>
 
       <Text className="font-Pretendard-Medium text-3xl pb-5">관리자 로그인</Text>
-      <TextInput
+      <CustomTextInput
         placeholder="이메일"
-        placeholderTextColor="black"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
         editable={!isLoading}
-        autoFocus={true}
-        className="w-full h-[60px] border-[1px] border-black rounded-md px-3 mb-3"
       />
-      <TextInput
+
+      <CustomTextInput
         placeholder="비밀번호"
-        placeholderTextColor="black"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
         editable={!isLoading}
-        className="w-full h-[60px] border-[1px] border-black rounded-md px-3 mb-3"
       />
       {isLoading ? (
         <ActivityIndicator size="large" color="#007AFF" />
       ) : (
-        <View className="w-full">
-          <CustomButton
-            text="로그인"
-            buttonStyle="w-full h-full flex justify-center items-center rounded-2xl bg-[#20284F]"
-            textStyle="text-3xl font-Pretendard-Medium color-white"
-            onPress={handleLogin}
-          />
-        </View>
+        <CustomButton
+          text="로그인"
+          buttonStyle="w-full h-full flex justify-center items-center rounded-2xl bg-[#20284F]"
+          textStyle="text-3xl font-Pretendard-Medium color-white"
+          onPress={handleLogin}
+        />
       )}
     </View>
   );

@@ -9,17 +9,17 @@ import CustomButton from '@/components/CustomButton';
 
 const selectStepImage = (steps: number) => {
   if (steps < 2000) {
-    return require('../../../../assets/images/step1.jpg');
+    return 'step1.jpg';
   } else if (steps < 4000) {
-    return require('../../../../assets/images/step2.jpg');
+    return 'step2.jpg';
   } else if (steps < 6000) {
-    return require('../../../../assets/images/step3.jpg');
+    return 'step3.jpg';
   } else if (steps < 8000) {
-    return require('../../../../assets/images/step4.jpg');
+    return 'step4.jpg';
   } else if (steps < 10000) {
-    return require('../../../../assets/images/step5.jpg');
+    return 'step5.jpg';
   } else {
-    return require('../../../../assets/images/step6.jpg');
+    return 'step6.jpg';
   }
 };
 
