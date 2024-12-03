@@ -3,7 +3,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import { Linking } from 'react-native'; // Linking 모듈을 가져옵니다.
-import CallButton from '../CallButton'; // CallButton 컴포넌트를 가져옵니다.
+import CallButton from '../CustomButton'; // CallButton 컴포넌트를 가져옵니다.
 
 jest.mock('react-native/Libraries/Linking/Linking', () => ({
   openURL: jest.fn(),

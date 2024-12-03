@@ -17,7 +17,7 @@ import Header from '@/components/Header';
 
 const CategoryList = () => {
   const { category } = useLocalSearchParams<{ category: string }>();
-  const { products  } = useProducts();
+  const { products } = useProducts();
   const filteredProducts = useMemo(
     () => products.filter((product: Product) => product.category === category),
     [products, category],
@@ -61,7 +61,7 @@ const CategoryList = () => {
                     },
                   })
                 }>
-                <View className="bg-white p-4 mb-4 rounded-md shadow-lg">
+                <View className="bg-white p-4 mb-4 rounded-md shadow-sm">
                   <View className="flex flex-row items-center">
                     <Image
                       source={product.image}
@@ -74,22 +74,23 @@ const CategoryList = () => {
                         borderWidth: 1,
                         borderColor: '#e8e8e8',
                       }}
-                      placeholder="이미지 없음"
+                      placeholder={require('@/assets/images/loading.png')}
+                      placeholderContentFit='cover'
                     />
                     <View className="flex-1">
                       <Text
-                        className="text-lg font-Pretendard-Medium text-[#20284F]"
+                        className="text-xl font-SpoqaMedium text-[#20284F]"
                         numberOfLines={2}
                         ellipsizeMode="tail">
                         {product.name}
                       </Text>
                       <View className="flex-row items-center">
                         <View className="w-full flex flex-row items-center mt-4">
-                          <Text className="text-lg text-[#20284F] font-semibold">
+                          <Text className="text-xl font-SpoqaMedium">
                             {FormatPrice(product.price)}
                           </Text>
                           <Text
-                            className="flex-1 text-gray-600 font-Pretendard-Light"
+                            className="flex-1 text-gray-600 font-SpoqaLight"
                             numberOfLines={1}
                             ellipsizeMode="tail">
                             {' '}

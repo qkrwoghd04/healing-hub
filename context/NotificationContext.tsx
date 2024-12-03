@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react'
-import * as Notifications from 'expo-notifications'
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
+import * as Notifications from 'expo-notifications';
 import { registerForPushNotificationsAsync } from '@/utils/registerForPushNotificationsAsync';
 
 interface NotificationContextType {
@@ -8,27 +8,21 @@ interface NotificationContextType {
   error: Error | null;
 }
 
-const NotificationContext = createContext<NotificationContextType | undefined>(
-  undefined
-)
+const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
 
-export const useNotifcation = () =>{
+export const useNotifcation = () => {
   const context = useContext(NotificationContext);
-  if( context === undefined) {
-    throw new Error(
-      "useNotification must be used within a NotificationProvider"
-    );
+  if (context === undefined) {
+    throw new Error('useNotification must be used within a NotificationProvider');
   }
   return context;
-}
+};
 
 interface NotificationProviderProps {
   children: ReactNode;
 }
 
-export const NotificationProvider: React.FC<NotificationProviderProps> = ({
-  children,
-}) => {
+export const NotificationProvider: React.FC<NotificationProviderProps> = ({ children }) => {
   const [expoPushToken, setExpoPushToken] = useState<string | null>(null);
   const [notification, setNotification] = useState<Notifications.Notification | null>(null);
   const [error, setError] = useState<Error | null>(null);
@@ -39,25 +33,23 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({
   useEffect(() => {
     registerForPushNotificationsAsync().then(
       (token) => setExpoPushToken(token),
-      (error) => setError(error)
+      (error) => setError(error),
     );
-  
+
     // 알림 리스너 설정
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
-        console.log("Notification Received", notification);
-        setNotification(notification); // 알림 상태 업데이트
-      });
-  
-    responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(
-          "Notification Response: ",
-          JSON.stringify(response, null, 2),
-          JSON.stringify(response.notification.request.content.data, null, 2)
-        );
-      });
-  
+    notificationListener.current = Notifications.addNotificationReceivedListener((notification) => {
+      console.log('Notification Received', notification);
+      setNotification(notification); // 알림 상태 업데이트
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener((response) => {
+      console.log(
+        'Notification Response: ',
+        JSON.stringify(response, null, 2),
+        JSON.stringify(response.notification.request.content.data, null, 2),
+      );
+    });
+
     // 클린업 함수 반환
     return () => {
       if (notificationListener.current) {
@@ -68,7 +60,6 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({
       }
     };
   }, []);
-  
 
   return (
     <NotificationContext.Provider value={{ expoPushToken, notification, error }}>

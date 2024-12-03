@@ -31,7 +31,7 @@ const Header: React.FC<HearderProps> = ({ name, iconRight, iconLeft, rightRoute,
         {iconLeft}
       </Pressable>
 
-      <Text className="text-2xl font-black font-Pretendard-Medium w-3/5 text-center">{name}</Text>
+      <Text className="text-2xl font-black font-SpoqaMedium w-3/5 text-center">{name}</Text>
 
       <Pressable onPress={handleNavigationRight} className="w-1/5 pl-8">
         {iconRight}

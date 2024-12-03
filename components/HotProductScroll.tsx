@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useCallback, memo } from 'react';
 import { Animated } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { View, Text, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 // Types
 //
-import { useProducts } from '@/context/ProductContext'
+import { useProducts } from '@/context/ProductContext';
 
 // Components
 import ProductSlide from './ProductSlide';
@@ -41,14 +41,10 @@ const HotProductScroll = () => {
       <View className="flex-row justify-start items-center px-3 py-2">
         <Animated.Text
           style={[
-            { opacity }, // Apply the animated opacity value
-            {
-              fontSize: 24,
-              fontWeight: 'medium',
-              marginRight: 8,
-              color: '#FFC300',
-            },
-          ]}>
+            { opacity },
+          ]}
+          className='font-SpoqaMedium text-2xl mr-2 color-[#fcd24a]'
+          >
           인기 상품
         </Animated.Text>
         <FontAwesome name="thumbs-o-up" size={24} color="black" style={{ marginTop: 5 }} />
@@ -57,12 +53,9 @@ const HotProductScroll = () => {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 12, gap: 20 }}>
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => <ProductSlide key={product.id} item={product} />)
-        ) : (
-          <Text>No products available</Text>
-        )}
+        contentContainerStyle={{ paddingHorizontal: 12, gap: 20 }}
+      >
+        {filteredProducts.map((product) => <ProductSlide key={product.id} item={product} />)}
       </ScrollView>
     </View>
   );

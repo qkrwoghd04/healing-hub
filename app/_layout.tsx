@@ -5,7 +5,7 @@ import { ProductProvider } from '../context/ProductContext';
 import { useEffect } from 'react';
 import '../global.css';
 import { NotificationProvider } from '@/context/NotificationContext';
-import * as Notifications from 'expo-notifications'
+import * as Notifications from 'expo-notifications';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -55,11 +55,10 @@ const RootLayout = () => {
             name="sendNotification"
             options={{
               presentation: 'transparentModal',
-              headerShown: false
+              headerShown: false,
             }}
           />
         </Stack>
-
       </NotificationProvider>
     </ProductProvider>
   );

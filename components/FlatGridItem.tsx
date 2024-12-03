@@ -3,7 +3,7 @@ import { View, Text, Pressable, Animated } from 'react-native';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { Asset } from 'expo-asset';
-import { usePressAnimation } from '@/hook/usePressAnimation'
+import { usePressAnimation } from '@/hook/usePressAnimation';
 
 interface ItemProps {
   name: string;
@@ -17,15 +17,15 @@ export function FlatGridItem({ name, imgKey, categoryImages, setName }: ItemProp
   const router = useRouter();
 
   return (
-    <Animated.View style={{ transform: [{scale : scaleValue}]}}>
+    <Animated.View style={{ transform: [{ scale: scaleValue }] }}>
       <Pressable
         {...pressHandlers(() =>
           router.push({
             pathname: '/category/categoryList',
             params: { category: name },
-          }))}
-        >
-        <View className="justify-center items-center rounded-xl px-3 h-[130px] font-Pretendard-Light border-[1px] border-gray-300">
+          }),
+        )}>
+        <View className="justify-center items-center rounded-xl px-3 h-[130px] border-[1px] border-gray-300">
           {categoryImages[imgKey] ? (
             <Image
               source={categoryImages[imgKey][0].uri}
@@ -36,7 +36,7 @@ export function FlatGridItem({ name, imgKey, categoryImages, setName }: ItemProp
               }}
             />
           ) : null}
-          {setName && <Text className="mt-2 text-center text-[14px]">{name}</Text>}
+          {setName && <Text className="mt-2 text-center font-SpoqaMedium text-[14px]">{name}</Text>}
         </View>
       </Pressable>
     </Animated.View>

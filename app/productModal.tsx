@@ -43,9 +43,9 @@ const Modal = () => {
         {/* Product Info */}
 
         <View className="w-full flex-col justify-center items-start p-2 my-4 gap-2">
-          <Text className="text-2xl font-Pretendard-Medium">{name}</Text>
-          <Text className="text-xl font-Pretendard-Medium text-gray-700">{description}</Text>
-          <Text className="text-2xl font-extrabold">{FormatPrice(price)}</Text>
+          <Text className="text-2xl font-SpoqaMedium">{name}</Text>
+          <Text className="text-xl font-SpoqaMedium text-gray">{description}</Text>
+          <Text className="text-2xl font-SpoqaBold">{FormatPrice(price)}</Text>
         </View>
         {/* 긴 이미지 */}
         <DetailImage uri={product_detail_url} />

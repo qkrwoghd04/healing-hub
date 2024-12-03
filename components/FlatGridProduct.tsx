@@ -54,7 +54,7 @@ const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, t
       {/* Title */}
       {title && (
         <View className="flex-row justify-start items-center px-4 pt-2 gap-x-2">
-          <Text className="text-black text-2xl font-Pretendard-Medium">카테고리별</Text>
+          <Text className="text-black text-2xl font-SpoqaMedium">카테고리별</Text>
         </View>
       )}
       {/* FlatGrid */}

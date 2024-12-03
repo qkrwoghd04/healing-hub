@@ -4,7 +4,6 @@ import { Image } from 'expo-image';
 
 const DetailImage = ({ uri }: { uri: string }) => {
   const [imgHeight, setImgHeight] = useState(0);
-  console.log(imgHeight);
 
   return (
     <View className="w-full" style={{ height: imgHeight }}>
@@ -17,6 +16,8 @@ const DetailImage = ({ uri }: { uri: string }) => {
           borderWidth: 1,
           borderColor: '#e8e8e8',
         }}
+        placeholder={require('@/assets/images/loading.png')}
+        placeholderContentFit='cover'
         transition={300}
         priority="normal"
         onLoad={(event) => {

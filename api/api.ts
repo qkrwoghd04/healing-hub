@@ -108,26 +108,28 @@ export const deleteProduct = async (id: string): Promise<void> => {
   }
 };
 
-
-export const registerPushNotification = async (id: string, pushToken: string): Promise<PushNotification> => {
-  const formData = new FormData()
+export const registerPushNotification = async (
+  id: string,
+  pushToken: string,
+): Promise<PushNotification> => {
+  const formData = new FormData();
   try {
-    formData.append('id', id)
-    formData.append('pushToken', pushToken)
+    formData.append('id', id);
+    formData.append('pushToken', pushToken);
 
     const response = await URL.post<PushNotification>('/push/register', formData, {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
+    });
 
-    return response.data
+    return response.data;
   } catch (error) {
-    console.log(formData)
-    console.error('Error register token:', error)
-    throw error
+    console.log(formData);
+    console.error('Error register token:', error);
+    throw error;
   }
-}
+};
 
 export const deregisterPushNotification = async (id: string): Promise<void> => {
   try {
@@ -136,17 +138,17 @@ export const deregisterPushNotification = async (id: string): Promise<void> => {
     console.error('Error deleting pushToken:', error);
     throw error;
   }
-}
+};
 
-export const sendNotification = async (inputData: { 
-  title: string; 
-  body: string; 
-  data?: object; 
+export const sendNotification = async (inputData: {
+  title: string;
+  body: string;
+  data?: object;
 }): Promise<SendNotification> => {
   try {
     const response = await URL.post<SendNotification>('/push/send', inputData, {
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
       },
     });
     return response.data;

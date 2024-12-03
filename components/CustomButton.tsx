@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text, Animated } from 'react-native';
-import { usePressAnimation } from '@/hook/usePressAnimation'
+import { usePressAnimation } from '@/hook/usePressAnimation';
 
 interface ButtonProps {
   buttonStyle: string;
@@ -14,19 +14,16 @@ const CustomButton: React.FC<ButtonProps> = ({ buttonStyle, onPress, text, textS
 
   return (
     // <View className="relative w-full h-[70px] flex items-center">
-      <Animated.View 
-        style={{
-          transform: [{ scale: scaleValue }],
-          height: 70
-        }}
-      >
-        <Pressable
-          className={`${buttonStyle}`}
-          {...pressHandlers(onPress)}
-        >
-          <Text className={`${textStyle}`}>{text}</Text>
-        </Pressable>
-      </Animated.View>
+    <Animated.View
+      style={{
+        width: '95%',
+        transform: [{ scale: scaleValue }],
+        height: 70,
+      }}>
+      <Pressable className={`${buttonStyle}`} {...pressHandlers(onPress)}>
+        <Text className={`${textStyle}`}>{text}</Text>
+      </Pressable>
+    </Animated.View>
     // </View>
   );
 };

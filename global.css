@@ -7,9 +7,9 @@
     @apply w-[90%] h-12 my-3 border border-gray-400 rounded-lg p-2.5;
   }
   .cancelButton {
-    @apply w-[150px] h-16 p-2 border-2 border-blue rounded-lg flex justify-center items-center
+    @apply w-[150px] h-16 p-2 border-2 border-blue rounded-lg flex justify-center items-center;
   }
   .confirmButton {
-    @apply w-[150px] h-16 p-2 bg-blue rounded-lg flex justify-center items-center
+    @apply w-[150px] h-16 p-2 bg-blue rounded-lg flex justify-center items-center;
   }
 }

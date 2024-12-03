@@ -1,12 +1,11 @@
 import express from 'express';
 import { Expo } from 'expo-server-sdk';
-import {
-  DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
   DynamoDBDocumentClient,
   PutCommand,
   DeleteCommand,
-  ScanCommand
+  ScanCommand,
 } from '@aws-sdk/lib-dynamodb';
 
 const router = express.Router();
@@ -36,8 +35,8 @@ router.post('/register', async (req, res) => {
       Item: {
         id,
         pushToken,
-        createdAt: new Date().toISOString()
-      }
+        createdAt: new Date().toISOString(),
+      },
     };
 
     await ddbDocClient.send(new PutCommand(params));
@@ -54,7 +53,7 @@ router.delete('/deregister/:id', async (req, res) => {
   try {
     const params = {
       TableName: EXPO_TOKEN_TABLE,
-      Key: { id }
+      Key: { id },
     };
 
     await ddbDocClient.send(new DeleteCommand(params));
@@ -71,19 +70,19 @@ router.post('/send', async (req, res) => {
   try {
     // Fetch all tokens
     const scanParams = {
-      TableName: EXPO_TOKEN_TABLE
+      TableName: EXPO_TOKEN_TABLE,
     };
     const { Items: tokens } = await ddbDocClient.send(new ScanCommand(scanParams));
 
     // Prepare messages
     const messages = tokens
-      .filter(tokenData => Expo.isExpoPushToken(tokenData.pushToken))
-      .map(tokenData => ({
+      .filter((tokenData) => Expo.isExpoPushToken(tokenData.pushToken))
+      .map((tokenData) => ({
         to: tokenData.pushToken,
         sound: 'default',
         title,
         body,
-        data: data || {}
+        data: data || {},
       }));
 
     // Chunk notifications to optimize sending
@@ -102,13 +101,13 @@ router.post('/send', async (req, res) => {
 
     // Optional: Handle receipts (you can expand this if needed)
     const receiptIds = tickets
-      .filter(ticket => ticket.status === 'ok')
-      .map(ticket => ticket.id);
+      .filter((ticket) => ticket.status === 'ok')
+      .map((ticket) => ticket.id);
 
-    res.json({ 
-      message: 'Notifications sent successfully', 
+    res.json({
+      message: 'Notifications sent successfully',
       ticketCount: tickets.length,
-      successfulTickets: receiptIds.length 
+      successfulTickets: receiptIds.length,
     });
   } catch (error) {
     console.error('Error sending notifications:', error);

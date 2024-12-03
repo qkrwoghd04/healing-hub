@@ -12,7 +12,8 @@
     },
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.jaehongpark.HealingHub"
     },
     "android": {
       "adaptiveIcon": {
@@ -40,7 +41,14 @@
             "./assets/images/omega3.png",
             "./assets/images/others.png",
             "./assets/images/vitamin.png",
-            "./assets/images/shop.jpg"
+            "./assets/images/shop.jpg",
+            "./assets/images/loading.png",
+            "./assets/images/step1.jpg",
+            "./assets/images/step2.jpg",
+            "./assets/images/step3.jpg",
+            "./assets/images/step4.jpg",
+            "./assets/images/step5.jpg",
+            "./assets/images/step6.jpg"
           ]
         }
       ],
@@ -59,7 +67,6 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#20284F"
-          
         }
       ],
       "expo-build-properties"

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Text, View, SafeAreaView, Pressable} from 'react-native';
+import { Text, View, SafeAreaView, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { router } from 'expo-router';
-
 
 // Components
 import Header from '../../../components/Header';
@@ -14,19 +13,18 @@ type AdminMenuItem = {
   code: string;
   route: '/mngProduct' | '/mngPost' | '/sendNotification';
 };
-const items:AdminMenuItem[] = [
+const items: AdminMenuItem[] = [
   { name: '상품 관리', code: '#1abc9c', route: '/mngProduct' },
   { name: '글 관리', code: '#3498db', route: '/mngPost' },
   { name: '알림 보내기', code: '#9b59b6', route: '/sendNotification' },
 ];
 
-
 const AdminHome = () => {
   console.log('[Admin Home] Rendered');
   const [modalVisible, setModalVisible] = useState(false);
 
-  function pressCatagory(item:AdminMenuItem) {
-    router.push(item.route)
+  function pressCatagory(item: AdminMenuItem) {
+    router.push(item.route);
   }
 
   return (
@@ -43,13 +41,13 @@ const AdminHome = () => {
         style={[{ paddingTop: 10 }, { paddingBottom: 10 }, { flex: 1 }]}
         spacing={10}
         renderItem={({ item }) => (
-            <Pressable onPress={() => pressCatagory(item)}>
-              <View
-                className="items-center justify-center rounded-xl p-4 h-[100px]"
-                style={{ backgroundColor: item.code }}>
-                <Text className="font-Pretendard-Medium text-2xl text-white">{item.name}</Text>
-              </View>
-            </Pressable>
+          <Pressable onPress={() => pressCatagory(item)}>
+            <View
+              className="items-center justify-center rounded-xl p-4 h-[100px]"
+              style={{ backgroundColor: item.code }}>
+              <Text className="font-Pretendard-Medium text-2xl text-white">{item.name}</Text>
+            </View>
+          </Pressable>
         )}
       />
       {/* Add Button */}

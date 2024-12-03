@@ -4,7 +4,7 @@ export type PushNotification = {
 };
 
 export type SendNotification = {
-  title: string
-  body: string
-  data?: object | undefined
-}
+  title: string;
+  body: string;
+  data?: object | undefined;
+};

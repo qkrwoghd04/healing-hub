@@ -166,11 +166,11 @@ const Walk = () => {
           <View className="flex-1 p-2 justify-between">
             {/* Steps Interface*/}
             <View className="bg-white rounded-xl shadow-2xl p-4 opacity-90">
-              <Text className="text-2xl font-Pretendard-Medium mb-2">오늘 걸음 수</Text>
+              <Text className="text-2xl font-SpoqaBold mb-2">오늘 걸음 수</Text>
               <View className="flex-row justify-between">
-                <Text className="text-2xl mb-4">👟{currentStepCount}</Text>
-                <Text className="text-2xl mb-4">{CalculateKillometer(currentStepCount)}km</Text>
-                <Text className="text-2xl mb-4">{CalculateCalorie(currentStepCount)}kcal</Text>
+                <Text className="text-2xl mb-4 font-SpoqaMedium">👟{currentStepCount}</Text>
+                <Text className="text-2xl mb-4 font-SpoqaMedium">{CalculateKillometer(currentStepCount)}km</Text>
+                <Text className="text-2xl mb-4 font-SpoqaMedium">{CalculateCalorie(currentStepCount)}kcal</Text>
               </View>
               <View className="w-full h-2 bg-gray-100 rounded-full mt-2">
                 <Animated.View
@@ -199,7 +199,8 @@ const Walk = () => {
               {/* 권한 요청 버튼 */}
               {permissionDenied && (
                 <CustomButton
-                  backgroudColor="bg-blue-500"
+                  textStyle='text-3xl text-white'
+                  buttonStyle="w-full h-full flex justify-center items-center rounded-2xl bg-blue"
                   onPress={requestPermission}
                   text="만보기 권한 허용하기"
                 />
