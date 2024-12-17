@@ -3,7 +3,7 @@ import * as Notifications from 'expo-notifications';
 import { registerForPushNotificationsAsync } from '@/utils/registerForPushNotificationsAsync';
 
 interface NotificationContextType {
-  expoPushToken: string | null;
+  expoPushToken: string | undefined;
   notification: Notifications.Notification | null;
   error: Error | null;
 }
@@ -23,7 +23,7 @@ interface NotificationProviderProps {
 }
 
 export const NotificationProvider: React.FC<NotificationProviderProps> = ({ children }) => {
-  const [expoPushToken, setExpoPushToken] = useState<string | null>(null);
+  const [expoPushToken, setExpoPushToken] = useState<string>();
   const [notification, setNotification] = useState<Notifications.Notification | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
@@ -39,7 +39,7 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({ chil
     // 알림 리스너 설정
     notificationListener.current = Notifications.addNotificationReceivedListener((notification) => {
       console.log('Notification Received', notification);
-      setNotification(notification); // 알림 상태 업데이트
+      setNotification(notification);
     });
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener((response) => {
@@ -50,7 +50,7 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({ chil
       );
     });
 
-    // 클린업 함수 반환
+
     return () => {
       if (notificationListener.current) {
         Notifications.removeNotificationSubscription(notificationListener.current);

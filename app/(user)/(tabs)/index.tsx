@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, View, Linking } from 'react-native';
-import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 // Components
 import Header from '../../../components/Header';
@@ -31,14 +31,13 @@ const HomeScreen = () => {
   function makePhoneCall() {
     Linking.openURL('tel:010-4040-1669');
   }
+
   return (
     <SafeAreaView className="flex-1 relative">
       <View className="flex-1 items-center">
         <Header
           name="힐링 허브"
           iconRight={<MaterialIcons name="manage-accounts" size={48} color="black" />}
-          iconLeft={<AntDesign name="search1" size={28} color="black" />}
-          leftRoute="/search"
           rightRoute="/(admin)/login"
         />
         <HotProductScroll />

@@ -34,16 +34,6 @@ export default function AdminTabsLayout() {
           tabBarIcon: ({ color, size }) => <AntDesign name="home" size={size} color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="mngPost"
-        options={{
-          title: '글 관리',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="post-outline" size={size} color={color} />
-          ),
-        }}
-      />
     </Tabs>
   );
 }

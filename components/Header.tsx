@@ -33,7 +33,7 @@ const Header: React.FC<HearderProps> = ({ name, iconRight, iconLeft, rightRoute,
 
       <Text className="text-2xl font-black font-SpoqaMedium w-3/5 text-center">{name}</Text>
 
-      <Pressable onPress={handleNavigationRight} className="w-1/5 pl-8">
+      <Pressable onPress={handleNavigationRight} className="w-1/5 pl-4">
         {iconRight}
       </Pressable>
     </View>

@@ -11,11 +11,10 @@ import { FlatGrid } from 'react-native-super-grid';
 type AdminMenuItem = {
   name: string;
   code: string;
-  route: '/mngProduct' | '/mngPost' | '/sendNotification';
+  route: '/mngProduct' | '/sendNotification';
 };
 const items: AdminMenuItem[] = [
   { name: '상품 관리', code: '#1abc9c', route: '/mngProduct' },
-  { name: '글 관리', code: '#3498db', route: '/mngPost' },
   { name: '알림 보내기', code: '#9b59b6', route: '/sendNotification' },
 ];
 

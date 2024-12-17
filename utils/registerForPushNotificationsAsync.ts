@@ -5,6 +5,7 @@ import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { registerPushNotification, deregisterPushNotification } from '@/api/api';
 
+
 type PermissionStatus = 'granted' | 'denied' | 'undetermined';
 
 function normalizeDeviceId(deviceId: string): string {
@@ -93,22 +94,39 @@ async function handlePushNotificationRegistration(
     // 푸시 토큰 및 디바이스 ID 가져오기
     const pushTokenResponse = await Notifications.getExpoPushTokenAsync({ projectId });
     const pushTokenString = pushTokenResponse.data;
-    const deviceId = Device.osBuildFingerprint;
+    const deviceName = Device.deviceName;
+    const designName = Device.designName;
+    const deviceYear = Device.deviceYearClass;
 
-    if (!deviceId) {
-      throw new Error('No deviceId');
+    if (deviceName && designName && deviceYear) {
+      const customId = deviceName + deviceYear + designName;
+      const id = normalizeDeviceId(customId)
+      await registerPushNotification(id, pushTokenString);
+
+      // 토큰과 디바이스 ID 저장
+      await AsyncStorage.setItem('pushToken', pushTokenString);
+      await AsyncStorage.setItem('deviceId', id);
+      await AsyncStorage.setItem('permissionStatus', 'granted');
+
+      return pushTokenString;
+    } else {
+      const deviceId = Device.osBuildId;
+
+      if (!deviceId) {
+        throw new Error('No deviceId');
+      }
+      const id = normalizeDeviceId(deviceId)
+
+      // 푸시 알림 등록
+      await registerPushNotification(id, pushTokenString);
+
+      // 토큰과 디바이스 ID 저장
+      await AsyncStorage.setItem('pushToken', pushTokenString);
+      await AsyncStorage.setItem('deviceId', id);
+      await AsyncStorage.setItem('permissionStatus', 'granted');
+
+      return pushTokenString;
     }
-    const id = normalizeDeviceId(deviceId);
-    console.log(id);
-    // 푸시 알림 등록
-    await registerPushNotification(id, pushTokenString);
-
-    // 토큰과 디바이스 ID 저장
-    await AsyncStorage.setItem('pushToken', pushTokenString);
-    await AsyncStorage.setItem('deviceId', id);
-    await AsyncStorage.setItem('permissionStatus', 'granted');
-
-    return pushTokenString;
   } catch (error) {
     console.error('Push Notification Registration Error:', error);
     throw new Error(`Registration failed: ${error}`);

@@ -56,7 +56,10 @@
         "expo-build-properties",
         {
           "android": {
-            "enableProguardInReleaseBuilds": true
+            "enableProguardInReleaseBuilds": true,
+            "extraMavenRepos": [
+              "https://devrepo.kakao.com/nexus/content/groups/public/"
+            ]
           }
         }
       ],
@@ -69,7 +72,16 @@
           "backgroundColor": "#20284F"
         }
       ],
-      "expo-build-properties"
+      [
+        "@react-native-kakao/core",
+        {
+          "nativeAppKey": "e6b1b3f5e6e616b6f75e926f9514ba8e",
+          "android": {
+            "authCodeHandlerActivity": true
+          }
+          
+        }
+      ]
     ],
     "extra": {
       "eas": {

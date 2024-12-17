@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { SafeAreaView, Text, View, Alert, Linking } from 'react-native';
 import { ImageBackground } from 'expo-image';
 import { Pedometer } from 'expo-sensors';
@@ -23,16 +23,16 @@ const selectStepImage = (steps: number) => {
   }
 };
 
+
 const Walk = () => {
-  console.log('[Pedometer] Rendered');
   const [currentStepCount, setCurrentStepCount] = useState(0);
   const [permissionDenied, setPermissionDenied] = useState(true);
   const animationRef = useRef<LottieView | null>(null);
   const subscriptionRef = useRef<any>(null);
 
-  const handlePress = useCallback(async () => {
+  const handlePress = async () => {
     await Linking.openSettings();
-  }, []);
+  }
 
   const emojiPositionStyle = useAnimatedStyle(() => {
     const progress = Math.min((currentStepCount / 10000) * 100, 100);
@@ -60,24 +60,25 @@ const Walk = () => {
   }, []);
 
   const loadSavedData = async () => {
+
     try {
+      const today = new Date().toDateString();
+
       const savedCurrentSteps = await AsyncStorage.getItem('currentSteps');
       const lastUpdateDate = await AsyncStorage.getItem('lastUpdateDate');
 
-      const today = new Date().toDateString();
-
       if (lastUpdateDate !== today) {
-        // Date has changed, move current steps to past steps
+        // 마지막으로 업데이트 된 날짜와 오늘의 날짜 비교
         if (savedCurrentSteps) {
           await AsyncStorage.setItem('pastSteps', savedCurrentSteps);
         }
-        // Reset current steps to 0
+
         await AsyncStorage.setItem('currentSteps', '0');
         setCurrentStepCount(0);
-        // Update date
+
         await AsyncStorage.setItem('lastUpdateDate', today);
       } else {
-        setCurrentStepCount(parseInt(savedCurrentSteps || '0', 10));
+        setCurrentStepCount(parseInt(savedCurrentSteps || "0", 10));
       }
     } catch (error) {
       console.error('Error loading saved data:', error);
@@ -150,12 +151,13 @@ const Walk = () => {
   function CalculateKillometer(step: number) {
     return ((currentStepCount * 0.4) / 1000).toFixed(2);
   }
+
   function CalculateCalorie(step: number) {
     return (currentStepCount * 0.0336).toFixed(1);
   }
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 relative">
       <ImageBackground
         source={selectStepImage(currentStepCount)}
         style={{
@@ -194,7 +196,7 @@ const Walk = () => {
                   width: 200,
                   height: 200,
                 }}
-                source={require('../../../../assets/walking.json')}
+                source={require('@/assets/walking.json')}
               />
               {/* 권한 요청 버튼 */}
               {permissionDenied && (
@@ -209,7 +211,9 @@ const Walk = () => {
           </View>
         </SafeAreaView>
       </ImageBackground>
+
     </View>
+
   );
 };
 

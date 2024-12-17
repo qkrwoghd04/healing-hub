@@ -55,17 +55,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="userInfo"
+        name="login"
         options={{
-          title: '내 정보',
+          title: '로그인',
           headerShown: false,
-          tabBarIcon: ({ color, size }) => <FontAwesome5 name="user" size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="search"
-        options={{
-          href: null,
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="questioncircleo" size={size} color={color} />
+          ),
         }}
       />
     </Tabs>
