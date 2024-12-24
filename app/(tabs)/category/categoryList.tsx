@@ -4,16 +4,16 @@ import { EvilIcons } from '@expo/vector-icons';
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
 // API and Context
-import { useProducts } from '../../../../context/ProductContext';
+import { useProducts } from '../../../context/ProductContext';
 
 // components
-import { FormatPrice } from '../../../../components/functions/FormatPrice';
+import { FormatPrice } from '../../../components/functions/FormatPrice';
 // import { ErrorMessage } from '../../../../components/ErrorMessage';
 // import { LoadingSpinner } from '../../../../components/LoadingSpinner';
 
 //type
-import { Product } from '../../../../types/Product';
-import Header from '@/components/Header';
+import { Product } from '../../../types/Product';
+import Header from '@/components/CustomHeader';
 
 const CategoryList = () => {
   const { category } = useLocalSearchParams<{ category: string }>();
@@ -34,13 +34,13 @@ const CategoryList = () => {
   return (
     <SafeAreaView className="h-full w-full">
       <View className="w-full h-full">
-        {/* Category Title */}
+        {/* 카테고리 헤더 */}
         <Header
           name={category}
           iconRight={<EvilIcons name="close" size={48} color="black" />}
-          rightRoute="/(user)/(tabs)/category"
+          rightRoute="/(tabs)/category"
         />
-        {/* Product List in ScrollView */}
+        {/* 스크롤 뷰를 통한 상품 리스트 */}
         <ScrollView
           className="flex-1"
           contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>

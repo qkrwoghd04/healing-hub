@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { View, Text, ListRenderItem } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import { Asset } from 'expo-asset';
+
 import { CategoryImgMap } from '../types/Product';
 import { FlatGridItem } from './FlatGridItem';
 
@@ -18,35 +18,16 @@ interface CategoryItem {
 }
 
 const FlatGridProduct: React.FC<FlatGridProductProps> = ({ dimension, setName, title, height }) => {
-  const [categoryImages, setCategoryImages] = useState<Record<string, Asset[]>>({});
-
-  useEffect(() => {
-    const loadImages = async () => {
-      const images = {
-        비타민_및_미네랄: await Asset.loadAsync(require('../assets/images/vitamin.png')),
-        콜라겐_및_피부건강: await Asset.loadAsync(require('../assets/images/collagen.png')),
-        소화_및_장_건강: await Asset.loadAsync(require('../assets/images/digestion.png')),
-        오메가3_및_혈관_건강: await Asset.loadAsync(require('../assets/images/omega3.png')),
-        관절_건강: await Asset.loadAsync(require('../assets/images/joint.png')),
-        면역_강화: await Asset.loadAsync(require('../assets/images/immune.png')),
-        기타_건강_보조제: await Asset.loadAsync(require('../assets/images/others.png')),
-      };
-      setCategoryImages(images);
-    };
-
-    loadImages();
-  }, []);
 
   const renderItem: ListRenderItem<CategoryItem> = useCallback(
     ({ item }) => (
       <FlatGridItem
         name={item.name}
         imgKey={item.imgKey}
-        categoryImages={categoryImages}
         setName={setName}
       />
     ),
-    [categoryImages, setName],
+    [setName],
   );
 
   return (

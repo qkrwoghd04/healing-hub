@@ -30,11 +30,11 @@ export type ProductForm = Pick<
 >;
 
 export const CategoryImgMap = [
-  { name: '비타민 및 미네랄', imgKey: '비타민_및_미네랄' },
-  { name: '콜라겐 및 피부건강', imgKey: '콜라겐_및_피부건강' },
-  { name: '소화 및 장 건강', imgKey: '소화_및_장_건강' },
-  { name: '오메가3 및 혈관 건강', imgKey: '오메가3_및_혈관_건강' },
-  { name: '관절 건강', imgKey: '관절_건강' },
-  { name: '면역 강화', imgKey: '면역_강화' },
-  { name: '기타 건강 보조제', imgKey: '기타_건강_보조제' },
+  { name: '비타민 및 미네랄', imgKey: 'vitamin' },
+  { name: '콜라겐 및 피부건강', imgKey: 'collagen' },
+  { name: '소화 및 장 건강', imgKey: 'digestion' },
+  { name: '오메가3 및 혈관 건강', imgKey: 'omega3' },
+  { name: '관절 건강', imgKey: 'joint' },
+  { name: '면역 강화', imgKey: 'immune' },
+  { name: '기타 건강 보조제', imgKey: 'others' },
 ];

@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView } from 'react-native';
 
 //components
 // import SearchBar from '../../../components/SearchBar'
-import FlatGrid from '../../../../components/FlatGridProduct';
+import FlatGrid from '../../../components/FlatGridProduct';
 
 const CategroyScreen = () => {
   console.log('[Category Index] Rendered');

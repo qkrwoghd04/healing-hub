@@ -13,7 +13,6 @@ const CustomButton: React.FC<ButtonProps> = ({ buttonStyle, onPress, text, textS
   const { scaleValue, pressHandlers } = usePressAnimation();
 
   return (
-    // <View className="relative w-full h-[70px] flex items-center">
     <Animated.View
       style={{
         width: '100%',
@@ -27,7 +26,6 @@ const CustomButton: React.FC<ButtonProps> = ({ buttonStyle, onPress, text, textS
         <Text className={`${textStyle}`}>{text}</Text>
       </Pressable>
     </Animated.View>
-    // </View>
   );
 };
 

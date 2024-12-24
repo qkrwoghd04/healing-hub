@@ -2,17 +2,15 @@ import React from 'react';
 import { View, Text, Pressable, Animated } from 'react-native';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
-import { Asset } from 'expo-asset';
 import { usePressAnimation } from '@/hook/usePressAnimation';
 
 interface ItemProps {
   name: string;
-  imgKey: string;
-  categoryImages: Record<string, Asset[]>;
+  imgKey: string; //app.json에 정의된 이미지 에셋의 이름
   setName: boolean;
 }
 
-export function FlatGridItem({ name, imgKey, categoryImages, setName }: ItemProps): JSX.Element {
+export function FlatGridItem({ name, imgKey, setName }: ItemProps): JSX.Element {
   const { scaleValue, pressHandlers } = usePressAnimation();
   const router = useRouter();
 
@@ -26,9 +24,9 @@ export function FlatGridItem({ name, imgKey, categoryImages, setName }: ItemProp
           }),
         )}>
         <View className="justify-center items-center rounded-xl px-3 h-[130px] border-[1px] border-gray-300">
-          {categoryImages[imgKey] ? (
+          {imgKey ? (
             <Image
-              source={categoryImages[imgKey][0].uri}
+              source={imgKey}
               style={{
                 marginBottom: 2,
                 width: 56,

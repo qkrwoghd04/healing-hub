@@ -1,12 +1,12 @@
 import React from 'react';
-import { SafeAreaView, View, Linking } from 'react-native';
+import { SafeAreaView, View, Linking, StatusBar } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 // Components
-import Header from '../../../components/Header';
-import HotProductScroll from '../../../components/HotProductScroll';
-import CallButton from '../../../components/CustomButton';
-import FlatGridProduct from '../../../components/FlatGridProduct';
+import Header from '../../components/CustomHeader';
+import HotProductScroll from '../../components/HotProductScroll';
+import CallButton from '../../components/CustomButton';
+import FlatGridProduct from '../../components/FlatGridProduct';
 // import { LoadingSpinner } from '../../../components/LoadingSpinner';
 // import { ErrorMessage } from '../../../components/ErrorMessage';
 // API
@@ -33,15 +33,16 @@ const HomeScreen = () => {
   }
 
   return (
-    <SafeAreaView className="flex-1 relative">
-      <View className="flex-1 items-center">
+    <SafeAreaView className="flex-1 relative bg-gray-100">
+      <StatusBar backgroundColor={'#f3f4f6'} />
+      <View className="flex-1">
         <Header
           name="힐링 허브"
           iconRight={<MaterialIcons name="manage-accounts" size={48} color="black" />}
           rightRoute="/(admin)/login"
         />
         <HotProductScroll />
-        <FlatGridProduct dimension={80} setName={true} title={true} height="h-[45%]" />
+        <FlatGridProduct dimension={100} setName={true} title={false} height="h-[47%]" />
         <CallButton
           onPress={makePhoneCall}
           buttonStyle="w-[95%] h-full flex justify-center items-center rounded-2xl bg-navy"

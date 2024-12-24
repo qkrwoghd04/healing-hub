@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 import { router } from 'expo-router';
 
 // Components
-import Header from '../../../components/Header';
+import Header from '../../../components/CustomHeader';
 import AddProductModal from '../../../components/modals/AdminProductModal';
 import { FlatGrid } from 'react-native-super-grid';
 
@@ -32,7 +32,7 @@ const AdminHome = () => {
       <Header
         name="Admin Home"
         iconRight={<Feather name="home" size={30} color="black" />}
-        rightRoute="/(user)/(tabs)"
+        rightRoute="/(admin)/(adminTabs)"
       />
       <FlatGrid
         itemDimension={130}

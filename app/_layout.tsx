@@ -17,6 +17,10 @@ Notifications.setNotificationHandler({
 
 SplashScreen.preventAutoHideAsync();
 
+export const unstable_settings = {
+  initialRouteName: '(tabs)/index',
+}
+
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
     'Pretendard-Light': require('../assets/fonts/Pretendard-Light.ttf'),
@@ -39,8 +43,8 @@ const RootLayout = () => {
   return (
     <ProductProvider>
       <NotificationProvider>
-        <Stack initialRouteName="(user)">
-          <Stack.Screen name="(user)" options={{ headerShown: false }} />
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="(admin)" options={{ headerShown: false }} />
           <Stack.Screen
             name="productModal"
