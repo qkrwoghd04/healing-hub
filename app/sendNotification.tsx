@@ -13,76 +13,75 @@ const SendNotification = () => {
   const [data, setData] = useState<object>();
 
   return (
-      <Animated.View entering={FadeIn} style={styles.background}>
+    <Animated.View entering={FadeIn} style={styles.background}>
+      <Animated.View entering={SlideInDown} style={styles.pushContainer}>
+        <View style={{ flex: 1, width: '100%', padding: 10 }}>
+          <View style={styles.headerContainer}>
+            <Text className="pt-4 font-SpoqaMedium text-2xl text-blue">Push 알림 보내기 ✉️</Text>
+          </View>
 
+          <View style={styles.inputContainer}>
+            <CustomTextInput
+              placeholder="알림 제목"
+              onChangeText={setTitle}
+              value={title}
+            />
 
-        <Animated.View entering={SlideInDown} style={styles.pushContainer}>
-          <View style={{ flex: 1, width: '100%', padding: 10 }}>
-            <View style={styles.headerContainer}>
-              <Text className="pt-4 font-SpoqaMedium text-2xl text-blue">Push 알림 보내기 ✉️</Text>
+            <CustomTextInput
+              placeholder="새로운 상품이 등록되었습니다!"
+              onChangeText={setBody}
+              value={body}
+            />
+          </View>
+
+          <View style={styles.footerContainer}>
+            <View style={styles.buttonContainer}>
+              <CustomButton
+                buttonStyle=" w-[150px] h-16 p-2 border-2 border-blue rounded-lg flex justify-center items-center"
+                textStyle="text-2xl font-Pretendard-Medium text-blue"
+                onPress={() => router.push('..')}
+                text="취소"
+              />
             </View>
 
-            <View style={styles.inputContainer}>
-              <CustomTextInput
-                placeholder="알림 제목"
-                onChangeText={setTitle}
-                value={title}
-              />
+            <View style={styles.buttonContainer}>
+              <CustomButton
+                buttonStyle="w-[150px] h-16 p-2 bg-blue rounded-lg flex justify-center items-center"
+                textStyle="text-2xl font-Pretendard-Medium color-white"
+                onPress={() => {
+                  const jsonData = {
+                    title,
+                    body,
+                    data: data || {},
+                  };
 
-              <CustomTextInput
-                placeholder="새로운 상품이 등록되었습니다!"
-                onChangeText={setBody}
-                value={body}
-              />
-            </View>
-
-            <View style={styles.footerContainer}>
-              <View style={styles.buttonContainer}>
-                <CustomButton
-                  buttonStyle=" w-[150px] h-16 p-2 border-2 border-blue rounded-lg flex justify-center items-center"
-                  textStyle="text-2xl font-Pretendard-Medium text-blue"
-                  onPress={() => router.push('..')}
-                  text="취소"
-                />
-              </View>
-              <View style={styles.buttonContainer}>
-                <CustomButton
-                  buttonStyle="w-[150px] h-16 p-2 bg-blue rounded-lg flex justify-center items-center"
-                  textStyle="text-2xl font-Pretendard-Medium color-white"
-                  onPress={() => {
-                    const jsonData = {
-                      title,
-                      body,
-                      data: data || {},
-                    };
-
-                    Alert.alert('알림을 전송하시겠습니까?', '한번 전송시 요금이 발생할 수 있습니다', [
-                      {
-                        text: '확인',
-                        onPress: async () => {
-                          try {
-                            await sendNotification(jsonData);
-                            Alert.alert('알림을 전송했습니다🔔');
-                            router.push('..');
-                          } catch (error) {
-                            console.error('Failed to send notification:', error);
-                          }
-                        },
+                  Alert.alert('알림을 전송하시겠습니까?', '한번 전송시 요금이 발생할 수 있습니다', [
+                    {
+                      text: '확인',
+                      onPress: async () => {
+                        try {
+                          await sendNotification(jsonData);
+                          Alert.alert('알림을 전송했습니다🔔');
+                          router.push('..');
+                        } catch (error) {
+                          console.error('Failed to send notification:', error);
+                        }
                       },
-                      {
-                        text: '취소',
-                        onPress: () => console.log('Cancel Pressed'),
-                        style: 'cancel',
-                      },
-                    ]);
-                  }}
-                  text="확인"
-                />
-              </View>
+                    },
+                    {
+                      text: '취소',
+                      onPress: () => console.log('Cancel Pressed'),
+                      style: 'cancel',
+                    },
+                  ]);
+                }}
+                text="확인"
+              />
             </View>
           </View>
-        </Animated.View>
+        </View>
       </Animated.View>
+    </Animated.View>
   );
 };
 

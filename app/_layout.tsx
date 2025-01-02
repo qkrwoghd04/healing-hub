@@ -62,6 +62,13 @@ const RootLayout = () => {
               headerShown: false,
             }}
           />
+          <Stack.Screen
+            name="addProductModal"
+            options={{
+              presentation: 'transparentModal',
+              headerShown: false,
+            }}
+          />
         </Stack>
       </NotificationProvider>
     </ProductProvider>

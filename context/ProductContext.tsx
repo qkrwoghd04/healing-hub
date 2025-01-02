@@ -11,12 +11,12 @@ import { Product, ProductForm } from '@/types/Product';
 
 const ProductContext = createContext<
   | {
-      products: Product[];
-      addNewProduct: (productData: ProductForm) => Promise<Product>;
-      removeProduct: (id: string) => Promise<void>;
-      updateProduct: (id: string, productData: ProductForm) => Promise<Product>;
-      refreshProducts: () => Promise<void>;
-    }
+    products: Product[];
+    addNewProduct: (productData: ProductForm) => Promise<Product>;
+    removeProduct: (id: string) => Promise<void>;
+    updateProduct: (id: string, productData: ProductForm) => Promise<Product>;
+    refreshProducts: () => Promise<void>;
+  }
   | undefined
 >(undefined);
 
@@ -33,29 +33,30 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) =>
     setProducts(fetchedProducts);
   }, []);
 
+
   useEffect(() => {
     loadProducts();
-  }, [loadProducts]);
+  }, []);
 
   // 상품 추가
-  const addNewProduct = useCallback(async (productData: ProductForm) => {
+  const addNewProduct = async (productData: ProductForm) => {
     const newProduct = await addProduct(productData);
     setProducts((prev) => [...prev, newProduct]);
     return newProduct;
-  }, []);
+  };
 
   // 상품 삭제
-  const removeProduct = useCallback(async (id: string) => {
+  const removeProduct = async (id: string) => {
     await deleteProduct(id);
     setProducts((prev) => prev.filter((p) => p.id !== id));
-  }, []);
+  };
 
   // 상품 업데이트
-  const updateProduct = useCallback(async (id: string, productData: ProductForm) => {
+  const updateProduct = async (id: string, productData: ProductForm) => {
     const updatedProduct = await patchProduct(id, productData);
     setProducts((prev) => prev.map((product) => (product.id === id ? updatedProduct : product)));
     return updatedProduct;
-  }, []);
+  };
 
   // 상품 새로고침
   const refreshProducts = useCallback(async () => {

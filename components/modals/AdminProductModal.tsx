@@ -241,7 +241,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                   buttonStyle="w-[150px] h-16 p-2 bg-blue rounded-lg flex justify-center items-center"
                   textStyle="text-2xl font-Pretendard-Medium color-white"
                   onPress={handleSubmit}
-                  text="수정"
+                  text="추가"
                 />
               </View>
             </View>

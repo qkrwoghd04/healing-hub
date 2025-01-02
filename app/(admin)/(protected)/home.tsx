@@ -1,26 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, View, SafeAreaView, Pressable } from 'react-native';
-import { Feather } from '@expo/vector-icons';
 import { router } from 'expo-router';
 
 // Components
-import Header from '../../../components/CustomHeader';
-import AddProductModal from '../../../components/modals/AdminProductModal';
 import { FlatGrid } from 'react-native-super-grid';
 
 type AdminMenuItem = {
   name: string;
   code: string;
-  route: '/mngProduct' | '/sendNotification';
+  route: '/manage' | '/sendNotification' | '/addProductModal';
 };
 const items: AdminMenuItem[] = [
-  { name: '상품 관리', code: '#1abc9c', route: '/mngProduct' },
   { name: '알림 보내기', code: '#9b59b6', route: '/sendNotification' },
+  { name: '상품 추가', code: '#1abc9c', route: '/addProductModal' },
 ];
 
 const AdminHome = () => {
   console.log('[Admin Home] Rendered');
-  const [modalVisible, setModalVisible] = useState(false);
 
   function pressCatagory(item: AdminMenuItem) {
     router.push(item.route);
@@ -28,12 +24,7 @@ const AdminHome = () => {
 
   return (
     <SafeAreaView className="w-full h-full bg-white">
-      {/* Header */}
-      <Header
-        name="Admin Home"
-        iconRight={<Feather name="home" size={30} color="black" />}
-        rightRoute="/(admin)/(adminTabs)"
-      />
+
       <FlatGrid
         itemDimension={130}
         data={items}
@@ -49,15 +40,6 @@ const AdminHome = () => {
           </Pressable>
         )}
       />
-      {/* Add Button */}
-      <Pressable
-        className="absolute bottom-3 right-5 bg-[#20284F] p-2 rounded-lg"
-        onPress={() => setModalVisible(true)}>
-        <Text className="text-xl text-white font-pretendard-light">상품 추가</Text>
-      </Pressable>
-
-      {/* Product Modal */}
-      <AddProductModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </SafeAreaView>
   );
 };

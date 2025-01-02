@@ -6,23 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Animated, { useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import LottieView from 'lottie-react-native';
 import CustomButton from '@/components/CustomButton';
-
-const selectStepImage = (steps: number) => {
-  if (steps < 2000) {
-    return require('@/assets/images/step1.jpg');
-  } else if (steps < 4000) {
-    return require('@/assets/images/step2.jpg');
-  } else if (steps < 6000) {
-    return require('@/assets/images/step3.jpg');
-  } else if (steps < 8000) {
-    return require('@/assets/images/step4.jpg');
-  } else if (steps < 10000) {
-    return require('@/assets/images/step5.jpg');
-  } else {
-    return require('@/assets/images/step6.jpg');
-  }
-};
-
+import { SelectStepImage, CalculateKillometer, CalculateCalorie } from '@/components/functions/pedometerFunction';
 
 const Walk = () => {
   const [currentStepCount, setCurrentStepCount] = useState(0);
@@ -41,7 +25,6 @@ const Walk = () => {
       transform: [{ translateX: -10 }],
     };
   });
-
   // 만보기 계산
   const progressStyle = useAnimatedStyle(() => {
     const progress = Math.min((currentStepCount / 10000) * 100, 100);
@@ -60,7 +43,6 @@ const Walk = () => {
   }, []);
 
   const loadSavedData = async () => {
-
     try {
       const today = new Date().toDateString();
 
@@ -148,18 +130,10 @@ const Walk = () => {
     }
   };
 
-  function CalculateKillometer(step: number) {
-    return ((currentStepCount * 0.4) / 1000).toFixed(2);
-  }
-
-  function CalculateCalorie(step: number) {
-    return (currentStepCount * 0.0336).toFixed(1);
-  }
-
   return (
     <View className="flex-1 relative">
       <ImageBackground
-        source={selectStepImage(currentStepCount)}
+        source={SelectStepImage(currentStepCount)}
         style={{
           flex: 1,
         }}
