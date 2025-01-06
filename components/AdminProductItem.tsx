@@ -5,14 +5,14 @@ import { memo } from 'react'
 import { FormatPrice } from './functions/FormatPrice'
 import { Entypo } from '@expo/vector-icons'
 
-const AdminProductItem = memo(({ item, onDeletePress, onProductPress }: {
+const AdminProductItem = memo(({ item, onDeletePress, onUpdatePress }: {
   item: Product;
   onDeletePress?: (id: string) => void;
-  onProductPress?: (product: Product) => void;
+  onUpdatePress?: (product: Product) => void;
 }) => (
   <View className="w-full h-20 flex flex-row justify-start items-center my-1 border-b-[0.5px] border-gray-200">
     <Pressable
-      onPress={() => onProductPress?.(item)}
+      onPress={() => onUpdatePress?.(item)}
       className="flex-1 h-20 flex-row justify-start items-center">
       <View className="w-[15%] h-full mr-2">
         <Image

@@ -1,12 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { View, Text, Modal, TextInput, TouchableWithoutFeedback, Pressable } from 'react-native';
+import { View, Text, Modal, TouchableWithoutFeedback, Pressable } from 'react-native';
 import { Image } from 'expo-image';
 import { Keyboard, StyleSheet, Alert } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import * as ImagePicker from 'expo-image-picker';
-import { useProducts } from '../../context/ProductContext';
-import { ProductForm, Product } from '../../types/Product';
-import CustomButton from '../CustomButton';
+import { useProducts } from '@/context/ProductContext';
+import { ProductForm, Product } from '@/types/Product';
+import CustomButton from '@/components/CustomButton';
 import CustomTextInput from '@/components/CustomTextInput'
 
 interface DropdownItem {

@@ -8,7 +8,6 @@ import { FormatPrice } from '../components/functions/FormatPrice';
 import DetailImage from '../components/DetailImage';
 
 const Modal = () => {
-  console.log('모달 렌더링');
   const { id, name, price, image, description, product_detail_url } = useLocalSearchParams<{
     id: string;
     name: string;
@@ -19,7 +18,6 @@ const Modal = () => {
   }>();
 
   if (!id) return null;
-  console.log(image);
 
   return (
     <View className="relative w-full h-full bg-white">

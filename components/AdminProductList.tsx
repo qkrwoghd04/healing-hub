@@ -6,13 +6,13 @@ import AdminProductItem from '@/components/AdminProductItem'
 interface AdminProductListProps {
   products: Product[];
   onDeletePress?: (id: string) => void;
-  onProductPress?: (product: Product) => void;
+  onUpdatePress?: (product: Product) => void;
 }
 
 const AdminProductList: React.FC<AdminProductListProps> = ({
   products,
   onDeletePress,
-  onProductPress
+  onUpdatePress
 }) => {
   return (
     <FlatList
@@ -21,7 +21,7 @@ const AdminProductList: React.FC<AdminProductListProps> = ({
         <AdminProductItem
           item={item}
           onDeletePress={onDeletePress}
-          onProductPress={onProductPress}
+          onUpdatePress={onUpdatePress}
         />
       )}
       keyExtractor={item => item.id}
