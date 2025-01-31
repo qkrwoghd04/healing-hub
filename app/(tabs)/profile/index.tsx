@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
-import { View, Text, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
 import { Image } from 'expo-image';
+import { colors } from '@/utils/colors';
 
-const shopData = [
+const shopInfoData = [
   {
     id: 1,
     title: "매장 소개",
@@ -35,34 +36,69 @@ const shopData = [
 ];
 
 const Profile = () => {
-
   return (
-    <SafeAreaView className="w-full h-full flex flex-col justify-start items-center relative bg-white">
-      <View className="w-full h-full flex flex-col justify-center items-center mt-10">
-        {/* Shop Image */}
-        <View className="w-full h-[35%] relative px-2">
-          <Image source="shop" style={{ width: '100%', height: '100%', borderRadius: 10 }} />
-        </View>
-        {/* Shop Info */}
-        <View className="flex justify-center items-center w-full h-[70%] relative">
-          <ScrollView className="w-full h-full">
-            <View className="mt-4 px-4">
-              {shopData.map((obj) => {
-                return (
-                  <View key={obj.id} className="w-full mb-2 border-b-[1px] border-gray-300">
-                    <Text className="text-2xl font-SpoqaBold mb-1">{obj.title}</Text>
-                    <Text className="text-xl font-SpoqaMedium">
-                      {obj.content}
-                    </Text>
-                  </View>
-                )
-              })}
+    <SafeAreaView style={styles.profileContainer}>
+      {/* Shop Image */}
+      <View style={styles.shopImageContainer}>
+        <Image source="shop" style={styles.shopImage} />
+      </View>
+      {/* Shop Info */}
+      <View style={styles.shopInfoContainer}>
+
+        {shopInfoData.map((shopInfo) => {
+          return (
+            <View key={shopInfo.id} style={styles.shopInfoBox}>
+              <Text style={styles.shopInfotitle}>{shopInfo.title}</Text>
+              <Text style={styles.shopInfoContent}>
+                {shopInfo.content}
+              </Text>
             </View>
-          </ScrollView>
-        </View>
+          )
+        })}
+
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  profileContainer: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#fff"
+  },
+  shopImageContainer: {
+    height: "35%",
+    width: "auto",
+    paddingHorizontal: 8
+  },
+  shopImage: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 10
+  },
+  shopInfoContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 20,
+    paddingHorizontal: 10
+  },
+  shopInfoBox: {
+    width: "100%",
+    marginBottom: 8,
+    borderColor: colors.gray,
+    borderBottomWidth: 2,
+  },
+  shopInfotitle: {
+    fontSize: 24,
+    lineHeight: 32
+  },
+  shopInfoContent: {
+    fontSize: 18,
+    lineHeight: 28
+  }
+})
 
 export default memo(Profile);

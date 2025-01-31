@@ -1,27 +1,12 @@
 import React from 'react';
 import { SafeAreaView, Linking, StatusBar, StyleSheet } from 'react-native';
-import AntDesign from '@expo/vector-icons/AntDesign';
 // Components
 import Header from '../../components/Header';
-import HotProductScroll from '../../components/HotProductScroll';
 import Button from '../../components/Button';
+import HotProductScroll from '../../components/HotProductScroll';
 import FlatGridProduct from '../../components/FlatGridProduct';
 
 const HomeScreen = () => {
-
-  // if (loading) {
-  //   return <LoadingSpinner color="#0066cc" />;
-  // }
-
-  // if (error) {
-  //   return (
-  //     <ErrorMessage
-  //       error={error}
-  //       onRetry={refreshProducts}
-  //       message="상품 정보를 불러오는데 실패했습니다."
-  //     />
-  //   );
-  // }
   console.log('[Main Home] Rendered');
 
   const makePhoneCall = () => {
