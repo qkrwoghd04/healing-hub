@@ -38,7 +38,7 @@ const CategoryList = () => {
         <Header
           title={category}
           iconRight={<EvilIcons name="close" size={48} color="black" />}
-          rightRoute="/(tabs)/category"
+          rightRoute=".."
         />
         {/* 스크롤 뷰를 통한 상품 리스트 */}
         <ScrollView

@@ -1,6 +1,6 @@
 import React from 'react';
-import { SafeAreaView, View, Linking, StatusBar, StyleSheet } from 'react-native';
-
+import { SafeAreaView, Linking, StatusBar, StyleSheet } from 'react-native';
+import AntDesign from '@expo/vector-icons/AntDesign';
 // Components
 import Header from '../../components/Header';
 import HotProductScroll from '../../components/HotProductScroll';
@@ -31,7 +31,9 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.homeContainer}>
       <StatusBar backgroundColor={'#f3f4f6'} />
-      <Header title="힐링 허브" />
+      <Header
+        title="힐링 허브"
+      />
       <HotProductScroll />
       <FlatGridProduct dimension={100} setName={true} title={false} height="h-[47%]" />
       <Button

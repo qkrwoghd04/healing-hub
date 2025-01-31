@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 
 interface HearderProps {
@@ -10,34 +10,66 @@ interface HearderProps {
   leftRoute?: Href;
 }
 
-const Header: React.FC<HearderProps> = ({ title, iconRight, iconLeft, rightRoute, leftRoute }) => {
+const Header: React.FC<HearderProps> = ({
+  title,
+  iconRight,
+  iconLeft,
+  rightRoute,
+  leftRoute
+}) => {
   const router = useRouter();
 
-  const handleNavigationRight = () => {
-    if (rightRoute) {
-      router.push(rightRoute);
-    }
-  };
-
-  const handleNavigationLeft = () => {
-    if (leftRoute) {
-      router.push(leftRoute);
+  const handleNavigation = (route?: Href) => {
+    if (route) {
+      router.push(route);
     }
   };
 
   return (
-    <View className="relative w-full h-[7%] flex-row justify-between items-center mb-2">
-      <Pressable onPress={handleNavigationLeft} className="w-1/5 pl-4">
-        {iconLeft}
-      </Pressable>
+    <View style={styles.headerContainer}>
+      <View style={styles.iconContainer}>
+        <Pressable onPress={() => handleNavigation(leftRoute)}>
+          {iconLeft}
+        </Pressable>
+      </View>
 
-      <Text className="text-2xl font-black font-SpoqaMedium w-3/5 text-center">{title}</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title} numberOfLines={1}>{title}</Text>
+      </View>
 
-      <Pressable onPress={handleNavigationRight} className="w-1/5 pl-4">
-        {iconRight}
-      </Pressable>
+      <View style={styles.iconContainer}>
+        <Pressable onPress={() => handleNavigation(rightRoute)}>
+          {iconRight}
+        </Pressable>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  headerContainer: {
+    position: "relative",
+    width: "100%",
+    height: "auto",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingBottom: 8,
+    paddingHorizontal: 20
+  },
+  iconContainer: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  titleContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    lineHeight: 36,
+  }
+})
 
 export default Header;
