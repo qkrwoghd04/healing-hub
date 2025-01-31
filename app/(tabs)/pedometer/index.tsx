@@ -5,7 +5,7 @@ import { Pedometer } from 'expo-sensors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Animated, { useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import LottieView from 'lottie-react-native';
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/Button';
 import { SelectStepImage, CalculateKillometer, CalculateCalorie } from '@/components/functions/pedometerFunction';
 
 const Walk = () => {

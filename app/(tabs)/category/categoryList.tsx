@@ -13,7 +13,7 @@ import { FormatPrice } from '../../../components/functions/FormatPrice';
 
 //type
 import { Product } from '../../../types/Product';
-import Header from '@/components/CustomHeader';
+import Header from '@/components/Header';
 
 const CategoryList = () => {
   const { category } = useLocalSearchParams<{ category: string }>();
@@ -36,7 +36,7 @@ const CategoryList = () => {
       <View className="w-full h-full">
         {/* 카테고리 헤더 */}
         <Header
-          name={category}
+          title={category}
           iconRight={<EvilIcons name="close" size={48} color="black" />}
           rightRoute="/(tabs)/category"
         />

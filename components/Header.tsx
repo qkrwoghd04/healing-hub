@@ -3,14 +3,14 @@ import { View, Text, Pressable } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 
 interface HearderProps {
-  name: string;
+  title: string;
   iconRight?: ReactNode;
   iconLeft?: ReactNode;
   rightRoute?: Href;
   leftRoute?: Href;
 }
 
-const Header: React.FC<HearderProps> = ({ name, iconRight, iconLeft, rightRoute, leftRoute }) => {
+const Header: React.FC<HearderProps> = ({ title, iconRight, iconLeft, rightRoute, leftRoute }) => {
   const router = useRouter();
 
   const handleNavigationRight = () => {
@@ -31,7 +31,7 @@ const Header: React.FC<HearderProps> = ({ name, iconRight, iconLeft, rightRoute,
         {iconLeft}
       </Pressable>
 
-      <Text className="text-2xl font-black font-SpoqaMedium w-3/5 text-center">{name}</Text>
+      <Text className="text-2xl font-black font-SpoqaMedium w-3/5 text-center">{title}</Text>
 
       <Pressable onPress={handleNavigationRight} className="w-1/5 pl-4">
         {iconRight}

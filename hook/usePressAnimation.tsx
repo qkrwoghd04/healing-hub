@@ -4,7 +4,7 @@ import { useRef } from 'react';
 export const usePressAnimation = (initialScale = 1, pressedScale = 0.95) => {
   const scaleValue = useRef(new Animated.Value(initialScale)).current;
   const lastPressTime = useRef(0);
-  const PRESS_DEBOUNCE_TIME = 300;
+  const PRESS_DEBOUNCE_TIME = 200;
 
   const pressIn = () => {
     Animated.spring(scaleValue, {

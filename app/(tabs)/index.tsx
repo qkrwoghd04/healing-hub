@@ -1,15 +1,11 @@
 import React from 'react';
-import { SafeAreaView, View, Linking, StatusBar } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { SafeAreaView, View, Linking, StatusBar, StyleSheet } from 'react-native';
 
 // Components
-import Header from '../../components/CustomHeader';
+import Header from '../../components/Header';
 import HotProductScroll from '../../components/HotProductScroll';
-import CallButton from '../../components/CustomButton';
+import Button from '../../components/Button';
 import FlatGridProduct from '../../components/FlatGridProduct';
-// import { LoadingSpinner } from '../../../components/LoadingSpinner';
-// import { ErrorMessage } from '../../../components/ErrorMessage';
-// API
 
 const HomeScreen = () => {
 
@@ -28,30 +24,33 @@ const HomeScreen = () => {
   // }
   console.log('[Main Home] Rendered');
 
-  function makePhoneCall() {
+  const makePhoneCall = () => {
     Linking.openURL('tel:010-4040-1669');
   }
 
   return (
-    <SafeAreaView className="flex-1 relative bg-gray-100">
+    <SafeAreaView style={styles.homeContainer}>
       <StatusBar backgroundColor={'#f3f4f6'} />
-      <View className="flex-1">
-        <Header
-          name="힐링 허브"
-          iconRight={<MaterialIcons name="manage-accounts" size={48} color="black" />}
-          rightRoute="/(admin)/login"
-        />
-        <HotProductScroll />
-        <FlatGridProduct dimension={100} setName={true} title={false} height="h-[47%]" />
-        <CallButton
-          onPress={makePhoneCall}
-          buttonStyle="w-[95%] h-full flex justify-center items-center rounded-2xl bg-navy"
-          textStyle="text-4xl font-SpoqaMedium color-white"
-          text="매장 주문"
-        />
-      </View>
+      <Header title="힐링 허브" />
+      <HotProductScroll />
+      <FlatGridProduct dimension={100} setName={true} title={false} height="h-[47%]" />
+      <Button
+        onPress={makePhoneCall}
+        buttonStyle="primary"
+        text="매장 주문"
+        textSize="lg"
+      />
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  homeContainer: {
+    flex: 1,
+    backgroundColor: "rgb(253,253,253)",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+})
 
 export default HomeScreen;

@@ -45,7 +45,6 @@ const RootLayout = () => {
       <NotificationProvider>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(admin)" options={{ headerShown: false }} />
           <Stack.Screen
             name="productModal"
             options={{
@@ -53,20 +52,6 @@ const RootLayout = () => {
               headerShown: true,
               headerTitle: '상품 정보',
               headerTitleAlign: 'center',
-            }}
-          />
-          <Stack.Screen
-            name="sendNotification"
-            options={{
-              presentation: 'transparentModal',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="manageProductModal"
-            options={{
-              presentation: 'transparentModal',
-              headerShown: false,
             }}
           />
         </Stack>
