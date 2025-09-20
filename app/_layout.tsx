@@ -4,22 +4,22 @@ import { useFonts } from 'expo-font';
 import { ProductProvider } from '../context/ProductContext';
 import { useEffect } from 'react';
 import '../global.css';
-import { NotificationProvider } from '@/context/NotificationContext';
 import * as Notifications from 'expo-notifications';
+// import { NotificationProvider } from '@/context/NotificationContext';
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
+// Notifications.setNotificationHandler({
+//   handleNotification: async () => ({
+//     shouldShowAlert: true,
+//     shouldPlaySound: false,
+//     shouldSetBadge: false,
+//   }),
+// });
 
 SplashScreen.preventAutoHideAsync();
 
 export const unstable_settings = {
   initialRouteName: '(tabs)/index',
-}
+};
 
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
@@ -42,28 +42,28 @@ const RootLayout = () => {
 
   return (
     <ProductProvider>
-      <NotificationProvider>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(admin)" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="productModal"
-            options={{
-              presentation: 'modal',
-              headerShown: true,
-              headerTitle: '상품 정보',
-              headerTitleAlign: 'center',
-            }}
-          />
-          <Stack.Screen
-            name="sendNotification"
-            options={{
-              presentation: 'transparentModal',
-              headerShown: false,
-            }}
-          />
-        </Stack>
-      </NotificationProvider>
+      {/* <NotificationProvider> */}
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(admin)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="productModal"
+          options={{
+            presentation: 'modal',
+            headerShown: true,
+            headerTitle: '상품 정보',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="sendNotification"
+          options={{
+            presentation: 'transparentModal',
+            headerShown: false,
+          }}
+        />
+      </Stack>
+      {/* </NotificationProvider> */}
     </ProductProvider>
   );
 };

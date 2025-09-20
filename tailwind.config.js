@@ -5,18 +5,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'blue': '#4C80F1',
-        'navy': '#20284F',
-        'red' : '#E05D67',
+        blue: '#4C80F1',
+        navy: '#20284F',
+        red: '#E05D67',
       },
       fontFamily: {
         'Pretendard-Light': ['Pretendard-Light', 'sans-serif'],
         'Pretendard-Medium': ['Pretendard-Medium', 'sans-serif'],
-        'SpoqaBold': ['SpoqaHanSansNeo-Bold', 'sans-serif'],
-        'SpoqaLight': ['SpoqaHanSansNeo-Light', 'sans-serif'],
-        'SpoqaMedium': ['SpoqaHanSansNeo-Medium', 'sans-serif'],
-        'SpoqaRegular': ['SpoqaHanSansNeo-Regular', 'sans-serif'],
-        'SpoqaThin': ['SpoqaHanSansNeo-Thin', 'sans-serif'],
+        SpoqaBold: ['SpoqaHanSansNeo-Bold', 'sans-serif'],
+        SpoqaLight: ['SpoqaHanSansNeo-Light', 'sans-serif'],
+        SpoqaMedium: ['SpoqaHanSansNeo-Medium', 'sans-serif'],
+        SpoqaRegular: ['SpoqaHanSansNeo-Regular', 'sans-serif'],
+        SpoqaThin: ['SpoqaHanSansNeo-Thin', 'sans-serif'],
       },
     },
   },

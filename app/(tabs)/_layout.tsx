@@ -50,7 +50,7 @@ export default function TabsLayout() {
           title: '매장 정보',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="questioncircleo" size={size} color={color} />
+            <AntDesign name="question-circle" size={size} color={color} />
           ),
         }}
       />
@@ -60,7 +60,7 @@ export default function TabsLayout() {
           title: '로그인',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="questioncircleo" size={size} color={color} />
+            <AntDesign name="question-circle" size={size} color={color} />
           ),
         }}
       />

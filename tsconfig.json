@@ -12,6 +12,7 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "components/TabBar.jsx",
-    "nativewind-env.d.ts"
+    "nativewind-env.d.ts",
+    "babel.config.js"
   ]
 }
